@@ -50,6 +50,7 @@ class CheckoutOrderController extends AppBaseController
     public function store(CreateCheckoutOrderRequest $request)
     {
         $input = $request->all();
+        dd($input);
         $input['user_id']=Auth::id();
         /** @var CheckoutOrder $checkoutOrder */
         $checkoutOrder = CheckoutOrder::create($input);
@@ -90,16 +91,16 @@ class CheckoutOrderController extends AppBaseController
      */
     public function edit($id)
     {
-        /** @var CheckoutOrder $checkoutOrder */
-        $checkoutOrder = CheckoutOrder::find($id);
-
-        if (empty($checkoutOrder)) {
-            Flash::error('Checkout Order not found');
-
-            return redirect(route('checkoutOrders.index'));
-        }
-
-        return view('checkout_orders.edit')->with('checkoutOrder', $checkoutOrder);
+//        /** @var CheckoutOrder $checkoutOrder */
+//        $checkoutOrder = CheckoutOrder::find($id);
+//
+//        if (empty($checkoutOrder)) {
+//            Flash::error('Checkout Order not found');
+//
+//            return redirect(route('checkoutOrders.index'));
+//        }
+//
+//        return view('checkout_orders.edit')->with('checkoutOrder', $checkoutOrder);
     }
 
     /**
@@ -112,21 +113,21 @@ class CheckoutOrderController extends AppBaseController
      */
     public function update($id, UpdateCheckoutOrderRequest $request)
     {
-        /** @var CheckoutOrder $checkoutOrder */
-        $checkoutOrder = CheckoutOrder::find($id);
-
-        if (empty($checkoutOrder)) {
-            Flash::error('Checkout Order not found');
-
-            return redirect(route('checkoutOrders.index'));
-        }
-
-        $checkoutOrder->fill($request->all());
-        $checkoutOrder->save();
-
-        Flash::success('Checkout Order updated successfully.');
-
-        return redirect(route('checkoutOrders.index'));
+//        /** @var CheckoutOrder $checkoutOrder */
+//        $checkoutOrder = CheckoutOrder::find($id);
+//
+//        if (empty($checkoutOrder)) {
+//            Flash::error('Checkout Order not found');
+//
+//            return redirect(route('checkoutOrders.index'));
+//        }
+//
+//        $checkoutOrder->fill($request->all());
+//        $checkoutOrder->save();
+//
+//        Flash::success('Checkout Order updated successfully.');
+//
+//        return redirect(route('checkoutOrders.index'));
     }
 
     /**

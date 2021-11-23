@@ -66,9 +66,9 @@ class CheckoutOrder extends Model
     public static $rules = [
         'bill_code' => 'string|max:12',
         'menu_id' => 'integer',
-        'quantity' => 'required|integer',
-        'price' => 'required|integer',
-        'type' => 'required|integer',
+        'quantity' => 'required',
+        'price' => 'required',
+        'type' => 'integer',
         'user_id' => 'integer',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'

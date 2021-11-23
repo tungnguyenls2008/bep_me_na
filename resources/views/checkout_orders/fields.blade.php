@@ -70,31 +70,34 @@ foreach ($menu as $item) {
                     width: '100%',
                     placeholder: 'Chọn...'
                 })
+            for (let j = 0; j <= i; j++) {
+                $("#menu_id-" + j).on('change', function () {
+                    if (!$("#type-" + j).is(":checked")) {
+                        getMenuPrice(j)
 
+                    } else {
+                        $("#price-" + j).val(0);
+                        $("#total-" + j).val(0);
+                    }
+                })
+                $("#type-" + j).on('click', function () {
+                    if (!$(this).is(":checked")) {
+                        getMenuPrice(j)
+
+                    } else {
+                        $("#price-" + j).val(0);
+                        $("#total-" + j).val(0);
+                    }
+                })
+                $("#quantity-" + j).on('input', function () {
+                    $("#total-" + j).val($(this).val() * $("#price-" + j).val())
+                })
+                $("#remove-menu-"+j).on('click',function () {
+                    $(this).parent().parent().remove();
+                })
+            }
         })
-        for (let j = 0; j <= i; j++) {
-            $("#menu_id-" + j).on('change', function () {
-                if (!$("#type-" + j).is(":checked")) {
-                    getMenuPrice(j)
 
-                } else {
-                    $("#price-" + j).val(0);
-                    $("#total-" + j).val(0);
-                }
-            })
-            $("#type-" + j).on('click', function () {
-                if (!$(this).is(":checked")) {
-                    getMenuPrice(j)
-
-                } else {
-                    $("#price-" + j).val(0);
-                    $("#total-" + j).val(0);
-                }
-            })
-            $("#quantity-" + j).on('input', function () {
-                $("#total-" + j).val($(this).val() * $("#price-" + j).val())
-            })
-        }
 
 
         function getMenuPrice(id) {
