@@ -2,9 +2,9 @@
     <table class="table" id="menus-table">
         <thead>
             <tr>
-                <th>Name</th>
-        <th>Price</th>
-                <th colspan="3">Action</th>
+                <th>Tên món</th>
+        <th>Giá</th>
+                <th colspan="3">Thao tác</th>
             </tr>
         </thead>
         <tbody>

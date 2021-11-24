@@ -10,7 +10,7 @@
 <li class="nav-item">
     <a href="{{ route('rawMaterialImports.index') }}"
        class="nav-link {{ Request::is('rawMaterialImports*') ? 'active' : '' }}">
-        <i class="fas fa-store"></i>  <p>Lịch sử nhập nguyên liệu</p>
+        <i class="fas fa-store"></i>  <p>Thống kê chi phí</p>
     </a>
 </li>
 
@@ -18,7 +18,7 @@
 <li class="nav-item">
     <a href="{{ route('checkoutOrders.index') }}"
        class="nav-link {{ Request::is('checkoutOrders*') ? 'active' : '' }}">
-        <i class="fas fa-file-invoice-dollar"></i>  <p>Hóa đơn bán hàng</p>
+        <i class="fas fa-file-invoice-dollar"></i>  <p>Thống kê doanh thu</p>
     </a>
 </li>
 

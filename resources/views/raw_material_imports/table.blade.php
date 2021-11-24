@@ -2,14 +2,14 @@
     <table class="table" id="rawMaterialImports-table">
         <thead>
         <tr>
-            <th>Nguyên liệu</th>
+            <th>Nội dung</th>
             <th>Số lượng</th>
             <th>Đơn vị</th>
             <th>Giá</th>
             <th>Thành tiền</th>
-            <th>Người nhập</th>
-            <th>Ngày nhập</th>
-            <th colspan="3">Action</th>
+            <th>Người chi</th>
+            <th>Ngày chi</th>
+            <th colspan="3">Thao tác</th>
         </tr>
         </thead>
         <tbody>
