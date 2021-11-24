@@ -17,7 +17,7 @@
                 <td>{{ $customer->name }}</td>
                 <td>{{ $customer->phone }}</td>
                 <td>{{ $customer->address }}</td>
-                <td>{{ $customer->dob }}</td>
+                <td>{{ date('d-m-Y',strtotime($customer->dob)) }}</td>
                 <?php
                 $favorites = json_decode($customer->favorites, true);
                 $menu = \App\Models\Menu::find($favorites);
