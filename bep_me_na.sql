@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 24, 2021 lúc 10:55 AM
+-- Thời gian đã tạo: Th10 24, 2021 lúc 11:34 AM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 7.4.23
 
@@ -50,7 +50,8 @@ INSERT INTO `checkout_order` (`id`, `bill_code`, `menu_id`, `quantity`, `price`,
 (3, 'BILL-000003', '[\"6\",\"4\",\"8\",\"1\"]', '[\"1\",\"3\",\"1\",\"1\"]', '[\"35000\",\"45000\",\"450000\",\"0\"]', '[0,0,0,1]', 2, '2021-11-23 19:26:01', '2021-11-23 19:26:01', NULL),
 (4, 'BILL-000004', '[\"4\",\"7\",\"5\",\"6\"]', '[\"2\",\"1\",\"3\",\"1\"]', '[\"45000\",\"450000\",\"55000\",\"0\"]', '[0,0,0,1]', 2, '2021-11-24 03:24:05', '2021-11-24 03:24:05', NULL),
 (5, 'BILL-000005', '[\"4\",\"5\",\"7\"]', '[\"2\",\"2\",\"1\"]', '[\"45000\",\"55000\",\"0\"]', '[0,0,1]', 2, '2021-11-24 07:14:00', '2021-11-24 07:14:00', NULL),
-(6, 'BILL-000006', '[\"4\"]', '[\"1\"]', '[\"45000\"]', '[0]', 2, '2021-11-24 07:28:53', '2021-11-24 07:28:53', NULL);
+(6, 'BILL-000006', '[\"4\"]', '[\"1\"]', '[\"45000\"]', '[0]', 2, '2021-11-24 07:28:53', '2021-11-24 07:28:53', NULL),
+(7, 'BILL-000007', '[\"5\",\"7\",\"1\"]', '[\"1\",\"1\",\"1\"]', '[\"55000\",\"450000\",\"50000\"]', '[0,0,0]', 2, '2021-11-24 10:34:11', '2021-11-24 10:34:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -167,7 +168,8 @@ CREATE TABLE `note` (
 INSERT INTO `note` (`id`, `bill_code`, `content`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'BILL-000006', 'chưa chuyển khoản', '2021-11-24 07:28:53', '2021-11-24 08:41:15', NULL),
 (2, 'BILL-000005', 'trả tiền mặt V nhận', '2021-11-24 08:31:28', '2021-11-24 08:41:25', NULL),
-(3, 'BILL-000004', 'ghjghjghj', '2021-11-24 08:31:34', '2021-11-24 08:31:34', NULL);
+(3, 'BILL-000004', 'ghjghjghj', '2021-11-24 08:31:34', '2021-11-24 08:31:34', NULL),
+(4, 'BILL-000007', 'dvbdfgdfgdfgdfg', '2021-11-24 10:34:11', '2021-11-24 10:34:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -206,7 +208,8 @@ CREATE TABLE `raw_material_import` (
 
 INSERT INTO `raw_material_import` (`id`, `name`, `quantity`, `unit`, `price`, `total`, `user_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Cá lăng', 2, 1, 100000, 200000, 1, '2021-11-22 23:04:30', '2021-11-22 23:04:30', NULL),
-(2, 'Bún', 15, 1, 10000, 150000, 2, '2021-11-24 09:47:00', '2021-11-24 09:47:00', NULL);
+(2, 'Bún', 15, 1, 10000, 150000, 2, '2021-11-24 09:47:00', '2021-11-24 09:47:00', NULL),
+(3, 'Trả lương nhân viên Long', 1, 7, 2000000, 2000000, 2, '2021-11-24 10:26:51', '2021-11-24 10:26:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -301,7 +304,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `checkout_order`
 --
 ALTER TABLE `checkout_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `customer`
@@ -331,13 +334,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT cho bảng `note`
 --
 ALTER TABLE `note`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `raw_material_import`
 --
 ALTER TABLE `raw_material_import`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `users`

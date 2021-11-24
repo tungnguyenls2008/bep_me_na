@@ -11,7 +11,10 @@
     <div class="col-md-12">
         <div class="alert alert-info">
             <button aria-hidden="true" data-dismiss="alert" class="close" type="button">&times;</button>
-            Chào mừng bạn quay trở lại, <strong>{{\Illuminate\Support\Facades\Auth::user()->name}}!</strong>
+            Chào mừng bạn quay trở lại, <strong>{{\Illuminate\Support\Facades\Auth::user()->name}}.</strong>
+            <a class="btn btn-primary" href="{{ route('checkoutOrders.create') }}">
+                Tạo doanh thu mới ngay!
+            </a>
         </div>
     </div>
 </div>
