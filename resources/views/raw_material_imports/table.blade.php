@@ -23,6 +23,8 @@
                     @case (3)<td><label class="badge badge-info">Con</label></td>@break
                     @case (4)<td><label class="badge badge-info">Cái</label></td>@break
                     @case (5)<td><label class="badge badge-info">Mớ</label></td>@break
+                    @case (6)<td><label class="badge badge-info">Ngày</label></td>@break
+                    @case (7)<td><label class="badge badge-info">Tháng</label></td>@break
                 @endswitch
                 <td>{{ number_format($rawMaterialImport->price) }}</td>
                 <td>{{ number_format($rawMaterialImport->total) }}</td>

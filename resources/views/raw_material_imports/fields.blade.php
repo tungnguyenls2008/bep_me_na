@@ -19,6 +19,8 @@
         <option value="3">Con</option>
         <option value="4">Cái</option>
         <option value="5">Mớ</option>
+        <option value="6">Ngày</option>
+        <option value="7">Tháng</option>
     </select>
 </div>
 

@@ -141,7 +141,7 @@
             <b>Version</b> 3.0.5
         </div>
         <strong>Copyright &copy; 2014-2021 <a href="https://fb.com/lonelycount">OverLord</a>.</strong> All rights
-        reserved.
+        reserved, baby.
     </footer>
 </div>
 
