@@ -5,21 +5,16 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Hóa đơn bán hàng </h1>
-                    <a href="{{route('bill-export')}}" class="badge badge-pill badge-success">Xuất file excel</a>
+                    <h1>Dữ liệu khách hàng</h1>
                 </div>
-
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
-                       href="{{ route('checkoutOrders.create') }}">
-                        Tạo mới
+                       href="{{ route('customers.create') }}">
+                        Thêm mới
                     </a>
                 </div>
             </div>
         </div>
-{{--        <div>--}}
-{{--            @include('checkout_orders.search')--}}
-{{--        </div>--}}
     </section>
 
     <div class="content px-3">
@@ -30,7 +25,7 @@
 
         <div class="card">
             <div class="card-body p-0">
-                @include('checkout_orders.table')
+                @include('customers.table')
 
                 <div class="card-footer clearfix float-right">
                     <div class="float-right">

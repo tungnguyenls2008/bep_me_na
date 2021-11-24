@@ -7,25 +7,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Class CheckoutOrder
+ * Class Note
  * @package App\Models
- * @version November 23, 2021, 6:59 am UTC
+ * @version November 24, 2021, 2:20 pm +07
  *
  * @property string $bill_code
- * @property integer $menu_id
- * @property integer $quantity
- * @property integer $price
- * @property integer $type
- * @property integer $user_id
+ * @property string $content
  */
-class CheckoutOrder extends Model
+class Note extends Model
 {
     use SoftDeletes;
 
     use HasFactory;
 
-    public $table = 'checkout_order';
-
+    public $table = 'note';
+    
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -36,11 +32,7 @@ class CheckoutOrder extends Model
 
     public $fillable = [
         'bill_code',
-        'menu_id',
-        'quantity',
-        'price',
-        'type',
-        'user_id'
+        'content'
     ];
 
     /**
@@ -51,11 +43,7 @@ class CheckoutOrder extends Model
     protected $casts = [
         'id' => 'integer',
         'bill_code' => 'string',
-        'menu_id' => 'string',
-        'quantity' => 'string',
-        'price' => 'string',
-        'type' => 'string',
-        'user_id' => 'integer'
+        'content' => 'string'
     ];
 
     /**
@@ -64,15 +52,11 @@ class CheckoutOrder extends Model
      * @var array
      */
     public static $rules = [
-        'bill_code' => 'string|max:12',
-        'menu_id' => 'required',
-        'quantity' => 'required',
-        'price' => 'required',
-        //'type' => 'required',
-        'user_id' => 'integer',
+        'bill_code' => 'required|string',
+        'content' => 'required|string',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
     ];
 
-
+    
 }

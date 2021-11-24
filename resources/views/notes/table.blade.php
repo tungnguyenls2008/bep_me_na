@@ -1,24 +1,24 @@
 <div class="table-responsive">
-    <table class="table" id="menus-table">
+    <table class="table" id="notes-table">
         <thead>
             <tr>
-                <th>Name</th>
-        <th>Price</th>
+                <th>Bill Code</th>
+        <th>Content</th>
                 <th colspan="3">Action</th>
             </tr>
         </thead>
         <tbody>
-        @foreach($menus as $menu)
+        @foreach($notes as $note)
             <tr>
-                <td>{{ $menu->name }}</td>
-            <td>{{ number_format($menu->price) }}</td>
+                <td>{{ $note->bill_code }}</td>
+            <td>{{ $note->content }}</td>
                 <td width="120">
-                    {!! Form::open(['route' => ['menus.destroy', $menu->id], 'method' => 'delete']) !!}
+                    {!! Form::open(['route' => ['notes.destroy', $note->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('menus.show', [$menu->id]) }}" class='btn btn-default btn-xs'>
+                        <a href="{{ route('notes.show', [$note->id]) }}" class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('menus.edit', [$menu->id]) }}" class='btn btn-default btn-xs'>
+                        <a href="{{ route('notes.edit', [$note->id]) }}" class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>
                         {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}

@@ -24,8 +24,8 @@
                     @case (4)<td><label class="badge badge-info">Cái</label></td>@break
                     @case (5)<td><label class="badge badge-info">Mớ</label></td>@break
                 @endswitch
-                <td>{{ $rawMaterialImport->price }}</td>
-                <td>{{ $rawMaterialImport->total }}</td>
+                <td>{{ number_format($rawMaterialImport->price) }}</td>
+                <td>{{ number_format($rawMaterialImport->total) }}</td>
                 <?php $user=\App\Models\User::query()->where(['id'=>$rawMaterialImport->user_id])->first(); ?>
                 <td>{{ $user->name }}</td>
                 <td>{{ $rawMaterialImport->created_at }}</td>
