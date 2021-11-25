@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -46,3 +47,6 @@ Route::resource('notes', App\Http\Controllers\NoteController::class);
 
 
 Route::resource('customers', App\Http\Controllers\CustomerController::class);
+
+Route::get('view', [FileController::class, 'index']);
+Route::get('get/{filename}', [FileController::class, 'getfile'])->name('getfile');

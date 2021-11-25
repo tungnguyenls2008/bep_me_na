@@ -9,6 +9,7 @@
             <th>Khuyến mãi?</th>
             <th>Thành tiền</th>
             <th>Thông tin khác</th>
+            <th>Thao tác</th>
         </tr>
         </thead>
         <tbody>
@@ -16,7 +17,10 @@
 
         @foreach($checkoutOrders as $checkoutOrder)
             <tr>
-                <td>{{ $checkoutOrder->bill_code }}</td>
+                <td>
+                    <b>Số hóa đơn: </b>{{ $checkoutOrder->bill_code }}<br><a href="{{asset($checkoutOrder->bill_path)}}"><i class="fas fa-download"></i></a>
+                    <b>Thông tin khách hàng: </b>{{$checkoutOrder->customer_info}}
+                </td>
                 <?php $menu_ids = json_decode($checkoutOrder->menu_id, true);
                 $menu = \App\Models\Menu::find($menu_ids);
                 ?>
@@ -178,21 +182,21 @@
                         </div>
                     </div>
                 </td>
-                {{--                <td width="120">--}}
-                {{--                    {!! Form::open(['route' => ['checkoutOrders.destroy', $checkoutOrder->id], 'method' => 'delete']) !!}--}}
-                {{--                    <div class='btn-group'>--}}
-                {{--                        <a href="{{ route('checkoutOrders.show', [$checkoutOrder->id]) }}"--}}
-                {{--                           class='btn btn-default btn-xs'>--}}
-                {{--                            <i class="far fa-eye"></i>--}}
-                {{--                        </a>--}}
-                {{--                        <a href="{{ route('checkoutOrders.edit', [$checkoutOrder->id]) }}"--}}
-                {{--                           class='btn btn-default btn-xs'>--}}
-                {{--                            <i class="far fa-edit"></i>--}}
-                {{--                        </a>--}}
-                {{--                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}--}}
-                {{--                    </div>--}}
-                {{--                    {!! Form::close() !!}--}}
-                {{--                </td>--}}
+                                <td width="120">
+                                    {!! Form::open(['route' => ['checkoutOrders.destroy', $checkoutOrder->id], 'method' => 'delete']) !!}
+                                    <div class='btn-group'>
+{{--                                        <a href="{{ route('checkoutOrders.show', [$checkoutOrder->id]) }}"--}}
+{{--                                           class='btn btn-default btn-xs'>--}}
+{{--                                            <i class="far fa-eye"></i>--}}
+{{--                                        </a>--}}
+{{--                                        <a href="{{ route('checkoutOrders.edit', [$checkoutOrder->id]) }}"--}}
+{{--                                           class='btn btn-default btn-xs'>--}}
+{{--                                            <i class="far fa-edit"></i>--}}
+{{--                                        </a>--}}
+                                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                                    </div>
+                                    {!! Form::close() !!}
+                                </td>
             </tr>
 
         @endforeach

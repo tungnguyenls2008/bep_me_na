@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @version November 23, 2021, 6:59 am UTC
  *
  * @property string $bill_code
+ * @property string $customer_info
  * @property integer $menu_id
  * @property integer $quantity
  * @property integer $price
@@ -36,6 +37,7 @@ class CheckoutOrder extends Model
 
     public $fillable = [
         'bill_code',
+        'customer_info',
         'menu_id',
         'quantity',
         'price',
@@ -51,6 +53,7 @@ class CheckoutOrder extends Model
     protected $casts = [
         'id' => 'integer',
         'bill_code' => 'string',
+        'customer_info' => 'string',
         'menu_id' => 'string',
         'quantity' => 'string',
         'price' => 'string',

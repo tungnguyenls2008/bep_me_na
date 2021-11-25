@@ -7,6 +7,10 @@ foreach ($menu as $item) {
 }
 ?>
 <div id="checkout-order-div" class="col-md-12">
+    <div class="col-md-12">
+        {!! Form::label('customer_info','Thông tin khách hàng') !!}
+        {!! Form::text('customer_info',null,['class'=>'form-control','required'=>true,'placeholder'=>'Nhập thông tin khách hàng (hiển thị trên hóa đơn)']) !!}
+    </div>
     <div class="menu-item-div">
         <div class="menu-item row">
             <!-- Menu Id Field -->
@@ -57,6 +61,7 @@ foreach ($menu as $item) {
 
             <!-- Price Field -->
             <div class="form-group col-sm-2">
+                {!! Form::label('', 'Giá tạm tính:') !!}
 
             </div>
             <div class="form-group col-sm-2">
@@ -72,8 +77,69 @@ foreach ($menu as $item) {
         </div>
     </div>
 </div>
+<div class="col-md-12">
+    <div class="total-div">
+        <div class="menu-item row">
+            <!-- Menu Id Field -->
+            <div class="form-group col-sm-3">
 
 
+            </div>
+            <!-- Quantity Field -->
+            <div class="form-group col-sm-2">
+
+            </div>
+
+            <!-- Price Field -->
+            <div class="form-group col-sm-2">
+                <label>Chiết khấu:</label>
+                {!! Form::number('discount_percent', null, ['id' => 'discount_percent','class'=>'','min'=>0,'max'=>100]) !!}%
+
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="text" id="discount" name="discount" readonly class="form-control">
+            </div>
+            <!-- Type Field -->
+            <div class="form-group col-sm-2">
+
+            </div>
+            <div class="form-group col-sm-1">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="total-div">
+        <div class="menu-item row">
+            <!-- Menu Id Field -->
+            <div class="form-group col-sm-3">
+
+
+            </div>
+            <!-- Quantity Field -->
+            <div class="form-group col-sm-2">
+
+            </div>
+
+            <!-- Price Field -->
+            <div class="form-group col-sm-2">
+                <label>Giá sau chiết khấu:</label>
+
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="text" id="total_to_pay" name="total_to_pay" readonly class="form-control">
+            </div>
+            <!-- Type Field -->
+            <div class="form-group col-sm-2">
+
+            </div>
+            <div class="form-group col-sm-1">
+
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-6">
         <textarea name="note" id="note" cols="40" rows="4" placeholder="Ghi chú cho hóa đơn này..."></textarea>
@@ -144,7 +210,8 @@ foreach ($menu as $item) {
             $(".total-to-pay").each(function () {
                 sum += +$(this).val();
             });
-            $("#sum-total").val(sum)
+            $("#sum-total").val(sum);
+            setDiscountValue()
         }
 
         function getMenuPrice(id) {
@@ -159,7 +226,8 @@ foreach ($menu as $item) {
                 success: function (data) {
                     $("#price-" + id).val(data['price']);
                     $("#total-" + id).val($("#quantity-" + id).val() * $("#price-" + id).val());
-                    updateTotalToPay()
+                    updateTotalToPay();
+                    setDiscountValue();
 
                 },
                 error: function (data) {
@@ -196,5 +264,13 @@ foreach ($menu as $item) {
             $(this).parent().parent().remove();
             updateTotalToPay();
         })
+        $("#discount_percent").on('change',function () {
+            setDiscountValue()
+        })
+        function setDiscountValue(){
+            var discount=($("#sum-total").val()*$("#discount_percent").val())/100;
+            $("#discount").val(discount)
+            $("#total_to_pay").val($("#sum-total").val()-discount);
+        }
     })
 </script>
