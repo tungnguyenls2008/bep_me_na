@@ -28,7 +28,7 @@
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Tạo đơn', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Tạo đơn', ['class' => 'btn btn-primary','id'=>'submit']) !!}
                 <a href="{{ route('checkoutOrders.index') }}" class="btn btn-default">Hủy</a>
             </div>
 
@@ -36,4 +36,9 @@
 
         </div>
     </div>
+    <script>
+        $(function () {
+
+        })
+    </script>
 @endsection

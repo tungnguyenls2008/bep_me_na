@@ -122,6 +122,7 @@ class CheckoutOrderController extends AppBaseController
         $checkoutOrder['menu_id'] = json_decode($checkoutOrder['menu_id'], true);
         foreach ($checkoutOrder['menu_id'] as $key => $item) {
             $menu = Menu::find($item);
+
             $checkoutOrder['menu_id'][$key] = $menu->name;
         }
         $checkoutOrder['quantity'] = json_decode($checkoutOrder['quantity'], true);

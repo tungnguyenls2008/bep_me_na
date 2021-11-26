@@ -7,10 +7,11 @@ foreach ($menu as $item) {
 }
 ?>
 <div id="checkout-order-div" class="col-md-12">
-    <div class="col-md-12">
+    <div>
         {!! Form::label('customer_info','Thông tin khách hàng') !!}
         {!! Form::text('customer_info',null,['class'=>'form-control','required'=>true,'placeholder'=>'Nhập thông tin khách hàng (hiển thị trên hóa đơn)']) !!}
     </div>
+    <hr>
     <div class="menu-item-div">
         <div class="menu-item row">
             <!-- Menu Id Field -->
@@ -44,8 +45,11 @@ foreach ($menu as $item) {
                 <a class="btn btn-danger less" style="color: white"><i class="fas fa-minus-circle"></i></a>
             </div>
         </div>
+
     </div>
+
 </div>
+<hr>
 <div class="col-md-12">
     <div class="total-div">
         <div class="menu-item row">
@@ -157,12 +161,12 @@ foreach ($menu as $item) {
             updateTotalToPay()
             i++;
             html = '<div class="row">' +
-                '<div class="form-group col-sm-3"><select id="menu_id-' + i + '" name="menu_id[' + i + ']" placeholder=""> ' +
+                '<div class="form-group col-sm-3"><select id="menu_id-' + i + '" name="menu_id[' + i + ']" placeholder="" required> ' +
                 '{!! $menu_html !!}' +
                 '</select></div>' +
-                '<div class="form-group col-sm-2"><input id="quantity-' + i + '" class="form-control" name="quantity[' + i + ']" type="number" min=0></div>' +
-                '<div class="form-group col-sm-2"><input id="price-' + i + '" readonly class="form-control" name="price[' + i + ']" type="number"></div>' +
-                '<div class="form-group col-sm-2"><input id="total-' + i + '" readonly class="form-control total-to-pay" name="total[' + i + ']" type="number"></div>' +
+                '<div class="form-group col-sm-2"><input id="quantity-' + i + '" class="form-control" name="quantity[' + i + ']" required type="number" min=0></div>' +
+                '<div class="form-group col-sm-2"><input id="price-' + i + '" readonly class="form-control" name="price[' + i + ']" required type="number"></div>' +
+                '<div class="form-group col-sm-2"><input id="total-' + i + '" readonly class="form-control total-to-pay" required name="total[' + i + ']" type="number"></div>' +
                 '<div class="form-group col-sm-2"><input class="form-control" id="type-' + i + '" name="type[' + i + ']" type="checkbox"></div>' +
                 '<div class="form-group col-sm-1"><a class="btn btn-danger less" id="remove-menu-' + i + '" style="color: white"><i class="fas fa-minus-circle"></i></a></div>' +
                 '</div>'
