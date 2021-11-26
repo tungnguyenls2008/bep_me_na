@@ -1,6 +1,6 @@
 <!-- Name Field -->
 <div class="form-group col-sm-3">
-    {!! Form::label('name', 'Tên nguyên liệu:') !!}
+    {!! Form::label('name', 'Nội dung chi phí:') !!}
     {!! Form::text('name', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 

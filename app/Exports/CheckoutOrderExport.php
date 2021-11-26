@@ -8,19 +8,19 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromView;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class CheckoutOrderExport implements FromCollection
+class CheckoutOrderExport implements FromView
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return CheckoutOrder::all();
+        return CheckoutOrder::where(['deleted_at'=>null])->get();
     }
     public function view(): View
     {
-        $checkoutOrder=CheckoutOrder::all();
-        return view('checkout_orders.table', [
+        $checkoutOrder=CheckoutOrder::where(['deleted_at'=>null])->get();
+        return view('checkout_orders.export', [
             'checkoutOrders' => $checkoutOrder
         ]);
     }

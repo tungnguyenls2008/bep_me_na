@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SpendingExport;
 use App\Http\Requests\CreateRawMaterialImportRequest;
 use App\Http\Requests\UpdateRawMaterialImportRequest;
 use App\Http\Controllers\AppBaseController;
@@ -9,6 +10,7 @@ use App\Models\RawMaterialImport;
 use Illuminate\Http\Request;
 use Flash;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Response;
 
 class RawMaterialImportController extends AppBaseController
@@ -153,5 +155,9 @@ class RawMaterialImportController extends AppBaseController
         Flash::success('Raw Material Import deleted successfully.');
 
         return redirect(route('rawMaterialImports.index'));
+    }
+    public function export()
+    {
+        return Excel::download(new SpendingExport(), 'spending.xlsx');
     }
 }

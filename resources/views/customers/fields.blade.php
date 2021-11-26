@@ -1,24 +1,24 @@
 <!-- Name Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('name', 'Name:') !!}
+    {!! Form::label('name', 'Tên:') !!}
     {!! Form::text('name', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 
 <!-- Phone Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('phone', 'Phone:') !!}
+    {!! Form::label('phone', 'Số điện thoại:') !!}
     {!! Form::text('phone', null, ['class' => 'form-control','maxlength' => 24,'maxlength' => 24]) !!}
 </div>
 
 <!-- Address Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('address', 'Address:') !!}
+    {!! Form::label('address', 'Địa chỉ:') !!}
     {!! Form::text('address', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 
 <!-- Dob Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('dob', 'Dob:') !!}
+    {!! Form::label('dob', 'Ngày sinh:') !!}
     {!! Form::text('dob', null, ['class' => 'form-control','id'=>'dob']) !!}
 </div>
 
@@ -47,14 +47,14 @@ foreach ($menu as $item) {
 </style>
 <!-- Favorites Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('favorites', 'Favorites:') !!}
+    {!! Form::label('favorites', 'Sở thích:') !!}
     {!! Form::select('favorites[]',$menu_select,null,['id'=>'favorites','multiple'=>true]) !!}
 
 </div>
 
 <!-- Note Field -->
 <div class="form-group col-sm-12 col-lg-12">
-    {!! Form::label('note', 'Note:') !!}
+    {!! Form::label('note', 'Ghi chú:') !!}
     {!! Form::textarea('note', null, ['class' => 'form-control']) !!}
 </div>
 <script>

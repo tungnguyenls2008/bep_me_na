@@ -60,8 +60,8 @@
                     <div class="card-body">
                         <div class="float-end mt-2">
                             <?php
-                            $import_count = \App\Models\RawMaterialImport::count();
-                            $sum_import=\App\Models\RawMaterialImport::sum('total');
+                            $import_count = \App\Models\RawMaterialImport::where(['deleted_at'=>null])->count();
+                            $sum_import=\App\Models\RawMaterialImport::where(['deleted_at'=>null])->sum('total');
                             ?>
                             <div id="total-revenue-chart">Bạn đã nhập nguyên liệu <b>{{$import_count}}</b> lần <br>
                                 Tổng chi phí nguyên liệu là <b>{{number_format($sum_import)}}</b>
@@ -79,8 +79,8 @@
                     <div class="card-body">
                         <div class="float-end mt-2">
                             <?php
-                            $checkout_order_count=\App\Models\CheckoutOrder::count();
-                            $checkoutOrders=\App\Models\CheckoutOrder::all();
+                            $checkout_order_count=\App\Models\CheckoutOrder::where(['deleted_at'=>null])->count();
+                            $checkoutOrders=\App\Models\CheckoutOrder::where(['deleted_at'=>null])->get();
                             $sum_total=[];
                             foreach ($checkoutOrders as $key=> $checkoutOrder){
                                 $quantity = json_decode($checkoutOrder->quantity, true);

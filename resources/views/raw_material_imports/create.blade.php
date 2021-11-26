@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Create Raw Material Import</h1>
+                    <h1>Tạo mới chi phí</h1>
                 </div>
             </div>
         </div>
@@ -28,8 +28,8 @@
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('rawMaterialImports.index') }}" class="btn btn-default">Cancel</a>
+                {!! Form::submit('Lưu', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ route('rawMaterialImports.index') }}" class="btn btn-default">Hủy</a>
             </div>
 
             {!! Form::close() !!}

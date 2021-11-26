@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Thống kê chi phí</h1>
+                    <h1>Thống kê chi phí</h1><a href="{{route('spending-export')}}" class="badge badge-pill badge-success">Xuất excel</a>
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
