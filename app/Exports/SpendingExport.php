@@ -8,11 +8,14 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class SpendingExport implements FromView,WithHeadings,WithStyles
+class SpendingExport implements FromView,WithHeadings,WithStyles,WithColumnFormatting,ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -57,5 +60,13 @@ class SpendingExport implements FromView,WithHeadings,WithStyles
                 $spending->updated_at=date('d-m-Y H:i',strtotime($spending->updated_at));
             return $spending;
         }, $rows);
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'D' => '#,##0_-',
+            'E' => '#,##0_-',
+        ];
     }
 }

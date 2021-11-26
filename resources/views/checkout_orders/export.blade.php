@@ -39,7 +39,7 @@ $order_sums=0;
                 $order_sums+=array_sum($total);
                 ?>
                 <td>
-                    {{number_format(array_sum($total))}}
+                    {{(array_sum($total))}}
                 </td>
                 <?php $user = \App\Models\User::find($checkoutOrder->user_id);
 
@@ -65,8 +65,8 @@ $order_sums=0;
         @endforeach
 <tr>
     <td></td>
-    <td><b>Tổng cộng</b></td>
-    <td>{{number_format($order_sums)}}</td>
+    <td><b><i>Tổng cộng</i></b></td>
+    <td><b>{{($order_sums)}}</b></td>
     <td></td>
     <td></td>
     <td></td>

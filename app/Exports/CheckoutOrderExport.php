@@ -6,9 +6,13 @@ use App\Models\CheckoutOrder;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class CheckoutOrderExport implements FromView
+class CheckoutOrderExport implements FromView,WithHeadings,WithStyles,WithColumnFormatting,ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -64,4 +68,10 @@ class CheckoutOrderExport implements FromView
 //            return $profile;
 //        }, $rows);
 //    }
+    public function columnFormats(): array
+    {
+        return [
+            'C' => '#,##0_-',
+        ];
+    }
 }

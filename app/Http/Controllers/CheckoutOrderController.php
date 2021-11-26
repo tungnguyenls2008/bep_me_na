@@ -332,22 +332,7 @@ class CheckoutOrderController extends AppBaseController
         $last_price = $this->searchInSheet($spreadsheet, '{price}');
         $last_total = $this->searchInSheet($spreadsheet, '{total}');
         $this->setMassBlankValue($sheet,[$last_menu_id,$last_price,$last_quantity,$last_total]);
-//        $sheet = $spreadsheet->getActiveSheet();
-//        $bank_name_cell = $this->searchInSheet($spreadsheet, '{BANK_NAME}');
-//        $merchant_name_cell = $this->searchInSheet($spreadsheet, '{MERCHANT_NAME}');
-//        $merchant_id_cell = $this->searchInSheet($spreadsheet, '{MERCHANT_ID}');
-//        $reference_number_cell = $this->searchInSheet($spreadsheet, '{REFERENCE_NUMBER}');
 
-//        $last_payer_email_cell = $this->searchInSheet($spreadsheet, '{PAYER_EMAIL}');
-//        $last_amount_cell = $this->searchInSheet($spreadsheet, '{AMOUNT}');
-//        $last_created_at_cell = $this->searchInSheet($spreadsheet, '{CREATED_AT}');
-//        $last_period_cell = $this->searchInSheet($spreadsheet, '{INSTALLMENT_PERIOD}');
-//        $last_otp_cell = $this->searchInSheet($spreadsheet, '{OTP}');
-//        $last_location_cell = $this->searchInSheet($spreadsheet, '{LOCATION}');
-//        $last_order_id_cell = $this->searchInSheet($spreadsheet, '{ORDER_ID}');
-//        $this->setMassBlankValue($sheet, [$last_serial_cell, $last_card_owner_fullname_cell, $last_card_number_cell, $last_payer_email_cell,
-//            $last_payer_phone_cell, $last_amount_cell, $last_amount_cell, $last_created_at_cell, $last_created_at_cell, $last_period_cell, $last_otp_cell, $last_location_cell, $bank_name_cell,
-//            $merchant_name_cell, $merchant_id_cell, $reference_number_cell, $last_order_id_cell]);
         $helper = new ExcelSample();
         $file_name = $data['bill_code'] . '-' . date('d-m-Y') . '.xls';
         $helper->write($spreadsheet, $file_name);
@@ -361,32 +346,13 @@ class CheckoutOrderController extends AppBaseController
         if ($matched != []) {
             foreach ($matched as $key => $cell) {
                 $sheet = $spreadsheet->getActiveSheet();
-//                if (is_array($data[$data_record])){
-//                    foreach ($data[$data_record] as $item){
-//                        $sheet->setCellValue($cell, $item);
-//                        $next_row = (int)(filter_var($cell, FILTER_SANITIZE_NUMBER_INT)) + 1;
-//                        $column = preg_replace("/[^A-Z]+/", "", $cell);
-//                        $matched_string = ['{menu_id}', '{quantity}', '{price}', '{total}'];
-//                        if (in_array($string, $matched_string)) {
-//                            $sheet->setCellValue($column . $next_row, $string);
-//                        }
-//                    }
-//                }else{
-//                $next_row = (int)(filter_var($cell, FILTER_SANITIZE_NUMBER_INT)) + 1;
-//                $column = preg_replace("/[^A-Z]+/", "", $cell);
+
                 if (isset($data[$data_record])) {
                     $sheet->setCellValue($matched[0], $data[$data_record]);
                 } else {
                     $sheet->setCellValue($matched[0], $data);
                 }
-//
-//                $matched_string = ['{menu_id}', '{quantity}', '{price}', '{total}'];
-//                if (in_array($string, $matched_string)) {
-//                    $sheet->insertNewRowBefore($next_row, 1);
-//                    $sheet->setCellValue($column . $next_row, $string);
-//
-//                }
-//                }
+
 
             }
         }

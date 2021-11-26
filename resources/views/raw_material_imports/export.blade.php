@@ -28,8 +28,8 @@
                     @case (6)<td><label class="badge badge-info">Ngày</label></td>@break
                     @case (7)<td><label class="badge badge-info">Tháng</label></td>@break
                 @endswitch
-                <td>{{ number_format($rawMaterialImport->price) }}</td>
-                <td>{{ number_format($rawMaterialImport->total) }}</td>
+                <td>{{ ($rawMaterialImport->price) }}</td>
+                <td>{{ ($rawMaterialImport->total) }}</td>
                 <?php $user=\App\Models\User::query()->where(['id'=>$rawMaterialImport->user_id])->first(); ?>
                 <td>{{ $user->name }}</td>
                 <td>{{ $rawMaterialImport->created_at }}</td>
@@ -41,7 +41,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td><b>{{number_format($rawMaterialImports->sum(['total']))}}</b></td>
+            <td><b>{{($rawMaterialImports->sum(['total']))}}</b></td>
             <td></td>
             <td></td>
         </tr>
