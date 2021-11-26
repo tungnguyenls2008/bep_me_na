@@ -41,18 +41,35 @@ class CheckoutOrderController extends AppBaseController
         return view('checkout_orders.index')
             ->with('checkoutOrders', $checkoutOrders);
     }
-//    public function search(Request $request)
-//    {
-//        $search=$request->post();
-//
-//        $checkoutOrders= CheckoutOrder::OrderBy('created_at','desc');
-//        if (isset($search['bill_code'])){
-//            $checkoutOrders->where('bill_code','like','%'.$search['bill_code'].'%');
-//        }
-//        $checkoutOrders->paginate(15);
-//        return view('checkout_orders.index')
-//            ->with('checkoutOrders', $checkoutOrders);
-//    }
+    public function search(Request $request)
+    {
+        $search=$request->post();
+
+        $checkoutOrders= CheckoutOrder::OrderBy('created_at','desc');
+        if (isset($search['bill_code'])){
+            $checkoutOrders->where('bill_code','like','%'.$search['bill_code'].'%');
+        }
+        if (isset($search['customer_info'])){
+            $checkoutOrders->where('customer_info','like','%'.$search['customer_info'].'%');
+        }
+        if (isset($search['user_id'])){
+            $checkoutOrders->where(['user_id'=>$search['user_id']]);
+        }
+        if (isset($search['create_from'])|| isset($search['create_to'])){
+            if (!isset($search['create_from'])){
+                $search['create_from']='1970-01-01';
+            }
+            if (!isset($search['create_to'])){
+                $search['create_to']='2100-12-31';
+            }
+            $from=date('Y-m-d H:i:s',strtotime($search['create_from'].' 00:00:00'));
+            $to=date('Y-m-d H:i:s',strtotime($search['create_to'].' 23:23:59'));
+            $checkoutOrders->whereBetween('created_at',[$from,$to]);
+        }
+        $checkoutOrders=$checkoutOrders->paginate(15);
+        return view('checkout_orders.index')
+            ->with('checkoutOrders', $checkoutOrders,)->with('count',$checkoutOrders->count());
+    }
 
     /**
      * Show the form for creating a new CheckoutOrder.

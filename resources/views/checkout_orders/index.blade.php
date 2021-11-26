@@ -17,9 +17,9 @@
                 </div>
             </div>
         </div>
-{{--        <div>--}}
-{{--            @include('checkout_orders.search')--}}
-{{--        </div>--}}
+        <div>
+            @include('checkout_orders.search')
+        </div>
     </section>
 
     <div class="content px-3">
