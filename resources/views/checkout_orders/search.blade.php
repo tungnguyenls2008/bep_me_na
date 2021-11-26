@@ -44,8 +44,8 @@
         <div class="col-md-3">
             <label for="">Ngày tạo</label><br>
             <div style="display: inline-flex">
-                <input type="date" name="create_from" id="create_from" class="form-control" style="width: 50%">
-                <input type="date" name="create_to" id="create_to" class="form-control" style="width: 50%">
+                <input type="date" name="create_from" id="create_from" placeholder="Từ" class="form-control" style="width: 50%">
+                <input type="date" name="create_to" id="create_to" placeholder="Đến" class="form-control" style="width: 50%">
             </div>
 
         </div>
