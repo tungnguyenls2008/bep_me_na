@@ -144,10 +144,8 @@ foreach ($menu as $item) {
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6">
+<div class="col-md-12">
         <textarea name="note" id="note" cols="40" rows="4" placeholder="Ghi chú cho hóa đơn này..."></textarea>
-    </div>
 </div>
 <div class="form-group col-md-12" style="text-align: center">
     <a class="btn btn-lg btn-success" style="color: white" id="more"><i class="fas fa-plus-circle"></i></a>
