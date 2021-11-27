@@ -367,7 +367,11 @@ class CheckoutOrderController extends AppBaseController
 
                 if (isset($data[$data_record])) {
                     $sheet->setCellValue($matched[0], $data[$data_record]);
+
                 } else {
+                    if (($data==0&& $data_record=='price')||$data==0&& $data_record=='total'){
+                        $data="Tặng kèm";
+                    }
                     $sheet->setCellValue($matched[0], $data);
                 }
 
