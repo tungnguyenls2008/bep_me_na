@@ -121,13 +121,19 @@ class RawMaterialImportController extends AppBaseController
 
             return redirect(route('rawMaterialImports.index'));
         }
+        if (Auth::id()==$rawMaterialImport->user_id) {
+            $rawMaterialImport->fill($request->all());
+            $rawMaterialImport->save();
 
-        $rawMaterialImport->fill($request->all());
-        $rawMaterialImport->save();
+            Flash::success('Cập nhật thành công khoản chi '.$rawMaterialImport->name.'.');
 
-        Flash::success('Raw Material Import updated successfully.');
+            return redirect(route('rawMaterialImports.index'));
+        }else{
+            Flash::error('Bạn không có quyền cập nhật khoản chi này.');
 
-        return redirect(route('rawMaterialImports.index'));
+            return redirect(route('rawMaterialImports.index'));
+        }
+
     }
 
     /**
@@ -149,12 +155,18 @@ class RawMaterialImportController extends AppBaseController
 
             return redirect(route('rawMaterialImports.index'));
         }
+        if (Auth::id()==$rawMaterialImport->user_id) {
+            $rawMaterialImport->delete();
 
-        $rawMaterialImport->delete();
+            Flash::success('Xóa thành công khoản chi '.$rawMaterialImport->name.'.');
 
-        Flash::success('Raw Material Import deleted successfully.');
+            return redirect(route('rawMaterialImports.index'));
+        }else{
+            Flash::error('Bạn không có quyền xóa khoản chi này.');
 
-        return redirect(route('rawMaterialImports.index'));
+            return redirect(route('rawMaterialImports.index'));
+        }
+
     }
     public function export()
     {

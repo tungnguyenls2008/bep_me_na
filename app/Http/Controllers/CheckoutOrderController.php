@@ -257,12 +257,18 @@ class CheckoutOrderController extends AppBaseController
 
             return redirect(route('checkoutOrders.index'));
         }
+        if (Auth::id()==$checkoutOrder->user_id){
+            $checkoutOrder->delete();
 
-        $checkoutOrder->delete();
+            Flash::success('Đã xóa thành công hóa đơn '.$checkoutOrder->bill_code.'.');
 
-        Flash::success('Checkout Order deleted successfully.');
+            return redirect(route('checkoutOrders.index'));
+        }else{
+            Flash::error('Bạn không có quyền xóa hóa đơn này.');
 
-        return redirect(route('checkoutOrders.index'));
+            return redirect(route('checkoutOrders.index'));
+        }
+
     }
 
     public function getMenuPrice(Request $request)
