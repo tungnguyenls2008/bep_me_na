@@ -50,7 +50,7 @@
     <div class="row">
         <div class="col-md-4">
             <label for="">Ngày tạo</label><br>
-            <div style="display: inline-flex">
+            <div style="display: flex">
                 <input type="date" name="create_from" id="create_from" placeholder="Từ" class="form-control" style="width: 50%" value="{{request()->filled('create_from')?request()->create_from:''}}">
                 <input type="date" name="create_to" id="create_to" placeholder="Đến" class="form-control" style="width: 50%" value="{{request()->filled('create_to')?request()->create_to:''}}">
             </div>
