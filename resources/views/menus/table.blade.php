@@ -1,17 +1,19 @@
 <div class="table-responsive">
     <table class="table" id="menus-table">
         <thead>
-            <tr>
-                <th>Tên món</th>
-        <th>Giá</th>
-                <th colspan="3">Thao tác</th>
-            </tr>
+        <tr>
+            <th>Tên món</th>
+            <th>Giá</th>
+            <th>Số lần order</th>
+            <th colspan="3">Thao tác</th>
+        </tr>
         </thead>
         <tbody>
         @foreach($menus as $menu)
             <tr>
                 <td>{{ $menu->name }}</td>
-            <td>{{ number_format($menu->price) }}</td>
+                <td>{{ number_format($menu->price) }}</td>
+                <td>{{ $menu->count}}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['menus.destroy', $menu->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

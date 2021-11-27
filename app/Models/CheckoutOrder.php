@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property integer $price
  * @property integer $type
  * @property integer $user_id
+ * @property integer $status
  */
 class CheckoutOrder extends Model
 {
@@ -42,7 +43,8 @@ class CheckoutOrder extends Model
         'quantity',
         'price',
         'type',
-        'user_id'
+        'user_id',
+        'status'
     ];
 
     /**
@@ -58,7 +60,8 @@ class CheckoutOrder extends Model
         'quantity' => 'string',
         'price' => 'string',
         'type' => 'string',
-        'user_id' => 'integer'
+        'user_id' => 'integer',
+        'status' => 'integer'
     ];
 
     /**

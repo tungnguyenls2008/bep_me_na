@@ -55,6 +55,9 @@ class CheckoutOrderController extends AppBaseController
         if (isset($search['user_id'])){
             $checkoutOrders->where(['user_id'=>$search['user_id']]);
         }
+        if (isset($search['status'])){
+            $checkoutOrders->where(['status'=>$search['status']]);
+        }
         if (isset($search['create_from'])|| isset($search['create_to'])){
             if (!isset($search['create_from'])){
                 $search['create_from']='1970-01-01';
@@ -68,7 +71,7 @@ class CheckoutOrderController extends AppBaseController
         }
         $checkoutOrders=$checkoutOrders->paginate(15);
         return view('checkout_orders.index')
-            ->with('checkoutOrders', $checkoutOrders,)->with('count',$checkoutOrders->count());
+            ->with('checkoutOrders', $checkoutOrders,)->with('count',$checkoutOrders->total());
     }
 
     /**
@@ -151,6 +154,14 @@ class CheckoutOrderController extends AppBaseController
         $order_update=CheckoutOrder::find($checkoutOrder['id']);
         $order_update->bill_path='/files/'.$bill;
         if ($order_update->update()){
+            $input['menu_id']=json_decode($input['menu_id'],true);
+            $input['quantity']=json_decode($input['quantity'],true);
+            $map_menu_quantity=array_combine($input['menu_id'],$input['quantity']);
+            foreach ($map_menu_quantity as $key=>$item){
+                    $menu_to_count=Menu::find($key);
+                    $menu_to_count->count=$menu_to_count->count+$item;
+                    $menu_to_count->save();
+            }
             Flash::success('Lưu hóa đơn thành công!');
 
             return redirect(route('checkoutOrders.index'));
@@ -490,6 +501,18 @@ class CheckoutOrderController extends AppBaseController
                 //Merge target cells
                 $sheet->mergeCells($merge);
             }
+        }
+    }
+    public function toggleStatus(Request $request){
+        $order=CheckoutOrder::find($request->id);
+        if ($order->status==0){
+            $order->status=1;
+        }elseif ($order->status==1){
+            $order->status=0;
+        }
+        if($order->save()){
+            Flash::success('Chuyển đổi trạng thái đơn hàng thành công!');
+            return redirect(route('checkoutOrders.index'));
         }
     }
 }

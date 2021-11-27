@@ -21,7 +21,7 @@ class Menu extends Model
     use HasFactory;
 
     public $table = 'menu';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -32,7 +32,8 @@ class Menu extends Model
 
     public $fillable = [
         'name',
-        'price'
+        'price',
+        'count'
     ];
 
     /**
@@ -43,7 +44,8 @@ class Menu extends Model
     protected $casts = [
         'id' => 'integer',
         'name' => 'string',
-        'price' => 'integer'
+        'price' => 'integer',
+        'count' => 'integer'
     ];
 
     /**
@@ -58,5 +60,5 @@ class Menu extends Model
         'deleted_at' => 'nullable'
     ];
 
-    
+
 }

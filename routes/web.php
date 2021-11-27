@@ -35,9 +35,9 @@ Route::resource('rawMaterialImports', App\Http\Controllers\RawMaterialImportCont
 
 Route::post('checkoutOrders/create-note',[\App\Http\Controllers\CheckoutOrderController::class,'createNote'])->name('create-note');
 Route::post('checkoutOrders/update-note',[\App\Http\Controllers\CheckoutOrderController::class,'updateNote'])->name('update-note');
-Route::post('checkoutOrders/search',[\App\Http\Controllers\CheckoutOrderController::class,'search'])->name('search');
-
+Route::get('checkoutOrders/search',[\App\Http\Controllers\CheckoutOrderController::class,'search'])->name('search');
 Route::post('get-menu-price',[\App\Http\Controllers\CheckoutOrderController::class,'getMenuPrice'])->name('get-menu-price');
+Route::get('toggle-status',[\App\Http\Controllers\CheckoutOrderController::class,'toggleStatus'])->name('toggle-status');
 
 Route::resource('checkoutOrders', App\Http\Controllers\CheckoutOrderController::class);
 
