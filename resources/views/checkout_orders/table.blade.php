@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div class="table-responsive table-hover">
     <table class="table" id="checkoutOrders-table">
         <thead>
         <tr>
