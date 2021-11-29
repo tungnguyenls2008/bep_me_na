@@ -35,7 +35,6 @@ class CheckoutOrderController extends AppBaseController
      */
     public function index(Request $request)
     {
-        /** @var CheckoutOrder $checkoutOrders */
         $checkoutOrders = CheckoutOrder::OrderBy('created_at', 'desc')->paginate(15);
 
 
@@ -45,7 +44,6 @@ class CheckoutOrderController extends AppBaseController
     public function search(Request $request)
     {
         $search=$request->post();
-
         $checkoutOrders= CheckoutOrder::OrderBy('created_at','desc');
         if (isset($search['bill_code'])){
             $checkoutOrders->where('bill_code','like','%'.$search['bill_code'].'%');
@@ -55,6 +53,9 @@ class CheckoutOrderController extends AppBaseController
         }
         if (isset($search['user_id'])){
             $checkoutOrders->where(['user_id'=>$search['user_id']]);
+        }
+        if (isset($search['regular_customer_id'])){
+            $checkoutOrders->where(['regular_customer_id'=>$search['regular_customer_id']]);
         }
         if (isset($search['status'])){
             $checkoutOrders->where(['status'=>$search['status']]);

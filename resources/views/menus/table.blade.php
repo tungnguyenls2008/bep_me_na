@@ -12,8 +12,8 @@
         @foreach($menus as $menu)
             <tr>
                 <td>{{ $menu->name }}</td>
-                <td>{{ number_format($menu->price) }}</td>
-                <td>{{ $menu->count}}</td>
+                <td>{{ number_format($menu->price) }}đ</td>
+                <td><label class="badge badge-info">{{ $menu->count}}</label></td>
                 <td width="120">
                     {!! Form::open(['route' => ['menus.destroy', $menu->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

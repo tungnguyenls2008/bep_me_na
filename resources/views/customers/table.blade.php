@@ -9,7 +9,7 @@
             <th>Sở thích</th>
             <th>Số lần Order</th>
             <th>Ghi chú</th>
-            <th colspan="3">Action</th>
+            <th colspan="3">Thao tác</th>
         </tr>
         </thead>
         <tbody>

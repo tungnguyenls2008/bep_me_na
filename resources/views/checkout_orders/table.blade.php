@@ -18,8 +18,13 @@
         @foreach($checkoutOrders as $checkoutOrder)
             <tr>
                 <td>
-                    <b>Số hóa đơn: </b>{{ $checkoutOrder->bill_code }}<br><a href="{{asset($checkoutOrder->bill_path)}}"><i class="fas fa-download"></i></a>
+                    <b>Số hóa đơn: </b>{{ $checkoutOrder->bill_code }}<br><a
+                        href="{{asset($checkoutOrder->bill_path)}}"><i class="fas fa-download"></i></a>
                     <b>Thông tin khách hàng: </b>{{$checkoutOrder->customer_info}}
+                    <br>
+                    @if($checkoutOrder->regular_customer_id!=null)
+                        <a href="{{route('customers.show',['customer'=>$checkoutOrder->regular_customer_id])}}" style="color: green"><i class="fas fa-user-check"></i>Khách hàng thân thiết</a>
+                    @endif
                 </td>
                 <?php $menu_ids = json_decode($checkoutOrder->menu_id, true);
                 $menu = \App\Models\Menu::find($menu_ids);
@@ -52,7 +57,7 @@
                     <table class="table table-bordered table-striped">
                         @foreach($price as $item)
                             <tr>
-                                <td>{{number_format($item)}}</td>
+                                <td>{{number_format($item)}}đ</td>
                             </tr>
                         @endforeach
                     </table>
@@ -85,12 +90,12 @@
                     <table class="table table-bordered table-striped">
                         @foreach($total as $item)
                             <tr>
-                                <td>{{number_format($item)}}</td>
+                                <td>{{number_format($item)}}đ</td>
                             </tr>
                         @endforeach
                         <tr>
                             <td>
-                                Tổng hóa đơn:<b> {{number_format(array_sum($total))}}</b>
+                                Tổng hóa đơn:<b> {{number_format(array_sum($total))}}đ</b>
                             </td>
                         </tr>
                     </table>
@@ -103,9 +108,15 @@
                     <b>Ngày tạo: </b>{{date('d-m-Y H:i:s',strtotime($checkoutOrder->created_at))}}<br>
                     <b>Trạng thái: </b>
                     @switch($checkoutOrder->status)
-                        @case(0) <a href="{{route('toggle-status',['id'=>$checkoutOrder->id])}}" class="badge badge-warning" onclick="return confirm('Bạn chắc chắn muốn đổi trạng thái đơn hàng này?')">Chưa thanh toán</a>@break
-                        @case(1) <a href="{{route('toggle-status',['id'=>$checkoutOrder->id])}}" class="badge badge-success" onclick="return confirm('Bạn chắc chắn muốn đổi trạng thái đơn hàng này?')">Đã thanh toán</a>@break
-                        @endswitch
+                        @case(0) <a href="{{route('toggle-status',['id'=>$checkoutOrder->id])}}"
+                                    class="badge badge-warning"
+                                    onclick="return confirm('Bạn chắc chắn muốn đổi trạng thái đơn hàng này?')">Chưa
+                            thanh toán</a>@break
+                        @case(1) <a href="{{route('toggle-status',['id'=>$checkoutOrder->id])}}"
+                                    class="badge badge-success"
+                                    onclick="return confirm('Bạn chắc chắn muốn đổi trạng thái đơn hàng này?')">Đã thanh
+                            toán</a>@break
+                    @endswitch
                     <hr>
                     <?php
                     $note = \App\Models\Note::where(['bill_code' => $checkoutOrder->bill_code])->first();
@@ -127,18 +138,18 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                <?php
-                                $note = \App\Models\Note::where(['bill_code' => $checkoutOrder->bill_code])->first();
-                                ?>
-                                @if($note!=null)
-                                    {!! Form::open(['route' => 'update-note']) !!}
+                                    <?php
+                                    $note = \App\Models\Note::where(['bill_code' => $checkoutOrder->bill_code])->first();
+                                    ?>
+                                    @if($note!=null)
+                                        {!! Form::open(['route' => 'update-note']) !!}
                                         <input type="text" hidden value="{{$note->id}}" id="note-id" name="note-id">
-                                    <!-- Bill Code Field -->
+                                        <!-- Bill Code Field -->
                                         <div class="form-group col-sm-12 col-lg-12">
                                             {!! Form::label('bill_code', 'Số hóa đơn:') !!}
                                             {{ Form::text('bill_code', $checkoutOrder->bill_code, ['class' => 'form-control','readonly'=>true]) }}
                                         </div>
-                                    <!-- Content Field -->
+                                        <!-- Content Field -->
                                         <div class="form-group col-sm-12 col-lg-12">
                                             {!! Form::label('content', 'Nội dung:') !!}
                                             {!! Form::textarea('content', $note->content, ['class' => 'form-control']) !!}
@@ -187,21 +198,21 @@
                         </div>
                     </div>
                 </td>
-                                <td width="120">
-                                    {!! Form::open(['route' => ['checkoutOrders.destroy', $checkoutOrder->id], 'method' => 'delete']) !!}
-                                    <div class='btn-group'>
-{{--                                        <a href="{{ route('checkoutOrders.show', [$checkoutOrder->id]) }}"--}}
-{{--                                           class='btn btn-default btn-xs'>--}}
-{{--                                            <i class="far fa-eye"></i>--}}
-{{--                                        </a>--}}
-{{--                                        <a href="{{ route('checkoutOrders.edit', [$checkoutOrder->id]) }}"--}}
-{{--                                           class='btn btn-default btn-xs'>--}}
-{{--                                            <i class="far fa-edit"></i>--}}
-{{--                                        </a>--}}
-                                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                                    </div>
-                                    {!! Form::close() !!}
-                                </td>
+                <td width="120">
+                    {!! Form::open(['route' => ['checkoutOrders.destroy', $checkoutOrder->id], 'method' => 'delete']) !!}
+                    <div class='btn-group'>
+                        {{--                                        <a href="{{ route('checkoutOrders.show', [$checkoutOrder->id]) }}"--}}
+                        {{--                                           class='btn btn-default btn-xs'>--}}
+                        {{--                                            <i class="far fa-eye"></i>--}}
+                        {{--                                        </a>--}}
+                        {{--                                        <a href="{{ route('checkoutOrders.edit', [$checkoutOrder->id]) }}"--}}
+                        {{--                                           class='btn btn-default btn-xs'>--}}
+                        {{--                                            <i class="far fa-edit"></i>--}}
+                        {{--                                        </a>--}}
+                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                    </div>
+                    {!! Form::close() !!}
+                </td>
             </tr>
 
         @endforeach

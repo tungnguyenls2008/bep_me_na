@@ -156,7 +156,8 @@
     });
     $('select').select2({
         width:'100%',
-        placeholder:'Chọn...'
+        placeholder:'Chọn...',
+        allowClear: true
     });
 </script>
 

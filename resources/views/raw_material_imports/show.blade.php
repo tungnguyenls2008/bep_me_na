@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Raw Material Import Details</h1>
+                    <h1>Chi tiết chi phí</h1>
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-default float-right"
                        href="{{ route('rawMaterialImports.index') }}">
-                        Back
+                        Quay lại
                     </a>
                 </div>
             </div>

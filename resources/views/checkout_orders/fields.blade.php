@@ -297,6 +297,8 @@ foreach ($customers as $customer){
                 $("#regular_customer_id").fadeOut().hide();
                 $("#regular_customer_id").next(".select2-container").fadeOut().hide();
                 $("#customer_info").fadeIn().show();
+                $('#regular_customer_id').val(null).trigger("change");
+
             }
         })
         $("#submit").on('click',function () {
@@ -307,6 +309,7 @@ foreach ($customers as $customer){
             }else{
                 $('#regular_customer_id').removeAttr('required');
                 $("#customer_info").val()
+                $('#regular_customer_id').val(null).trigger("change");
             }
         })
     })

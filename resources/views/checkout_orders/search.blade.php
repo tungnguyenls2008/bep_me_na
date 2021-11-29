@@ -46,6 +46,7 @@
 
         </div>
 
+
     </div>
     <div class="row">
         <div class="col-md-4">
@@ -63,6 +64,20 @@
                 <option value="0" {{request()->status=="0"?'selected':''}}>Chưa thanh toán</option>
                 <option value="1" {{request()->status=="1"?'selected':''}}>Đã thanh toán</option>
             </select>
+        </div>
+        <div class="col-sm-4">
+            <?php
+            $customers=\App\Models\Customer::all();
+            $customer_select=[];
+            foreach ($customers as $customer){
+                $customer_select[$customer->id]=$customer->name.'-'.$customer->phone.'-'.$customer->address;
+            }
+            ?>
+            <label for="total_from">
+                Khách hàng thân thiết
+            </label>
+            {{Form::select('regular_customer_id',$customer_select,request()->filled('regular_customer_id')?request()->regular_customer_id:null,['class'=>'form-control','placeholder'=>'Chọn...'])}}
+
         </div>
     </div>
     <hr>
