@@ -28,7 +28,7 @@
                         <div class="badge badge-pill badge-danger">{{$item->name}}</div>
                     @endforeach
                 </td>
-                <td>{{ $customer->order_count }}</td>
+                <td><label class="badge badge-info">{{ $customer->order_count }}</label></td>
                 <td>{{ $customer->note }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['customers.destroy', $customer->id], 'method' => 'delete']) !!}

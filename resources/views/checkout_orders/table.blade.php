@@ -18,12 +18,15 @@
         @foreach($checkoutOrders as $checkoutOrder)
             <tr>
                 <td>
-                    <b>Số hóa đơn: </b>{{ $checkoutOrder->bill_code }}<br><a
-                        href="{{asset($checkoutOrder->bill_path)}}"><i class="fas fa-download"></i></a>
+                    <b>Số hóa đơn: </b><a
+                        href="{{asset($checkoutOrder->bill_path)}}">{{ $checkoutOrder->bill_code }}<i
+                            class="fas fa-download"></i></a><br>
                     <b>Thông tin khách hàng: </b>{{$checkoutOrder->customer_info}}
                     <br>
                     @if($checkoutOrder->regular_customer_id!=null)
-                        <a href="{{route('customers.show',['customer'=>$checkoutOrder->regular_customer_id])}}" style="color: green"><i class="fas fa-user-check"></i>Khách hàng thân thiết</a>
+                        <a href="{{route('customers.show',['customer'=>$checkoutOrder->regular_customer_id])}}"
+                           class="btn btn-sm btn-outline-success" style="color: green"><i class="fas fa-user-check"></i> Khách
+                            hàng thân thiết</a>
                     @endif
                 </td>
                 <?php $menu_ids = json_decode($checkoutOrder->menu_id, true);
@@ -70,11 +73,11 @@
                         @foreach($type as $item)
                             @if($item==0)
                                 <tr>
-                                    <td>Thanh toán</td>
+                                    <td style="color: darkgreen"><i class="fas fa-dollar-sign"></i></td>
                                 </tr>
                             @else
                                 <tr>
-                                    <td>Tặng kèm</td>
+                                    <td style="color: red"><i class="fas fa-gift"></i></td>
                                 </tr>
                             @endif
                         @endforeach

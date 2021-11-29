@@ -172,6 +172,6 @@ class RawMaterialImportController extends AppBaseController
     }
     public function export()
     {
-        return Excel::download(new SpendingExport(), 'spending.xlsx');
+        return Excel::download(new SpendingExport(), 'thong-ke-chi-phi-'.date('d-m-Y',time()).'.xlsx');
     }
 }

@@ -300,7 +300,7 @@ class CheckoutOrderController extends AppBaseController
 
     public function export()
     {
-        return Excel::download(new CheckoutOrderExport(), 'bills.xlsx');
+        return Excel::download(new CheckoutOrderExport(), 'thong-ke-doanh-thu-'.date('d-m-Y',time()).'.xlsx');
     }
 
     public function createNote(Request $request)

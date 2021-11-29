@@ -3,14 +3,25 @@
 <li class="nav-item">
     <a href="{{ route('menus.index') }}"
        class="nav-link {{ Request::is('menus*') ? 'active' : '' }}">
-        <i class="fas fa-utensils"></i>  <p>Thực đơn</p>
+        <table style="width: -webkit-fill-available;">
+        <tr>
+            <td width="20%"><i class="fas fa-utensils"></i></td>
+            <td width="80%" style="text-align: right"><p>Quản lý thực đơn</p></td>
+        </tr>
+        </table>
     </a>
 </li>
 
 <li class="nav-item">
     <a href="{{ route('rawMaterialImports.index') }}"
        class="nav-link {{ Request::is('rawMaterialImports*') ? 'active' : '' }}">
-        <i class="fas fa-store"></i>  <p>Thống kê chi phí</p>
+        <table style="width: -webkit-fill-available;">
+            <tr>
+                <td width="20%"><i class="fas fa-store"></i></td>
+                <td width="80%" style="text-align: right"><p>Thống kê chi phí</p></td>
+            </tr>
+        </table>
+
     </a>
 </li>
 
@@ -18,7 +29,13 @@
 <li class="nav-item">
     <a href="{{ route('checkoutOrders.index') }}"
        class="nav-link {{ Request::is('checkoutOrders*') ? 'active' : '' }}">
-        <i class="fas fa-file-invoice-dollar"></i>  <p>Thống kê doanh thu</p>
+        <table style="width: -webkit-fill-available;">
+            <tr>
+                <td width="20%"><i class="fas fa-file-invoice-dollar"></i></td>
+                <td width="80%" style="text-align: right"><p>Thống kê doanh thu</p></td>
+            </tr>
+        </table>
+
     </a>
 </li>
 
@@ -34,7 +51,13 @@
 <li class="nav-item">
     <a href="{{ route('customers.index') }}"
        class="nav-link {{ Request::is('customers*') ? 'active' : '' }}">
-        <i class="fas fa-user-tie"></i>  <p>Dữ liệu khách hàng</p>
+        <table style="width: -webkit-fill-available;">
+            <tr>
+                <td width="20%"><i class="fas fa-user-tie"></i></td>
+                <td width="80%" style="text-align: right"><p>Khách hàng thân thiết</p></td>
+            </tr>
+        </table>
+
     </a>
 </li>
 
