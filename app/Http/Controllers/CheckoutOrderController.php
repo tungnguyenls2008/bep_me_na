@@ -7,6 +7,7 @@ use App\Http\Requests\CreateCheckoutOrderRequest;
 use App\Http\Requests\UpdateCheckoutOrderRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\CheckoutOrder;
+use App\Models\Customer;
 use App\models\ExcelSample;
 use App\Models\Menu;
 use App\Models\Note;
@@ -118,6 +119,11 @@ class CheckoutOrderController extends AppBaseController
             $new_note['bill_code'] = $input['bill_code'];
             $new_note['content'] = $input['note'];
             $note = Note::create($new_note);
+        }
+        if (isset($input['regular_customer_id'])){
+            $customer=Customer::find($input['regular_customer_id']);
+            $customer->order_count+=1;
+            $customer->save();
         }
 
         $checkoutOrder = CheckoutOrder::create($input);
@@ -258,6 +264,19 @@ class CheckoutOrderController extends AppBaseController
             return redirect(route('checkoutOrders.index'));
         }
         if (Auth::id()==$checkoutOrder->user_id){
+            $customer=Customer::find($checkoutOrder->regular_customer_id);
+            if ($customer!=null){
+                $customer->order_count-=1;
+                $customer->save();
+            }
+            $menu_id=json_decode($checkoutOrder->menu_id,true);
+            $quantity=json_decode($checkoutOrder->quantity,true);
+            $match_menu_quantity=array_combine($menu_id,$quantity);
+            foreach ($match_menu_quantity as $key=>$item){
+                $menu=Menu::find($key);
+                $menu->count-=$item;
+                $menu->save();
+            }
             $checkoutOrder->delete();
 
             Flash::success('Đã xóa thành công hóa đơn '.$checkoutOrder->bill_code.'.');

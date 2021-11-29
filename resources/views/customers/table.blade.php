@@ -7,6 +7,7 @@
             <th>Điạ chỉ</th>
             <th>Ngày sinh</th>
             <th>Sở thích</th>
+            <th>Số lần Order</th>
             <th>Ghi chú</th>
             <th colspan="3">Action</th>
         </tr>
@@ -27,6 +28,7 @@
                         <div class="badge badge-pill badge-danger">{{$item->name}}</div>
                     @endforeach
                 </td>
+                <td>{{ $customer->order_count }}</td>
                 <td>{{ $customer->note }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['customers.destroy', $customer->id], 'method' => 'delete']) !!}

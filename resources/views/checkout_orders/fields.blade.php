@@ -5,11 +5,23 @@ foreach ($menu as $item) {
     $menu_select[$item->id] = $item->name;
     $menu_html .= '<option value="' . $item->id . '">' . $item->name . '</option>';
 }
+$customers=\App\Models\Customer::all();
+$customer_select=[];
+foreach ($customers as $customer){
+    $customer_select[$customer->id]=$customer->name.'-'.$customer->phone.'-'.$customer->address;
+}
 ?>
 <div id="checkout-order-div" class="col-md-12">
     <div>
-        {!! Form::label('customer_info','Thông tin khách hàng') !!}
-        {!! Form::text('customer_info',null,['class'=>'form-control','required'=>true,'placeholder'=>'Nhập thông tin khách hàng (hiển thị trên hóa đơn)']) !!}
+        {!! Form::label('customer_info','Thông tin khách hàng') !!} <label for="is-regular" class="btn btn-outline-success"> <input type="checkbox" id="is-regular" name="regular" class="custom-checkbox">-Thân thiết?</label>
+
+        {!! Form::text('customer_info',null,['id'=>'customer_info','class'=>'form-control','required'=>true,'placeholder'=>'Nhập thông tin khách hàng (hiển thị trên hóa đơn)']) !!}
+
+        {!! Form::select('regular_customer_id',$customer_select,null,['id'=>'regular_customer_id','class'=>'form-control','placeholder'=>'Chọn...','required'=>true]) !!}
+
+    </div>
+    <div>
+
     </div>
     <hr>
     <div class="menu-item-div">
@@ -274,5 +286,28 @@ foreach ($menu as $item) {
             $("#discount").val(discount)
             $("#total_to_pay").val($("#sum-total").val()-discount);
         }
+        $("#regular_customer_id").fadeOut().hide();
+        $("#regular_customer_id").next(".select2-container").fadeIn().hide();
+        $("#is-regular").on('change',function () {
+            if ($(this).is(':checked')){
+                $("#regular_customer_id").fadeIn().show();
+                $("#regular_customer_id").next(".select2-container").fadeIn().show();
+                $("#customer_info").fadeOut().hide();
+            }else{
+                $("#regular_customer_id").fadeOut().hide();
+                $("#regular_customer_id").next(".select2-container").fadeOut().hide();
+                $("#customer_info").fadeIn().show();
+            }
+        })
+        $("#submit").on('click',function () {
+
+            if ($("#is-regular").is(':checked')){
+                var data = $('#regular_customer_id').select2('data')
+                $("#customer_info").val(data[0].text)
+            }else{
+                $('#regular_customer_id').removeAttr('required');
+                $("#customer_info").val()
+            }
+        })
     })
 </script>

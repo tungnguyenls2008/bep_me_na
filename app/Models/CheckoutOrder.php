@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *
  * @property string $bill_code
  * @property string $customer_info
+ * @property integer $regular_customer_id
  * @property integer $menu_id
  * @property integer $quantity
  * @property integer $price
@@ -39,6 +40,7 @@ class CheckoutOrder extends Model
     public $fillable = [
         'bill_code',
         'customer_info',
+        'regular_customer_id',
         'menu_id',
         'quantity',
         'price',
@@ -56,6 +58,7 @@ class CheckoutOrder extends Model
         'id' => 'integer',
         'bill_code' => 'string',
         'customer_info' => 'string',
+        'regular_customer_id' => 'integer',
         'menu_id' => 'string',
         'quantity' => 'string',
         'price' => 'string',
