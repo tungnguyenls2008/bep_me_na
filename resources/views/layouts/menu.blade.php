@@ -6,7 +6,7 @@
         <table style="width: -webkit-fill-available;">
         <tr>
             <td width="20%"><i class="fas fa-utensils"></i></td>
-            <td width="80%" style="text-align: right"><p>Quản lý thực đơn</p></td>
+            <td width="80%" style="text-align: left"><p>Quản lý thực đơn</p></td>
         </tr>
         </table>
     </a>
@@ -18,7 +18,7 @@
         <table style="width: -webkit-fill-available;">
             <tr>
                 <td width="20%"><i class="fas fa-store"></i></td>
-                <td width="80%" style="text-align: right"><p>Thống kê chi phí</p></td>
+                <td width="80%" style="text-align: left"><p>Thống kê chi phí</p></td>
             </tr>
         </table>
 
@@ -32,7 +32,7 @@
         <table style="width: -webkit-fill-available;">
             <tr>
                 <td width="20%"><i class="fas fa-file-invoice-dollar"></i></td>
-                <td width="80%" style="text-align: right"><p>Thống kê doanh thu</p></td>
+                <td width="80%" style="text-align: left"><p>Thống kê doanh thu</p></td>
             </tr>
         </table>
 
@@ -54,7 +54,7 @@
         <table style="width: -webkit-fill-available;">
             <tr>
                 <td width="20%"><i class="fas fa-user-tie"></i></td>
-                <td width="80%" style="text-align: right"><p>Khách hàng thân thiết</p></td>
+                <td width="80%" style="text-align: left"><p>Khách hàng thân thiết</p></td>
             </tr>
         </table>
 
