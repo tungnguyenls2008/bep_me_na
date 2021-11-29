@@ -520,9 +520,16 @@ class CheckoutOrderController extends AppBaseController
         }elseif ($order->status==1){
             $order->status=0;
         }
-        if($order->save()){
-            Flash::success('Chuyển đổi trạng thái đơn hàng thành công!');
+        if(Auth::id()==$order->user_id){
+            if($order->save()){
+                Flash::success('Chuyển đổi trạng thái đơn hàng thành công!');
+                return redirect(route('checkoutOrders.index'));
+            }
+        }
+        else{
+            Flash::error('Bạn không có quyền chuyển đổi trạng thái đơn hàng này!');
             return redirect(route('checkoutOrders.index'));
         }
+
     }
 }

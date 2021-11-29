@@ -115,6 +115,8 @@ class RawMaterialImportController extends AppBaseController
     {
         /** @var RawMaterialImport $rawMaterialImport */
         $rawMaterialImport = RawMaterialImport::find($id);
+        $input=$request->all();
+        $input['total']=$input['quantity']*$input['price'];
 
         if (empty($rawMaterialImport)) {
             Flash::error('Raw Material Import not found');
@@ -122,7 +124,7 @@ class RawMaterialImportController extends AppBaseController
             return redirect(route('rawMaterialImports.index'));
         }
         if (Auth::id()==$rawMaterialImport->user_id) {
-            $rawMaterialImport->fill($request->all());
+            $rawMaterialImport->fill($input);
             $rawMaterialImport->save();
 
             Flash::success('Cập nhật thành công khoản chi '.$rawMaterialImport->name.'.');
