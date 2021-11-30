@@ -1,4 +1,4 @@
-<?php $menu = \App\Models\Menu::all();
+<?php $menu = \App\Models\Menu::where(['status'=>0])->get();
 $menu_select = [];
 $menu_html = '<option></option>';
 foreach ($menu as $item) {

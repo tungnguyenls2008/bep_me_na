@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('get-menu-price',[\App\Http\Controllers\CheckoutOrderController::class,'getMenuPrice'])->name('get-menu-price');
     Route::get('order-toggle-status',[\App\Http\Controllers\CheckoutOrderController::class,'toggleStatus'])->name('order-toggle-status');
     Route::get('import-toggle-status',[\App\Http\Controllers\RawMaterialImportController::class,'toggleStatus'])->name('import-toggle-status');
+    Route::get('menu-toggle-status',[\App\Http\Controllers\MenuController::class,'toggleStatus'])->name('menu-toggle-status');
     Route::get('spending-export/', [\App\Http\Controllers\RawMaterialImportController::class,'export'])->name('spending-export');
     Route::get('bill-export', [\App\Http\Controllers\CheckoutOrderController::class,'export'])->name('bill-export');
 });

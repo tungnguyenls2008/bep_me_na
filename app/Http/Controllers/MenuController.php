@@ -8,6 +8,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Auth;
 use Response;
 
 class MenuController extends AppBaseController
@@ -131,9 +132,9 @@ class MenuController extends AppBaseController
      *
      * @param int $id
      *
+     * @return Response
      * @throws \Exception
      *
-     * @return Response
      */
     public function destroy($id)
     {
@@ -151,5 +152,20 @@ class MenuController extends AppBaseController
         Flash::success('Menu deleted successfully.');
 
         return redirect(route('menus.index'));
+    }
+
+    public function toggleStatus(Request $request)
+    {
+        $order = Menu::find($request->id);
+        if ($order->status == 0) {
+            $order->status = 1;
+        } elseif ($order->status == 1) {
+            $order->status = 0;
+        }
+
+        if ($order->save()) {
+            Flash::success('Chuyển đổi trạng thái mặt hàng thành công!');
+            return redirect(route('menus.index'));
+        }
     }
 }

@@ -33,7 +33,8 @@ class Menu extends Model
     public $fillable = [
         'name',
         'price',
-        'count'
+        'count',
+        'status',
     ];
 
     /**

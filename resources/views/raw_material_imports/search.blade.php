@@ -61,7 +61,15 @@
 
         </div>
         <div class="col-md-4">
+            <?php
+            $providers=\App\Models\Provider::all();
+            foreach ($providers as $provider){
+                $provider_select[$provider->id]=$provider->name;
+            }
+            ?>
 
+                {!! Form::label('provider_id', 'Nhà cung cấp:') !!}
+                {!! Form::select('provider_id',$provider_select, request()->filled('provider_id')?request()->provider_id:null, ['class' => 'form-control','id'=>'provider_id','placeholder'=>true]) !!}
         </div>
         <div class="col-sm-4">
 

@@ -56,6 +56,9 @@ class RawMaterialImportController extends AppBaseController
         if (isset($search['user_id'])){
             $spending->where(['user_id'=>$search['user_id']]);
         }
+        if (isset($search['provider_id'])){
+            $spending->where(['provider_id'=>$search['provider_id']]);
+        }
         $spending=$spending->paginate(15);
         return view('raw_material_imports.index')
             ->with('rawMaterialImports', $spending,)->with('count',$spending->total());

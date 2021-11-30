@@ -24,7 +24,7 @@
                             class="fas fa-download"></i></a><br>
                     <b>Thông tin khách hàng: </b>{{$checkoutOrder->customer_info}}
                     <br>
-                    @if($checkoutOrder->regular_customer_id!=null)
+                    @if($checkoutOrder->regular_customer_id!=null && \App\Models\Customer::find($checkoutOrder->regular_customer_id)!=null)
                         <a href="{{route('customers.show',['customer'=>$checkoutOrder->regular_customer_id])}}"
                            class="btn btn-sm btn-outline-success" style="color: green"><i class="fas fa-user-check"></i>
                             Khách
@@ -38,7 +38,12 @@
                     <table class="table table-bordered table-striped">
                         @foreach($menu as $item)
                             <tr>
-                                <td>{{$item->name}}</td>
+                                <td>
+                                    {{$item->name}}
+                                    @if($item->status==1)
+                                        <div class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="Tạm ngừng bán"><i class="fas fa-pause-circle"></i></div>
+                                        @endif
+                                </td>
                             </tr>
                         @endforeach
                     </table>

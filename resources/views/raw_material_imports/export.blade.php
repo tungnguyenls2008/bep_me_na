@@ -1,11 +1,12 @@
 <div class="row">
-    <h3>CHI TIẾT CHI PHÍ</h3>
+    <h1>CHI TIẾT CHI PHÍ</h1>
 </div>
 <div class="table-responsive">
     <table class="table" id="rawMaterialImports-table">
         <thead>
         <tr>
             <th>Nội dung</th>
+            <th>Nhà cung cấp</th>
             <th>Số lượng</th>
             <th>Đơn vị</th>
             <th>Giá</th>
@@ -19,6 +20,16 @@
         @foreach($rawMaterialImports as $rawMaterialImport)
             <tr>
                 <td>{{ $rawMaterialImport->name }}</td>
+                <td>
+                    @if($rawMaterialImport->provider_id!=null)
+                        <?php
+                        $provider=\App\Models\Provider::find($rawMaterialImport->provider_id);
+                        if ($provider!=null){
+                            echo $provider->name.'-'.$provider->phone;
+                        }
+                        ?>
+                        @endif
+                </td>
                 <td>{{ $rawMaterialImport->quantity }}</td>
                 @switch($rawMaterialImport->unit)
                     @case (1)<td><label class="badge badge-info">Kg</label></td> @break
@@ -48,8 +59,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td><b>{{($rawMaterialImports->sum(['total']))}}</b></td>
             <td></td>
+            <td><b>{{($rawMaterialImports->sum(['total']))}}</b></td>
             <td></td>
         </tr>
         </tbody>

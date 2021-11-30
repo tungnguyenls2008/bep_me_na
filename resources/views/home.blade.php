@@ -22,7 +22,7 @@
             <div class="col-md-3 col-xl-3">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Thống kê thực đơn</h3>
+                        <h3 class="card-title">Thống kê hàng hóa</h3>
                     </div>
                     <div class="card-body">
                         <div class="float-end mt-2">
@@ -32,7 +32,7 @@
                             $type_lau_count = \App\Models\Menu::where('name', 'like', '%Lẩu%')->count();
                             ?>
                             <div id="total-revenue-chart">
-                                Bạn đang có <b>{{$menu_count}}</b> món ăn, trong đó: <br>
+                                Bạn đang có <b>{{$menu_count}}</b> mặt hàng, trong đó: <br>
                                 <b>{{$type_bun_count}}</b> món Bún. <br>
                                 <b>{{$type_lau_count}}</b> món Lẩu.
                             </div>

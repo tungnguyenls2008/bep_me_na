@@ -20,7 +20,9 @@
                     <?php
                         $provider=\App\Models\Provider::find($rawMaterialImport->provider_id);
                         ?>
+                    @if($provider!=null)
                     <b>Nhà cung cấp:</b> <a href="{{route('providers.show',['provider'=>$rawMaterialImport->provider_id])}}">{{$provider->name}}</a>
+                    @endif
                     @endif
                 </td>
                 <td>{{ $rawMaterialImport->quantity }}</td>

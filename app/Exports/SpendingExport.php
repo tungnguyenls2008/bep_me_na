@@ -59,6 +59,9 @@ class SpendingExport implements FromView,WithHeadings,WithStyles,WithColumnForma
             if (($search_params['user_id'])!=''){
                 $spending->where(['user_id'=>$search_params['user_id']]);
             }
+            if (($search_params['provider_id'])!=''){
+                $spending->where(['provider_id'=>$search_params['provider_id']]);
+            }
         }
 
         $spending=$spending->get();
@@ -102,8 +105,8 @@ class SpendingExport implements FromView,WithHeadings,WithStyles,WithColumnForma
     public function columnFormats(): array
     {
         return [
-            'D' => '#,##0_-',
             'E' => '#,##0_-',
+            'F' => '#,##0_-',
         ];
     }
 }
