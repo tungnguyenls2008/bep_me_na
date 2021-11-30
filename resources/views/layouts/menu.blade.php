@@ -153,7 +153,7 @@
                class="nav-link {{ Request::is('positions*') ? 'active' : '' }}">
                 <table style="width: -webkit-fill-available;">
                     <tr>
-                        <td width="20%" style="text-align: center"><i class="fas fa-users"></i></td>
+                        <td width="20%" style="text-align: center"><i class="fas fa-briefcase"></i></td>
                         <td width="75%" style="text-align: left"><p>Vị trí làm việc</p></td>
                     </tr>
                 </table>
