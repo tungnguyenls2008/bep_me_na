@@ -138,20 +138,20 @@ class MenuController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var Menu $menu */
-        $menu = Menu::find($id);
-
-        if (empty($menu)) {
-            Flash::error('Menu not found');
-
-            return redirect(route('menus.index'));
-        }
-
-        $menu->delete();
-
-        Flash::success('Menu deleted successfully.');
-
-        return redirect(route('menus.index'));
+//        /** @var Menu $menu */
+//        $menu = Menu::find($id);
+//
+//        if (empty($menu)) {
+//            Flash::error('Menu not found');
+//
+//            return redirect(route('menus.index'));
+//        }
+//
+//        $menu->delete();
+//
+//        Flash::success('Menu deleted successfully.');
+//
+//        return redirect(route('menus.index'));
     }
 
     public function toggleStatus(Request $request)

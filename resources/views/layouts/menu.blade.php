@@ -126,3 +126,44 @@
         </li>
     </ul>
 </li>
+<li class="nav-item has-treeview nav-pills {{ Request::is('employees*')||Request::is('positions*') ? 'menu-open' : '' }}">
+    <a href="#" class="nav-link parent-link {{ Request::is('employees*')||Request::is('positions*') ? 'active' : '' }}">
+        <table style="width: -webkit-fill-available;">
+            <tr>
+                <td width="20%" style="text-align: center"><i class="fas fa-users"></i></td>
+                <td width="75%" style="text-align: left"><p>Quản lý nhân viên</p></td>
+                <td width="5%" style="text-align: right"><i class="right fa fa-angle-left"></i></td>
+            </tr>
+        </table>
+    </a>
+    <ul class="nav nav-treeview nav-pills nav-sidebar ">
+        <li class="nav-item">
+            <a href="{{ route('employees.index') }}"
+               class="nav-link {{ Request::is('employees*') ? 'active' : '' }}">
+                <table style="width: -webkit-fill-available;">
+                    <tr>
+                        <td width="20%" style="text-align: center"><i class="fas fa-users"></i></td>
+                        <td width="75%" style="text-align: left"><p>Thống kê nhân viên</p></td>
+                    </tr>
+                </table>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('positions.index') }}"
+               class="nav-link {{ Request::is('positions*') ? 'active' : '' }}">
+                <table style="width: -webkit-fill-available;">
+                    <tr>
+                        <td width="20%" style="text-align: center"><i class="fas fa-users"></i></td>
+                        <td width="75%" style="text-align: left"><p>Vị trí làm việc</p></td>
+                    </tr>
+                </table>
+            </a>
+        </li>
+
+
+
+    </ul>
+</li>
+
+
+
