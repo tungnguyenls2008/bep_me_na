@@ -2,9 +2,9 @@
     <table class="table" id="menus-table">
         <thead>
         <tr>
-            <th>Tên món</th>
+            <th>Mặt hàng</th>
             <th>Giá</th>
-            <th>Số lần order</th>
+            <th>Đã bán</th>
             <th colspan="3">Thao tác</th>
         </tr>
         </thead>

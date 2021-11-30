@@ -17,8 +17,8 @@
             <label for="customer_info">
                 Nội dung chi
             </label>
-            <input type="text" id="customer_info" name="customer_info" placeholder="Tìm nội dung chi..."
-                   value="{{request()->filled('customer_info')?request()->customer_info:''}}"
+            <input type="text" id="name" name="name" placeholder="Tìm nội dung chi..."
+                   value="{{request()->filled('name')?request()->name:''}}"
                    class="form-control">
             {{--<input type="number" id="total_from" name="total_from" placeholder="Từ..." class="form-control"--}}
             {{--                                                   style="width: auto">--}}

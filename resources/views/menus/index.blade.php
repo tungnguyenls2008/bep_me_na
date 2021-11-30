@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Thực đơn</h1>
+                    <h1>Quản lý hàng hóa</h1>
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"

@@ -35,3 +35,17 @@
     <p>{{ $user->name }}</p>
 </div>
 
+<!-- Status Field -->
+<div class="col-sm-12">
+    {!! Form::label('status', 'Trạng thái:') !!}<br>
+    @switch($rawMaterialImport->status)
+        @case(0) <a href="{{route('import-toggle-status',['id'=>$rawMaterialImport->id])}}"
+                    class="badge badge-warning"
+                    onclick="return confirm('Bạn chắc chắn muốn đổi trạng thái khoản chi này?')">Chưa
+            thanh toán</a>@break
+        @case(1) <a href="{{route('import-toggle-status',['id'=>$rawMaterialImport->id])}}"
+                    class="badge badge-success"
+                    onclick="return confirm('Bạn chắc chắn muốn đổi trạng thái khoản chi này?')">Đã thanh
+            toán</a>@break
+    @endswitch
+</div>

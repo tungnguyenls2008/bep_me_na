@@ -6,7 +6,7 @@
         <table style="width: -webkit-fill-available;">
         <tr>
             <td width="20%" style="text-align: center"><i class="fas fa-utensils"></i></td>
-            <td width="80%" style="text-align: left"><p>Quản lý thực đơn</p></td>
+            <td width="80%" style="text-align: left"><p>Quản lý hàng hóa</p></td>
         </tr>
         </table>
     </a>

@@ -11,7 +11,8 @@
             <th>Giá</th>
             <th>Thành tiền</th>
             <th>Người chi</th>
-            <th>Ngày chi</th>
+            <th>Trạng thái</th>
+            <th>Ngày tạo</th>
         </tr>
         </thead>
         <tbody>
@@ -32,6 +33,12 @@
                 <td>{{ ($rawMaterialImport->total) }}</td>
                 <?php $user=\App\Models\User::query()->where(['id'=>$rawMaterialImport->user_id])->first(); ?>
                 <td>{{ $user->name }}</td>
+                <td>
+                    @switch($rawMaterialImport->status)
+                        @case(0) Chưa thanh toán @break
+                        @case(1) Đã thanh toán @break
+                    @endswitch
+                </td>
                 <td>{{ $rawMaterialImport->created_at }}</td>
 
             </tr>
