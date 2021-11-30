@@ -1,7 +1,7 @@
 <?php
 ?>
 <div class="col-md-12 border">
-    {!! Form::model($checkoutOrders, ['route' => 'search','method'=>'get']) !!}
+    {!! Form::model($checkoutOrders, ['route' => 'order-search','method'=>'get']) !!}
 
     <div class="row">
         <div class="col-sm-4">

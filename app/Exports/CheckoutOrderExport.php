@@ -23,9 +23,48 @@ class CheckoutOrderExport implements FromView,WithHeadings,WithStyles,WithColumn
     }
     public function view(): View
     {
-        $checkoutOrder=CheckoutOrder::where(['deleted_at'=>null])->get();
+        $search= request()->headers->get('referer');
+        $search=explode('search?',$search);
+        $checkoutOrders= CheckoutOrder::where(['deleted_at'=>null])->OrderBy('created_at','desc');
+
+        if (isset($search[1])){
+            $search=explode('&',$search[1]);
+            $search_params=[];
+            foreach ($search as $param){
+                $param=explode('=',$param);
+                $search_params[$param[0]]=$param[1];
+            }
+            if (($search_params['bill_code'])!=''){
+                $checkoutOrders->where('bill_code','like','%'.$search_params['bill_code'].'%');
+            }
+            if (($search_params['customer_info'])!=''){
+                $checkoutOrders->where('customer_info','like','%'.$search_params['customer_info'].'%');
+            }
+            if (($search_params['user_id'])!=''){
+                $checkoutOrders->where(['user_id'=>$search_params['user_id']]);
+            }
+            if (($search_params['regular_customer_id'])!=''){
+                $checkoutOrders->where(['regular_customer_id'=>$search_params['regular_customer_id']]);
+            }
+            if (($search_params['status'])!=''){
+                $checkoutOrders->where(['status'=>$search_params['status']]);
+            }
+            if (($search_params['create_from'])!=''|| ($search_params['create_to'])!=''){
+                if (($search_params['create_from'])==''){
+                    $search_params['create_from']='1970-01-01';
+                }
+                if (($search_params['create_to'])==''){
+                    $search_params['create_to']='2100-12-31';
+                }
+                $from=date('Y-m-d H:i:s',strtotime($search_params['create_from'].' 00:00:00'));
+                $to=date('Y-m-d H:i:s',strtotime($search_params['create_to'].' 23:23:59'));
+                $checkoutOrders->whereBetween('created_at',[$from,$to]);
+            }
+        }
+
+        $checkoutOrders=$checkoutOrders->get();
         return view('checkout_orders.export', [
-            'checkoutOrders' => $checkoutOrder
+            'checkoutOrders' => $checkoutOrders
         ]);
     }
     public function headings(): array

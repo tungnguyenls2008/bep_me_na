@@ -25,8 +25,8 @@ Auth::routes();
 Route::get('/home', [
     HomeController::class, 'index'
 ])->name('home')->middleware('auth');
-Route::get('checkoutOrders/search',[\App\Http\Controllers\CheckoutOrderController::class,'search'])->name('search');
-Route::get('rawMaterialImports/search',[\App\Http\Controllers\RawMaterialImportController::class,'search'])->name('search');
+Route::get('checkoutOrders/search',[\App\Http\Controllers\CheckoutOrderController::class,'search'])->name('order-search');
+Route::get('rawMaterialImports/search',[\App\Http\Controllers\RawMaterialImportController::class,'search'])->name('spending-search');
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('menus', App\Http\Controllers\MenuController::class);
