@@ -2,15 +2,15 @@
     <table class="table" id="checkoutOrders-table">
         <thead>
         <tr>
-            <th>Hóa đơn</th>
-            <th>Danh sách thực đơn</th>
-            <th>Số lượng</th>
-            <th>Đơn giá</th>
-            <th><i class="fas fa-dollar-sign" style="color: darkgreen"></i> / <i class="fas fa-gift"
+            <th style="text-align: center">Hóa đơn</th>
+            <th style="text-align: center">Danh sách thực đơn</th>
+            <th style="text-align: center">Số lượng</th>
+            <th style="text-align: center">Đơn giá</th>
+            <th style="text-align: center"><i class="fas fa-dollar-sign" style="color: darkgreen"></i> / <i class="fas fa-gift"
                                                                                  style="color: red"></i></th>
-            <th>Thành tiền</th>
-            <th>Thông tin khác</th>
-            <th>Thao tác</th>
+            <th style="text-align: center">Thành tiền</th>
+            <th style="text-align: center">Thông tin khác</th>
+            <th style="text-align: center">Thao tác</th>
         </tr>
         </thead>
         <tbody>
@@ -75,11 +75,11 @@
                         @foreach($type as $item)
                             @if($item==0)
                                 <tr>
-                                    <td style="color: darkgreen"><i class="fas fa-dollar-sign"></i></td>
+                                    <td style="color: darkgreen;text-align: center"><i class="fas fa-dollar-sign"></i></td>
                                 </tr>
                             @else
                                 <tr>
-                                    <td style="color: red"><i class="fas fa-gift"></i></td>
+                                    <td style="color: red;text-align: center"><i class="fas fa-gift"></i></td>
                                 </tr>
                             @endif
                         @endforeach

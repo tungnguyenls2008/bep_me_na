@@ -160,11 +160,11 @@
                             <?php
                             $profit=$sum_sale_done-$sum_import;
                             if ($profit<=0){
-                                $state='<b>lỗ</b>';
+                                $state='<b style="color: red"> lỗ</b>'.' <b style="color: red">'. number_format(($profit)).'đ!</b>';
                             }else{
-                                $state='<b>lãi</b>';
+                                $state='<b style="color: darkgreen">lãi</b>'.' <b style="color: darkgreen">'. number_format(($profit)).'đ!</b>';
                             }
-                            echo '<p>Bạn đang '.$state.' <b>'. number_format(intval($profit)).'đ!</b></p>'
+                            echo '<p>Bạn đang '.$state.'</p>'
                             ?>
 {{--                            <button id="profit-button" class="btn btn-outline-success">Hiển thị</button>--}}
                             <div id="profit-display" >
