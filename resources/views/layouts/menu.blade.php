@@ -131,7 +131,7 @@
         <table style="width: -webkit-fill-available;">
             <tr>
                 <td width="20%" style="text-align: center"><i class="fas fa-users"></i></td>
-                <td width="75%" style="text-align: left"><p>Quản lý nhân viên</p></td>
+                <td width="75%" style="text-align: left"><p>Quản trị nhân viên</p></td>
                 <td width="5%" style="text-align: right"><i class="right fa fa-angle-left"></i></td>
             </tr>
         </table>
