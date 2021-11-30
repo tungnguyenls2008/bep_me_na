@@ -26,6 +26,7 @@ Route::get('/home', [
     HomeController::class, 'index'
 ])->name('home')->middleware('auth');
 Route::get('checkoutOrders/search',[\App\Http\Controllers\CheckoutOrderController::class,'search'])->name('search');
+Route::get('rawMaterialImports/search',[\App\Http\Controllers\RawMaterialImportController::class,'search'])->name('search');
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('menus', App\Http\Controllers\MenuController::class);
@@ -36,7 +37,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('checkoutOrders/create-note',[\App\Http\Controllers\CheckoutOrderController::class,'createNote'])->name('create-note');
     Route::post('checkoutOrders/update-note',[\App\Http\Controllers\CheckoutOrderController::class,'updateNote'])->name('update-note');
     Route::post('get-menu-price',[\App\Http\Controllers\CheckoutOrderController::class,'getMenuPrice'])->name('get-menu-price');
-    Route::get('toggle-status',[\App\Http\Controllers\CheckoutOrderController::class,'toggleStatus'])->name('toggle-status');
+    Route::get('order-toggle-status',[\App\Http\Controllers\CheckoutOrderController::class,'toggleStatus'])->name('order-toggle-status');
+    Route::get('import-toggle-status',[\App\Http\Controllers\RawMaterialImportController::class,'toggleStatus'])->name('import-toggle-status');
     Route::get('spending-export/', [\App\Http\Controllers\RawMaterialImportController::class,'export'])->name('spending-export');
     Route::get('bill-export', [\App\Http\Controllers\CheckoutOrderController::class,'export'])->name('bill-export');
 });

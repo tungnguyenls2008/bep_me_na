@@ -15,6 +15,9 @@
                 </div>
             </div>
         </div>
+        <div>
+            @include('raw_material_imports.search')
+        </div>
     </section>
 
     <div class="content px-3">

@@ -8,7 +8,7 @@
             <th>Giá</th>
             <th>Thành tiền</th>
             <th>Người chi</th>
-            <th>Ngày chi</th>
+            <th>Thời gian</th>
             <th colspan="3">Thao tác</th>
         </tr>
         </thead>
@@ -30,7 +30,24 @@
                 <td>{{ number_format($rawMaterialImport->total) }}đ</td>
                 <?php $user=\App\Models\User::query()->where(['id'=>$rawMaterialImport->user_id])->first(); ?>
                 <td>{{ $user->name }}</td>
-                <td>{{ $rawMaterialImport->created_at }}</td>
+                <td>
+                    <b>Ngày tạo:</b> {{ $rawMaterialImport->created_at }}<br>
+                    @if(isset($rawMaterialImport->updated_at) && $rawMaterialImport->updated_at!=$rawMaterialImport->created_at)
+                        <b>Ngày cập nhật:</b> {{ $rawMaterialImport->updated_at }}<br>
+                    @endif
+                    <b>Trạng thái: </b>
+                    @switch($rawMaterialImport->status)
+                        @case(0) <a href="{{route('import-toggle-status',['id'=>$rawMaterialImport->id])}}"
+                                    class="badge badge-warning"
+                                    onclick="return confirm('Bạn chắc chắn muốn đổi trạng thái khoản chi này?')">Chưa
+                            thanh toán</a>@break
+                        @case(1) <a href="{{route('import-toggle-status',['id'=>$rawMaterialImport->id])}}"
+                                    class="badge badge-success"
+                                    onclick="return confirm('Bạn chắc chắn muốn đổi trạng thái khoản chi này?')">Đã thanh
+                            toán</a>@break
+                    @endswitch
+
+                </td>
                 <td width="120">
                     {!! Form::open(['route' => ['rawMaterialImports.destroy', $rawMaterialImport->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

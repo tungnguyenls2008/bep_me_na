@@ -25,12 +25,40 @@ class RawMaterialImportController extends AppBaseController
     public function index(Request $request)
     {
         /** @var RawMaterialImport $rawMaterialImports */
-        $rawMaterialImports = RawMaterialImport::all();
+        $rawMaterialImports = RawMaterialImport::OrderBy('created_at','desc')->get();
 
         return view('raw_material_imports.index')
             ->with('rawMaterialImports', $rawMaterialImports);
     }
+    public function search(Request $request)
+    {
+        $search=$request->post();
+        $spending= RawMaterialImport::OrderBy('created_at','desc');
 
+        if (isset($search['create_from'])|| isset($search['create_to'])){
+            if (!isset($search['create_from'])){
+                $search['create_from']='1970-01-01';
+            }
+            if (!isset($search['create_to'])){
+                $search['create_to']='2100-12-31';
+            }
+            $from=date('Y-m-d H:i:s',strtotime($search['create_from'].' 00:00:00'));
+            $to=date('Y-m-d H:i:s',strtotime($search['create_to'].' 23:23:59'));
+            $spending->whereBetween('created_at',[$from,$to]);
+        }
+        if (isset($search['status'])){
+            $spending->where(['status'=>$search['status']]);
+        }
+        if (isset($search['name'])){
+            $spending->where('name','like','%'.$search['name'].'%');
+        }
+        if (isset($search['user_id'])){
+            $spending->where(['user_id'=>$search['user_id']]);
+        }
+        $spending=$spending->paginate(15);
+        return view('raw_material_imports.index')
+            ->with('rawMaterialImports', $spending,)->with('count',$spending->total());
+    }
     /**
      * Show the form for creating a new RawMaterialImport.
      *
@@ -173,5 +201,24 @@ class RawMaterialImportController extends AppBaseController
     public function export()
     {
         return Excel::download(new SpendingExport(), 'thong-ke-chi-phi-'.date('d-m-Y',time()).'.xlsx');
+    }
+    public function toggleStatus(Request $request){
+        $order=RawMaterialImport::find($request->id);
+        if ($order->status==0){
+            $order->status=1;
+        }elseif ($order->status==1){
+            $order->status=0;
+        }
+        if(Auth::id()==$order->user_id){
+            if($order->save()){
+                Flash::success('Chuyển đổi trạng thái khoản chi thành công!');
+                return redirect(route('rawMaterialImports.index'));
+            }
+        }
+        else{
+            Flash::error('Bạn không có quyền chuyển đổi trạng thái khoản chi này!');
+            return redirect(route('rawMaterialImports.index'));
+        }
+
     }
 }

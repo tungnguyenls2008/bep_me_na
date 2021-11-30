@@ -119,11 +119,11 @@
                     <b>Ngày tạo: </b>{{date('d-m-Y H:i:s',strtotime($checkoutOrder->created_at))}}<br>
                     <b>Trạng thái: </b>
                     @switch($checkoutOrder->status)
-                        @case(0) <a href="{{route('toggle-status',['id'=>$checkoutOrder->id])}}"
+                        @case(0) <a href="{{route('order-toggle-status',['id'=>$checkoutOrder->id])}}"
                                     class="badge badge-warning"
                                     onclick="return confirm('Bạn chắc chắn muốn đổi trạng thái đơn hàng này?')">Chưa
                             thanh toán</a>@break
-                        @case(1) <a href="{{route('toggle-status',['id'=>$checkoutOrder->id])}}"
+                        @case(1) <a href="{{route('order-toggle-status',['id'=>$checkoutOrder->id])}}"
                                     class="badge badge-success"
                                     onclick="return confirm('Bạn chắc chắn muốn đổi trạng thái đơn hàng này?')">Đã thanh
                             toán</a>@break

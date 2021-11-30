@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property integer $price
  * @property integer $total
  * @property integer $user_id
+ * @property integer $status
  */
 class RawMaterialImport extends Model
 {
@@ -40,6 +41,7 @@ class RawMaterialImport extends Model
         'unit',
         'price',
         'total',
+        'status',
         'user_id'
     ];
 
@@ -55,7 +57,8 @@ class RawMaterialImport extends Model
         'unit' => 'integer',
         'price' => 'integer',
         'total' => 'integer',
-        'user_id' => 'integer'
+        'user_id' => 'integer',
+        'status' => 'integer',
     ];
 
     /**

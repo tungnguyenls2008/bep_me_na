@@ -62,9 +62,11 @@
                             <?php
                             $import_count = \App\Models\RawMaterialImport::where(['deleted_at' => null])->count();
                             $sum_import = \App\Models\RawMaterialImport::where(['deleted_at' => null])->sum('total');
+                            $sum_paid_import=\App\Models\RawMaterialImport::where(['deleted_at' => null,'status'=>1])->sum('total');
                             ?>
-                            <div id="total-revenue-chart">Bạn đã chi <b>{{$import_count}}</b> lần <br>
-                                Tổng chi phí là <b>{{number_format($sum_import)}}đ</b>
+                            <div id="total-revenue-chart">Bạn có <b>{{$import_count}}</b> khoản chi <br>
+                                Tổng chi phí tạm tính là <b>{{number_format($sum_import)}}đ</b><br>
+                                Tổng thực chi là <b>{{number_format($sum_paid_import)}}đ</b><br>
 
                             </div>
                         </div>
@@ -160,13 +162,19 @@
                             <?php
                             $profit=$sum_sale_done-$sum_import;
                             if ($profit<=0){
-                                $state='<b style="color: red"> lỗ</b>'.' <b style="color: red">'. number_format(($profit)).'đ!</b>';
+                                $state='<b style="color: red">tạm lỗ</b>'.' <b style="color: red">'. number_format(($profit)).'đ!</b>';
                             }else{
-                                $state='<b style="color: darkgreen">lãi</b>'.' <b style="color: darkgreen">'. number_format(($profit)).'đ!</b>';
+                                $state='<b style="color: darkgreen">tạm lãi</b>'.' <b style="color: darkgreen">'. number_format(($profit)).'đ!</b>';
                             }
-                            echo '<p>Bạn đang '.$state.'</p>'
+                            echo '<p>Sau trừ tất cả chi phí, bạn đang '.$state.'</p>'
                             ?>
+                                <br>
+                                <p>Bạn còn <b>{{\App\Models\RawMaterialImport::where(['deleted_at' => null,'status'=>0])->count()}}</b>
+                                    <a href="{{route('rawMaterialImports.index')}}">khoản chi</a> chưa thanh toán!</p><br>
+                                <p>Bạn còn <b>{{\App\Models\CheckoutOrder::where(['deleted_at' => null,'status'=>0])->count()}}</b>
+                                    <a href="{{route('checkoutOrders.index')}}">hóa đơn</a> chưa thu tiền!</p><br>
 {{--                            <button id="profit-button" class="btn btn-outline-success">Hiển thị</button>--}}
+
                             <div id="profit-display" >
                                 @include('charts.order-chart')
                             </div>
