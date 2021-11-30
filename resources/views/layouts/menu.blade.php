@@ -159,7 +159,17 @@
                 </table>
             </a>
         </li>
-
+        <li class="nav-item">
+            <a href=""
+               class="nav-link ">
+                <table style="width: -webkit-fill-available;">
+                    <tr>
+                        <td width="20%" style="text-align: center"><i class="fas fa-calendar"></i></td>
+                        <td width="75%" style="text-align: left"><p>Chấm công</p></td>
+                    </tr>
+                </table>
+            </a>
+        </li>
 
 
     </ul>
