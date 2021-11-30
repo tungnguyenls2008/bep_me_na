@@ -21,7 +21,9 @@
                         $provider=\App\Models\Provider::find($rawMaterialImport->provider_id);
                         ?>
                     @if($provider!=null)
-                    <b>Nhà cung cấp:</b> <a href="{{route('providers.show',['provider'=>$rawMaterialImport->provider_id])}}">{{$provider->name}}</a>
+                    <b>Nhà cung cấp:</b> <a href="{{route('providers.show',['provider'=>$rawMaterialImport->provider_id])}}">{{$provider->name}}</a>@if($provider->status==1)
+                                <div class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="Tạm ngừng"><i class="fas fa-pause-circle"></i></div>
+                            @endif
                     @endif
                     @endif
                 </td>

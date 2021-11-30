@@ -152,4 +152,18 @@ class ProviderController extends AppBaseController
 
         return redirect(route('providers.index'));
     }
+    public function toggleStatus(Request $request)
+    {
+        $order = Provider::find($request->id);
+        if ($order->status == 0) {
+            $order->status = 1;
+        } elseif ($order->status == 1) {
+            $order->status = 0;
+        }
+
+        if ($order->save()) {
+            Flash::success('Chuyển đổi trạng thái nhà cung cấp thành công!');
+            return redirect(route('providers.index'));
+        }
+    }
 }

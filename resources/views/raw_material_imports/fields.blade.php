@@ -5,7 +5,7 @@
 </div>
 <!-- Provider Field -->
 <?php
-$providers=\App\Models\Provider::all();
+$providers=\App\Models\Provider::where(['status'=>0])->get();
 foreach ($providers as $provider){
     $provider_select[$provider->id]=$provider->name;
 }

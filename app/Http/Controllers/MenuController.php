@@ -23,7 +23,7 @@ class MenuController extends AppBaseController
     public function index(Request $request)
     {
         /** @var Menu $menus */
-        $menus = Menu::all();
+        $menus = Menu::OrderBy('created_at', 'desc')->paginate(15);
 
         return view('menus.index')
             ->with('menus', $menus);
