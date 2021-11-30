@@ -3,6 +3,17 @@
     {!! Form::label('name', 'Nội dung chi phí:') !!}
     {!! Form::text('name', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
+<!-- Provider Field -->
+<?php
+$providers=\App\Models\Provider::all();
+foreach ($providers as $provider){
+    $provider_select[$provider->id]=$provider->name;
+}
+?>
+<div class="form-group col-sm-3">
+    {!! Form::label('provider_id', 'Nhà cung cấp (nếu có):') !!}
+    {!! Form::select('provider_id',$provider_select, null, ['class' => 'form-control','id'=>'provider_id','placeholder'=>true]) !!}
+</div>
 
 <!-- Quantity Field -->
 <div class="form-group col-sm-3">

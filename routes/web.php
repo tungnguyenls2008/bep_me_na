@@ -45,3 +45,6 @@ Route::middleware(['auth'])->group(function () {
 
 
 
+
+
+Route::resource('providers', App\Http\Controllers\ProviderController::class);

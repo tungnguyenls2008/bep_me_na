@@ -6,6 +6,7 @@ use App\Exports\SpendingExport;
 use App\Http\Requests\CreateRawMaterialImportRequest;
 use App\Http\Requests\UpdateRawMaterialImportRequest;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Provider;
 use App\Models\RawMaterialImport;
 use Illuminate\Http\Request;
 use Flash;
@@ -81,6 +82,11 @@ class RawMaterialImportController extends AppBaseController
         $input = $request->all();
         $input['total']=$input['quantity']*$input['price'];
         $input['user_id']=Auth::id();
+        if ($input['provider_id']!=null){
+            $provider=Provider::find($input['provider_id']);
+            $provider->count+=1;
+            $provider->save();
+        }
         /** @var RawMaterialImport $rawMaterialImport */
         $rawMaterialImport = RawMaterialImport::create($input);
 
@@ -186,6 +192,11 @@ class RawMaterialImportController extends AppBaseController
             return redirect(route('rawMaterialImports.index'));
         }
         if (Auth::id()==$rawMaterialImport->user_id) {
+            if ($rawMaterialImport->provider_id!=null){
+                $provider=Provider::find($rawMaterialImport->provider_id);
+                $provider->count-=1;
+                $provider->save();
+            }
             $rawMaterialImport->delete();
 
             Flash::success('Xóa thành công khoản chi '.$rawMaterialImport->name.'.');

@@ -15,7 +15,14 @@
         <tbody>
         @foreach($rawMaterialImports as $rawMaterialImport)
             <tr>
-                <td>{{ $rawMaterialImport->name }}</td>
+                <td>{{ $rawMaterialImport->name }}<br>
+                @if($rawMaterialImport->provider_id!=null)
+                    <?php
+                        $provider=\App\Models\Provider::find($rawMaterialImport->provider_id);
+                        ?>
+                    <b>Nhà cung cấp:</b> <a href="{{route('providers.show',['provider'=>$rawMaterialImport->provider_id])}}">{{$provider->name}}</a>
+                    @endif
+                </td>
                 <td>{{ $rawMaterialImport->quantity }}</td>
                 @switch($rawMaterialImport->unit)
                     @case (1)<td><label class="badge badge-info">Kg</label></td> @break

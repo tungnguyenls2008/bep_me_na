@@ -12,32 +12,21 @@
     </a>
 </li>
 
-<li class="nav-item">
-    <a href="{{ route('rawMaterialImports.index') }}"
-       class="nav-link {{ Request::is('rawMaterialImports*') ? 'active' : '' }}">
-        <table style="width: -webkit-fill-available;">
-            <tr>
-                <td width="20%" style="text-align: center"><i class="fas fa-store"></i></td>
-                <td width="80%" style="text-align: left"><p>Thống kê chi phí</p></td>
-            </tr>
-        </table>
-
-    </a>
-</li>
 
 
-<li class="nav-item">
-    <a href="{{ route('checkoutOrders.index') }}"
-       class="nav-link {{ Request::is('checkoutOrders*') ? 'active' : '' }}">
-        <table style="width: -webkit-fill-available;">
-            <tr>
-                <td width="20%" style="text-align: center"><i class="fas fa-file-invoice-dollar"></i></td>
-                <td width="80%" style="text-align: left"><p>Thống kê doanh thu</p></td>
-            </tr>
-        </table>
 
-    </a>
-</li>
+{{--<li class="nav-item">--}}
+{{--    <a href="{{ route('checkoutOrders.index') }}"--}}
+{{--       class="nav-link {{ Request::is('checkoutOrders*') ? 'active' : '' }}">--}}
+{{--        <table style="width: -webkit-fill-available;">--}}
+{{--            <tr>--}}
+{{--                <td width="20%" style="text-align: center"><i class="fas fa-file-invoice-dollar"></i></td>--}}
+{{--                <td width="80%" style="text-align: left"><p>Thống kê doanh thu</p></td>--}}
+{{--            </tr>--}}
+{{--        </table>--}}
+
+{{--    </a>--}}
+{{--</li>--}}
 
 
 {{--<li class="nav-item">--}}
@@ -48,17 +37,92 @@
 {{--</li>--}}
 
 
-<li class="nav-item">
-    <a href="{{ route('customers.index') }}"
-       class="nav-link {{ Request::is('customers*') ? 'active' : '' }}">
+{{--<li class="nav-item">--}}
+{{--    <a href="{{ route('customers.index') }}"--}}
+{{--       class="nav-link {{ Request::is('customers*') ? 'active' : '' }}">--}}
+{{--        <table style="width: -webkit-fill-available;">--}}
+{{--            <tr>--}}
+{{--                <td width="20%" style="text-align: center"><i class="fas fa-user-tie"></i></td>--}}
+{{--                <td width="80%" style="text-align: left"><p>Khách hàng thân thiết</p></td>--}}
+{{--            </tr>--}}
+{{--        </table>--}}
+
+{{--    </a>--}}
+{{--</li>--}}
+
+
+
+
+<li class="nav-item has-treeview nav-pills {{ Request::is('checkoutOrders*')||Request::is('customers*') ? 'menu-open' : '' }}">
+    <a href="#" class="nav-link parent-link {{ Request::is('checkoutOrders*')||Request::is('customers*') ? 'active' : '' }}">
         <table style="width: -webkit-fill-available;">
             <tr>
-                <td width="20%" style="text-align: center"><i class="fas fa-user-tie"></i></td>
-                <td width="80%" style="text-align: left"><p>Khách hàng thân thiết</p></td>
+                <td width="20%" style="text-align: center"><i class="fas fa-file-invoice-dollar"></i></td>
+                <td width="75%" style="text-align: left"><p>Quản lý doanh thu</p></td>
+                <td width="5%" style="text-align: right"><i class="right fa fa-angle-left"></i></td>
             </tr>
         </table>
-
     </a>
+    <ul class="nav nav-treeview nav-pills nav-sidebar ">
+        <li class="nav-item child-item">
+            <a href="{{ route('checkoutOrders.index') }}"
+               class="nav-link {{ Request::is('checkoutOrders*') ? 'active' : '' }}">
+                <table style="width: -webkit-fill-available;">
+                    <tr>
+                        <td width="20%" style="text-align: center"><i class="fas fa-file-invoice-dollar"></i></td>
+                        <td width="80%" style="text-align: left"><p>Thống kê doanh thu</p></td>
+                    </tr>
+                </table>
+
+            </a>
+        </li>
+        <li class="nav-item child-item">
+            <a href="{{ route('customers.index') }}"
+               class="nav-link {{ Request::is('customers*') ? 'active' : '' }}">
+                <table style="width: -webkit-fill-available;">
+                    <tr>
+                        <td width="20%" style="text-align: center"><i class="fas fa-user-tie"></i></td>
+                        <td width="80%" style="text-align: left"><p>Khách hàng thân thiết</p></td>
+                    </tr>
+                </table>
+
+            </a>
+        </li>
+    </ul>
 </li>
+<li class="nav-item has-treeview nav-pills {{ Request::is('rawMaterialImports*')||Request::is('providers*') ? 'menu-open' : '' }}">
+    <a href="#" class="nav-link parent-link {{ Request::is('rawMaterialImports*')||Request::is('providers*') ? 'active' : '' }}">
+        <table style="width: -webkit-fill-available;">
+            <tr>
+                <td width="20%" style="text-align: center"><i class="fas fa-file-invoice-dollar"></i></td>
+                <td width="75%" style="text-align: left"><p>Quản lý chi phí</p></td>
+                <td width="5%" style="text-align: right"><i class="right fa fa-angle-left"></i></td>
+            </tr>
+        </table>
+    </a>
+    <ul class="nav nav-treeview nav-pills nav-sidebar ">
+        <li class="nav-item">
+            <a href="{{ route('rawMaterialImports.index') }}"
+               class="nav-link {{ Request::is('rawMaterialImports*') ? 'active' : '' }}">
+                <table style="width: -webkit-fill-available;">
+                    <tr>
+                        <td width="20%" style="text-align: center"><i class="fas fa-store"></i></td>
+                        <td width="80%" style="text-align: left"><p>Thống kê chi phí</p></td>
+                    </tr>
+                </table>
 
-
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('providers.index') }}"
+               class="nav-link {{ Request::is('providers*') ? 'active' : '' }}">
+                <table style="width: -webkit-fill-available;">
+                    <tr>
+                        <td width="20%" style="text-align: center"><i class="fas fa-shopping-cart"></i></td>
+                        <td width="80%" style="text-align: left"><p>Nhà cung cấp</p></td>
+                    </tr>
+                </table>
+            </a>
+        </li>
+    </ul>
+</li>
