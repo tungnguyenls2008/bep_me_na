@@ -180,7 +180,7 @@
 
                 <div class="card card-success">
                     <div class="card-header">
-                        <h3 class="card-title">Weather forecast</h3>
+                        <h3 class="card-title">Thời tiết hôm nay</h3>
                     </div>
                     <div class="card-body">
                         <?php

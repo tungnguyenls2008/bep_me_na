@@ -1,12 +1,13 @@
-<div class="table-responsive table-hover">
+<div class="table-responsive table-hover table-bordered">
     <table class="table" id="checkoutOrders-table">
         <thead>
         <tr>
             <th>Hóa đơn</th>
-            <th>Danh sách món</th>
+            <th>Danh sách thực đơn</th>
             <th>Số lượng</th>
             <th>Đơn giá</th>
-            <th>Khuyến mãi?</th>
+            <th><i class="fas fa-dollar-sign" style="color: darkgreen"></i> / <i class="fas fa-gift"
+                                                                                 style="color: red"></i></th>
             <th>Thành tiền</th>
             <th>Thông tin khác</th>
             <th>Thao tác</th>
@@ -25,7 +26,8 @@
                     <br>
                     @if($checkoutOrder->regular_customer_id!=null)
                         <a href="{{route('customers.show',['customer'=>$checkoutOrder->regular_customer_id])}}"
-                           class="btn btn-sm btn-outline-success" style="color: green"><i class="fas fa-user-check"></i> Khách
+                           class="btn btn-sm btn-outline-success" style="color: green"><i class="fas fa-user-check"></i>
+                            Khách
                             hàng thân thiết</a>
                     @endif
                 </td>
@@ -98,7 +100,13 @@
                         @endforeach
                         <tr>
                             <td>
-                                Tổng hóa đơn:<b> {{number_format(array_sum($total))}}đ</b>
+                                Chiết khấu {{$checkoutOrder->discount_percent!=null?$checkoutOrder->discount_percent.'%':''}}:
+                                <b> {{$checkoutOrder->discount_percent!=null?number_format(((array_sum($total)*$checkoutOrder->discount_percent)/100)):0}}đ</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Tổng hóa đơn:<b> {{number_format(array_sum($total)-(array_sum($total)*$checkoutOrder->discount_percent)/100)}}đ</b>
                             </td>
                         </tr>
                     </table>
