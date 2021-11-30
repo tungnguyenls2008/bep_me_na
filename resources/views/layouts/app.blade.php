@@ -106,12 +106,12 @@
                              alt="User Image">
                         <p>
                             {{ Auth::user()->name }}
-                            <small>Thành viên từ {{ Auth::user()->created_at->format('M. Y') }}</small>
+                            <small>Thành viên từ {{ Auth::user()->created_at->format('d/m/Y') }}</small>
                         </p>
                     </li>
                     <!-- Menu Footer-->
                     <li class="user-footer">
-                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+{{--                        <a href="#" class="btn btn-default btn-flat">Profile</a>--}}
                         <a href="#" class="btn btn-default btn-flat float-right"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             Đăng xuất

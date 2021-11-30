@@ -7,6 +7,6 @@
 <!-- Price Field -->
 <div class="col-sm-12">
     {!! Form::label('price', 'Giá:') !!}
-    <p>{{ $menu->price }}</p>
+    <p>{{ number_format($menu->price )}}</p>
 </div>
 

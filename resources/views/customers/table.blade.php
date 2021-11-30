@@ -25,7 +25,7 @@
                 ?>
                 <td>
                     @foreach($menu as $item)
-                        <div class="badge badge-pill badge-danger">{{$item->name}}</div>
+                        <a href="{{route('menus.show',['menu'=>$item])}}" class="badge badge-pill badge-danger">{{$item->name}}</a>
                     @endforeach
                 </td>
                 <td><label class="badge badge-info">{{ $customer->order_count }}</label></td>
