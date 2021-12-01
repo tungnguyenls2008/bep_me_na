@@ -35,6 +35,7 @@ class Organization extends Model
 
     public $fillable = [
         'name',
+        'profile_id',
         'ceo_id',
         'licence',
         'db_name',
