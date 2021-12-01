@@ -175,5 +175,33 @@
     </ul>
 </li>
 
+<li class="nav-item has-treeview nav-pills {{ Request::is('units*')? 'menu-open' : '' }}">
+    <a href="#" class="nav-link parent-link {{ Request::is('units*')? 'active' : '' }}">
+        <table style="width: -webkit-fill-available;">
+            <tr>
+                <td width="20%" style="text-align: center"><i class="fas fa-cogs"></i></td>
+                <td width="75%" style="text-align: left"><p>Cài đặt</p></td>
+                <td width="5%" style="text-align: right"><i class="right fa fa-angle-left"></i></td>
+            </tr>
+        </table>
+    </a>
+    <ul class="nav nav-treeview nav-pills nav-sidebar">
+        <li class="nav-item">
+
+            <a href="{{ route('units.index') }}"
+               class="nav-link {{ Request::is('units*') ? 'active' : '' }}">
+                <table style="width: -webkit-fill-available;">
+                    <tr>
+                        <td width="20%" style="text-align: center"><i class="fas fa-balance-scale-right"></i></td>
+                        <td width="75%" style="text-align: left"><p>Đơn vị tính</p></td>
+                    </tr>
+                </table>
+            </a>
+        </li>
+
+
+
+    </ul>
+</li>
 
 

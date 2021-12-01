@@ -22,9 +22,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [
-    HomeController::class, 'index'
-])->name('home')->middleware('auth');
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('checkoutOrders/search',[\App\Http\Controllers\CheckoutOrderController::class,'search'])->name('order-search');
 Route::get('rawMaterialImports/search',[\App\Http\Controllers\RawMaterialImportController::class,'search'])->name('spending-search');
 
@@ -45,15 +43,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('employee-toggle-status',[\App\Http\Controllers\EmployeeController::class,'toggleStatus'])->name('employee-toggle-status');
     Route::get('spending-export/', [\App\Http\Controllers\RawMaterialImportController::class,'export'])->name('spending-export');
     Route::get('bill-export', [\App\Http\Controllers\CheckoutOrderController::class,'export'])->name('bill-export');
+    Route::resource('providers', App\Http\Controllers\ProviderController::class);
+    Route::resource('positions', App\Http\Controllers\PositionController::class);
+    Route::resource('employees', App\Http\Controllers\EmployeeController::class);
+    Route::resource('units', App\Http\Controllers\UnitController::class);
 });
 
 
-
-
-
-Route::resource('providers', App\Http\Controllers\ProviderController::class);
-
-
-Route::resource('positions', App\Http\Controllers\PositionController::class);
-
-Route::resource('employees', App\Http\Controllers\EmployeeController::class);

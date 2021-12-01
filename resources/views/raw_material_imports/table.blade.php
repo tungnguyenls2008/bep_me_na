@@ -13,33 +13,40 @@
         </tr>
         </thead>
         <tbody>
+        <?php
+        $units = \App\Models\Unit::all();
+        $unit_select = [];
+        $unit_badge = [];
+        ?>
         @foreach($rawMaterialImports as $rawMaterialImport)
+
             <tr>
                 <td>{{ $rawMaterialImport->name }}<br>
-                @if($rawMaterialImport->provider_id!=null)
-                    <?php
-                        $provider=\App\Models\Provider::find($rawMaterialImport->provider_id);
+                    @if($rawMaterialImport->provider_id!=null)
+                        <?php
+                        $provider = \App\Models\Provider::find($rawMaterialImport->provider_id);
                         ?>
-                    @if($provider!=null)
-                    <b>Nhà cung cấp:</b> <a href="{{route('providers.show',['provider'=>$rawMaterialImport->provider_id])}}">{{$provider->name}}</a>@if($provider->status==1)
-                                <div class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="Tạm ngừng"><i class="fas fa-pause-circle"></i></div>
+                        @if($provider!=null)
+                            <b>Nhà cung cấp:</b> <a
+                                href="{{route('providers.show',['provider'=>$rawMaterialImport->provider_id])}}">{{$provider->name}}</a>@if($provider->status==1)
+                                <div class="badge badge-secondary" data-toggle="tooltip" data-placement="top"
+                                     title="Tạm ngừng"><i class="fas fa-pause-circle"></i></div>
                             @endif
-                    @endif
+                        @endif
                     @endif
                 </td>
                 <td>{{ $rawMaterialImport->quantity }}</td>
-                @switch($rawMaterialImport->unit)
-                    @case (1)<td><label class="badge badge-info">Kg</label></td> @break
-                    @case (2)<td><label class="badge badge-info">Mg</label></td>@break
-                    @case (3)<td><label class="badge badge-info">Con</label></td>@break
-                    @case (4)<td><label class="badge badge-info">Cái</label></td>@break
-                    @case (5)<td><label class="badge badge-info">Mớ</label></td>@break
-                    @case (6)<td><label class="badge badge-info">Ngày</label></td>@break
-                    @case (7)<td><label class="badge badge-info">Tháng</label></td>@break
-                @endswitch
+                <?php
+                foreach ($units as $unit) {
+                    $unit_badge[$unit->id] = '<td><label class="badge badge-info">' . $unit->name . '</label></td>';
+                    if ($rawMaterialImport->unit == $unit->id) {
+                        echo $unit_badge[$unit->id];
+                    }
+                }
+                ?>
                 <td>{{ number_format($rawMaterialImport->price) }}đ</td>
                 <td>{{ number_format($rawMaterialImport->total) }}đ</td>
-                <?php $user=\App\Models\User::query()->where(['id'=>$rawMaterialImport->user_id])->first(); ?>
+                <?php $user = \App\Models\User::query()->where(['id' => $rawMaterialImport->user_id])->first(); ?>
                 <td>{{ $user->name }}</td>
                 <td>
                     <b>Ngày tạo:</b> {{ $rawMaterialImport->created_at }}<br>
@@ -54,7 +61,8 @@
                             thanh toán</a>@break
                         @case(1) <a href="{{route('import-toggle-status',['id'=>$rawMaterialImport->id])}}"
                                     class="badge badge-success"
-                                    onclick="return confirm('Bạn chắc chắn muốn đổi trạng thái khoản chi này?')">Đã thanh
+                                    onclick="return confirm('Bạn chắc chắn muốn đổi trạng thái khoản chi này?')">Đã
+                            thanh
                             toán</a>@break
                     @endswitch
 

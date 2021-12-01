@@ -6,6 +6,7 @@
 <!-- Provider Field -->
 <?php
 $providers=\App\Models\Provider::where(['status'=>0])->get();
+$provider_select=[];
 foreach ($providers as $provider){
     $provider_select[$provider->id]=$provider->name;
 }
@@ -20,19 +21,18 @@ foreach ($providers as $provider){
     {!! Form::label('quantity', 'Số lượng:') !!}
     {!! Form::number('quantity', null, ['class' => 'form-control']) !!}
 </div>
-
+<?php
+$units=\App\Models\Unit::all();
+$unit_select=[];
+foreach ($units as $unit){
+    $unit_select[$unit->id]=$unit->name;
+}
+?>
 <!-- Unit Field -->
 <div class="form-group col-sm-3">
     <label for="unit">Đơn vị tính:</label><br>
-    <select name="unit" id="unit" class="form-control">
-        <option value="1">Kg</option>
-        <option value="2">Mg</option>
-        <option value="3">Con</option>
-        <option value="4">Cái</option>
-        <option value="5">Mớ</option>
-        <option value="6">Ngày</option>
-        <option value="7">Tháng</option>
-    </select>
+    {!! Form::select('unit',$unit_select, null, ['class' => 'form-control','placeholder'=>true]) !!}
+
 </div>
 
 <!-- Price Field -->

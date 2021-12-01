@@ -13,13 +13,13 @@ return [
 
         'migration'         => database_path('migrations/'),
 
-        'model'             => app_path('Models/'),
+        'model'             => app_path('Models/Models_be/'),
 
         'datatables'        => app_path('DataTables/'),
 
         'repository'        => app_path('Repositories/'),
 
-        'routes'            => base_path('routes/web.php'),
+        'routes'            => base_path('routes/backend.php'),
 
         'api_routes'        => base_path('routes/api.php'),
 
@@ -27,7 +27,7 @@ return [
 
         'api_request'       => app_path('Http/Requests/API/'),
 
-        'controller'        => app_path('Http/Controllers/'),
+        'controller'        => app_path('Http/Controllers/Controller_be'),
 
         'api_controller'    => app_path('Http/Controllers/API/'),
 
@@ -39,7 +39,7 @@ return [
 
         'tests'             => base_path('tests/'),
 
-        'views'             => resource_path('views/'),
+        'views'             => resource_path('views/backend/'),
 
         'schema_files'      => resource_path('model_schemas/'),
 

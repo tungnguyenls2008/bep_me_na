@@ -46,6 +46,10 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        'backend'=>[
+            'driver'=>'session',
+            'provider'=>'backend'
+        ]
     ],
 
     /*
@@ -70,6 +74,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'backend'=>[
+            'driver'=>'eloquent',
+            'model'=>App\Models\Models_be\User::class
+        ]
 
         // 'users' => [
         //     'driver' => 'database',

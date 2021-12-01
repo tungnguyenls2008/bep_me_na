@@ -12,8 +12,19 @@
 
 <!-- Unit Field -->
 <div class="col-sm-12">
-    {!! Form::label('unit', 'Đơn vị tính:') !!}
-    <p>{{ $rawMaterialImport->unit }}</p>
+    {!! Form::label('unit', 'Đơn vị tính:') !!}<br>
+    <?php
+    $units = \App\Models\Unit::all();
+    $unit_select = [];
+    $unit_badge = [];
+    foreach ($units as $unit) {
+        $unit_badge[$unit->id] = '<label class="badge badge-info">' . $unit->name . '</label>';
+        if ($rawMaterialImport->unit == $unit->id) {
+            echo $unit_badge[$unit->id];
+        }
+    }
+    ?>
+
 </div>
 
 <!-- Price Field -->
