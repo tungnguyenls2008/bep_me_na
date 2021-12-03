@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Models_be\Organization;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Organization;
+
 
 class CreateOrganizationRequest extends FormRequest
 {

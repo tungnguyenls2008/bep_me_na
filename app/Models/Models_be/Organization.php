@@ -50,7 +50,6 @@ class Organization extends Model
     protected $casts = [
         'id' => 'integer',
         'name' => 'string',
-        'ceo_id' => 'integer',
         'licence' => 'string',
         'db_name' => 'string',
         'status' => 'integer'
@@ -63,10 +62,7 @@ class Organization extends Model
      */
     public static $rules = [
         'name' => 'required|string|max:255',
-        'ceo_id' => 'required|integer',
-        'licence' => 'required|string|max:24',
         'db_name' => 'required|string|max:24',
-        'status' => 'required|integer',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
     ];

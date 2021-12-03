@@ -12,7 +12,7 @@ Route::post('backend/logout',  [\App\Http\Controllers\Controllers_be\Auth\LoginC
 
 // Registration Routes...
 Route::get('backend/register', [\App\Http\Controllers\Controllers_be\Auth\RegisterController::class, 'showRegistrationForm'])->name('backend-register');
-Route::post('backend/register', [\App\Http\Controllers\Controllers_be\Auth\RegisterController::class, 'backend-register']);
+Route::post('backend/register', [\App\Http\Controllers\Controllers_be\Auth\RegisterController::class, 'register']);
 
 // Password Reset Routes...
 Route::get('backend/password/reset', [\App\Http\Controllers\Controllers_be\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('backend-password.request');

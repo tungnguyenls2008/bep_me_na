@@ -32,7 +32,7 @@
 
 </head>
 <body class="hold-transition login-page">
-<div class="login-box">
+<div class="login-box" style="width: 50%">
     <div class="login-logo">
         <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
     </div>

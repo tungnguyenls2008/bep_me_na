@@ -6,8 +6,11 @@ use App\Http\Requests\CreateOrganizationRequest;
 use App\Http\Requests\UpdateOrganizationRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Models_be\Organization;
+use App\Models\Models_be\Profile;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Response;
 
 class OrganizationController extends AppBaseController
@@ -48,13 +51,21 @@ class OrganizationController extends AppBaseController
     public function store(CreateOrganizationRequest $request)
     {
         $input = $request->all();
-
+        $input['licence'] = uniqidReal(36);
+        if ($request->file('logo') !== null) {
+            $image = $request->file('logo');
+            $input['logo'] = $image->move('img/organization_logos', $input['name'] . '.' . $image->getClientOriginalExtension())->getPathname();
+        }
+        $profile = Profile::create(['name' => $input['name']]);
+        $input['profile_id'] = $profile->id;
         /** @var Organization $organization */
         $organization = Organization::create($input);
+        cloneCoreDb($input['db_name']);
 
-        Flash::success('Organization saved successfully.');
+        //Artisan::call('db:create ' . $input['db_name']);
+        Flash::success('Khởi tạo cửa hàng thành công.');
 
-        return redirect(route('backend.organizations.index'));
+        return redirect(route('login'));
     }
 
     /**
@@ -131,9 +142,9 @@ class OrganizationController extends AppBaseController
      *
      * @param int $id
      *
+     * @return Response
      * @throws \Exception
      *
-     * @return Response
      */
     public function destroy($id)
     {
