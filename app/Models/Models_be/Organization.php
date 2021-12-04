@@ -36,6 +36,7 @@ class Organization extends Model
     public $fillable = [
         'name',
         'profile_id',
+        'logo',
         'ceo_id',
         'licence',
         'db_name',
@@ -62,10 +63,13 @@ class Organization extends Model
      */
     public static $rules = [
         'name' => 'required|string|max:255',
-        'db_name' => 'required|string|max:24',
+        'db_name' => 'required|unique:backend.organization|string|max:24',
+        'db_name.unique'=>'Mã cửa hàng đã tồn tại',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
     ];
+
+
 
 
 }

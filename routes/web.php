@@ -17,15 +17,19 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/landing', function () {
     return view('landing');
 })->name('landing');
+Route::get('/organization', function () {
+    return view('organization-login');
+})->name('organization');
+Route::get('/welcome', function () {
+    return view('welcome');
+})->name('welcome');
 Auth::routes();
 // Registration Routes...
 Route::get('organization/register', [\App\Http\Controllers\LandingController::class, 'showOrganizationRegistrationForm'])->name('organization-register');
 Route::post('organization/register', [\App\Http\Controllers\LandingController::class, 'registerOrganization'])->name('organization-register');
+Route::post('organization/check', [\App\Http\Controllers\Controllers_be\OrganizationController::class, 'organizationCheck'])->name('organization-check');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('checkoutOrders/search',[\App\Http\Controllers\CheckoutOrderController::class,'search'])->name('order-search');

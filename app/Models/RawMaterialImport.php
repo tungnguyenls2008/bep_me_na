@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Class RawMaterialImport
@@ -33,8 +34,15 @@ class RawMaterialImport extends Model
 
 
     protected $dates = ['deleted_at'];
+    /**
+     * @var mixed
+     */
+    protected $connection;
 
-
+    public function __construct()
+    {
+        $this->connection = Session::get('connection')['db_name'];
+    }
 
     public $fillable = [
         'name',

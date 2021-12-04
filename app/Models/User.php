@@ -6,10 +6,17 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Session;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->connection = Session::get('connection')['db_name'];
+    }
 
     /**
      * The attributes that are mass assignable.

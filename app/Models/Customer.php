@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Class Customer
@@ -23,7 +24,12 @@ class Customer extends Model
     use SoftDeletes;
 
     use HasFactory;
+    protected $connection;
 
+    public function __construct()
+    {
+        $this->connection = Session::get('connection')['db_name'];
+    }
     public $table = 'customer';
 
     const CREATED_AT = 'created_at';

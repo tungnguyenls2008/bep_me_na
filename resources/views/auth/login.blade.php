@@ -34,11 +34,12 @@
 <body class="hold-transition login-page">
 <div class="login-box" style="width: 50%">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
+        <a href="{{ url('/home') }}"><b>{{ Session::get('connection')['name'] }}</b></a>
     </div>
 
     <!-- /.login-logo -->
-
+<?php
+?>
     <!-- /.login-box-body -->
     <div class="card">
         <div class="card-body login-card-body">

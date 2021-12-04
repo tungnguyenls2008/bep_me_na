@@ -9,8 +9,13 @@ use App\Models\Models_be\Organization;
 use App\Models\Models_be\Profile;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
 use Response;
 
 class OrganizationController extends AppBaseController
@@ -54,7 +59,8 @@ class OrganizationController extends AppBaseController
         $input['licence'] = uniqidReal(36);
         if ($request->file('logo') !== null) {
             $image = $request->file('logo');
-            $input['logo'] = $image->move('img/organization_logos', $input['name'] . '.' . $image->getClientOriginalExtension())->getPathname();
+            $image->move('img/organization_logos', $input['db_name'] . '.' . $image->getClientOriginalExtension())->getPathname();
+            $input['logo']='img/organization_logos/'.$input['db_name'] . '.' . $image->getClientOriginalExtension();
         }
         $profile = Profile::create(['name' => $input['name']]);
         $input['profile_id'] = $profile->id;
@@ -65,7 +71,7 @@ class OrganizationController extends AppBaseController
         //Artisan::call('db:create ' . $input['db_name']);
         Flash::success('Khởi tạo cửa hàng thành công.');
 
-        return redirect(route('login'));
+        return redirect(route('organization'));
     }
 
     /**
@@ -162,5 +168,17 @@ class OrganizationController extends AppBaseController
         Flash::success('Organization deleted successfully.');
 
         return redirect(route('organizations.index'));
+    }
+    public function organizationCheck(Request $request): bool
+    {
+        $db_name=$request->get('organization_id');
+        $organization=Organization::withoutTrashed()->where(['db_name'=>$db_name])->first();
+        if ($organization!=null){
+            $connection= $organization->toArray();
+            Session::put('connection',$connection);
+            return true;
+        }else{
+            return false;
+        }
     }
 }

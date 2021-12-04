@@ -121,7 +121,7 @@
             @auth
                 <a href="{{ url('/home') }}" class="btn-get-started scrollto">Trang chủ</a>
             @else
-                <a href="{{ route('login') }}" class="btn-get-started scrollto" style="background: green;width: 250px">Đăng nhập</a>
+                <a href="{{ route('organization') }}" class="btn-get-started scrollto" style="background: green;width: 250px">Đăng nhập</a>
                 <a href="{{ route('organization-register') }}" class="btn-get-started scrollto" style="background: blue;width: 250px">Tạo cửa hàng</a>
 
                 {{--                        @if (Route::has('register'))--}}
