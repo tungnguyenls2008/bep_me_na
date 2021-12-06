@@ -22,7 +22,7 @@
             <div class="col-md-3 col-xl-3">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Thống kê hàng hóa</h3>
+                        <h3 class="card-title text-white">Thống kê sản phẩm</h3>
                     </div>
                     <div class="card-body">
                         <div class="float-end mt-2">
@@ -41,7 +41,7 @@
                             <h4 class="mb-1 mt-1" style="text-align: center">
                         <span>
                         <h5 id="total_api_calls"></h5>
-                            <img src="{{asset('images/api.gif')}}" alt="" style="height: 200px">
+{{--                            <img src="{{asset('images/api.gif')}}" alt="" style="height: 200px">--}}
                         </span>
                             </h4>
 
@@ -53,7 +53,7 @@
             <div class="col-md-3 col-xl-3">
                 <div class="card card-info">
                     <div class="card-header">
-                        <h3 class="card-title">
+                        <h3 class="card-title text-white">
                             Thống kê chi phí
                         </h3>
                     </div>
@@ -75,8 +75,8 @@
             </div> <!-- end col-->
             <div class="col-md-3 col-xl-3">
                 <div class="card card-warning">
-                    <div class="card-header">
-                        <h3 class="card-title">Thống kê doanh thu</h3>
+                    <div class="card-header ">
+                        <h3 class="card-title text-white">Thống kê doanh thu</h3>
                     </div>
                     <div class="card-body">
                         <div class="float-end mt-2">
@@ -121,9 +121,9 @@
                 </div>
             </div> <!-- end col-->
             <div class="col-md-3 col-xl-3">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Thống kê khách hàng</h3>
+                <div class="card card-primary ">
+                    <div class="card-header ">
+                        <h3 class="card-title text-white">Thống kê khách hàng</h3>
                     </div>
                     <div class="card-body">
                         <div class="float-end mt-2">
@@ -138,7 +138,7 @@
                             <h4 class="mb-1 mt-1" style="text-align: center">
                         <span>
                         <h5 id="total_api_calls"></h5>
-                            <img src="{{asset('images/api.gif')}}" alt="" style="height: 200px">
+{{--                            <img src="{{asset('images/api.gif')}}" alt="" style="height: 200px">--}}
                         </span>
                             </h4>
 
@@ -155,7 +155,7 @@
 
                 <div class="card card-success">
                     <div class="card-header">
-                        <h3 class="card-title">Thống kê lợi nhuận</h3>
+                        <h3 class="card-title text-white">Thống kê lợi nhuận</h3>
                     </div>
                     <div class="card-body">
                         <div class="container">
@@ -188,7 +188,7 @@
 
                 <div class="card card-success">
                     <div class="card-header">
-                        <h3 class="card-title">Thời tiết hôm nay</h3>
+                        <h3 class="card-title text-white">Thời tiết hôm nay</h3>
                     </div>
                     <div class="card-body">
                         <?php

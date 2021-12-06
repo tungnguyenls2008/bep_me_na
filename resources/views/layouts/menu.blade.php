@@ -1,228 +1,125 @@
-
+<li class="app-sidebar__heading">Sản phẩm</li>
 
 <li class="nav-item">
-    <a href="{{ route('menus.index') }}"
-       class="nav-link {{ Request::is('menus*') ? 'active' : '' }}">
-        <table style="width: -webkit-fill-available;">
-        <tr>
-            <td width="20%" style="text-align: center"><i class="fas fa-utensils"></i></td>
-            <td width="80%" style="text-align: left"><p>Quản lý hàng hóa</p></td>
-        </tr>
-        </table>
+    <a href="{{ route('menus.index') }}" class="{{ Request::is('menus*') ? 'mm-active' : '' }}">
+        <i class="metismenu-icon pe-7s-gift "></i>
+        Quản lý sản phẩm
     </a>
+
 </li>
 
+<li class="app-sidebar__heading">Doanh thu</li>
 
 
-
-{{--<li class="nav-item">--}}
-{{--    <a href="{{ route('checkoutOrders.index') }}"--}}
-{{--       class="nav-link {{ Request::is('checkoutOrders*') ? 'active' : '' }}">--}}
-{{--        <table style="width: -webkit-fill-available;">--}}
-{{--            <tr>--}}
-{{--                <td width="20%" style="text-align: center"><i class="fas fa-file-invoice-dollar"></i></td>--}}
-{{--                <td width="80%" style="text-align: left"><p>Thống kê doanh thu</p></td>--}}
-{{--            </tr>--}}
-{{--        </table>--}}
-
-{{--    </a>--}}
-{{--</li>--}}
-
-
-{{--<li class="nav-item">--}}
-{{--    <a href="{{ route('notes.index') }}"--}}
-{{--       class="nav-link {{ Request::is('notes*') ? 'active' : '' }}">--}}
-{{--        <p>Notes</p>--}}
-{{--    </a>--}}
-{{--</li>--}}
-
-
-{{--<li class="nav-item">--}}
-{{--    <a href="{{ route('customers.index') }}"--}}
-{{--       class="nav-link {{ Request::is('customers*') ? 'active' : '' }}">--}}
-{{--        <table style="width: -webkit-fill-available;">--}}
-{{--            <tr>--}}
-{{--                <td width="20%" style="text-align: center"><i class="fas fa-user-tie"></i></td>--}}
-{{--                <td width="80%" style="text-align: left"><p>Khách hàng thân thiết</p></td>--}}
-{{--            </tr>--}}
-{{--        </table>--}}
-
-{{--    </a>--}}
-{{--</li>--}}
-
-
-
-
-<li class="nav-item has-treeview nav-pills {{ Request::is('checkoutOrders*')||Request::is('customers*') ? 'menu-open' : '' }}">
-    <a href="#" class="nav-link parent-link {{ Request::is('checkoutOrders*')||Request::is('customers*') ? 'active' : '' }}">
-        <table style="width: -webkit-fill-available;">
-            <tr>
-                <td width="20%" style="text-align: center"><i class="fas fa-file-invoice-dollar"></i></td>
-                <td width="75%" style="text-align: left"><p>Quản lý doanh thu</p></td>
-                <td width="5%" style="text-align: right"><i class="right fa fa-angle-left"></i></td>
-            </tr>
-        </table>
+<li class="{{ Request::is('checkoutOrders*')||Request::is('customers*') ? 'menu-open' : '' }}">
+    <a href="#" class="{{ Request::is('checkoutOrders*')||Request::is('customers*') ? 'mm-active' : '' }}">
+        <i class="metismenu-icon pe-7s-cash"></i>
+        Quản lý doanh thu
+        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
     </a>
-    <ul class="nav nav-treeview nav-pills nav-sidebar ">
+    <ul class="nav nav-treeview nav-pills nav-sidebar {{ Request::is('checkoutOrders*')||Request::is('customers*') ? 'mm-show' : '' }} ">
         <li class="nav-item child-item">
-            <a href="{{ route('checkoutOrders.create') }}"
-               class="nav-link {{ Request::is('*create') ? 'active' : '' }}">
-                <table style="width: -webkit-fill-available;">
-                    <tr>
-                        <td width="20%" style="text-align: center"><i class="fas fa-plus"></i></td>
-                        <td width="80%" style="text-align: left"><p>Tạo mới doanh thu</p></td>
-                    </tr>
-                </table>
-
+            <a href="{{ route('checkoutOrders.create') }}" class="{{ Request::is('*create') ? 'mm-active' : '' }}">
+                <i class="metismenu-icon pe-7s-cash"></i>
+                Tạo mới
             </a>
         </li>
         <li class="nav-item child-item">
             <a href="{{ route('checkoutOrders.index') }}"
-               class="nav-link {{ Request::is('checkoutOrders') ? 'active' : '' }}">
-                <table style="width: -webkit-fill-available;">
-                    <tr>
-                        <td width="20%" style="text-align: center"><i class="fas fa-file-invoice-dollar"></i></td>
-                        <td width="80%" style="text-align: left"><p>Thống kê doanh thu</p></td>
-                    </tr>
-                </table>
-
+               class="{{ Request::is('checkoutOrders') ? 'mm-active' : '' }}">
+                <i class="metismenu-icon pe-7s-cash"></i>
+                Thống kê
             </a>
         </li>
         <li class="nav-item child-item">
-            <a href="{{ route('customers.index') }}"
-               class="nav-link {{ Request::is('customers*') ? 'active' : '' }}">
-                <table style="width: -webkit-fill-available;">
-                    <tr>
-                        <td width="20%" style="text-align: center"><i class="fas fa-user-tie"></i></td>
-                        <td width="80%" style="text-align: left"><p>Khách hàng thân thiết</p></td>
-                    </tr>
-                </table>
-
+            <a href="{{ route('customers.index') }}" class="{{ Request::is('customers*') ? 'mm-active' : '' }}">
+                <i class="metismenu-icon pe-7s-cash"></i>
+                Khách hàng thân thiết
             </a>
+
         </li>
     </ul>
 </li>
-<li class="nav-item has-treeview nav-pills {{ Request::is('rawMaterialImports*')||Request::is('providers*') ? 'menu-open' : '' }}">
-    <a href="#" class="nav-link parent-link {{ Request::is('rawMaterialImports*')||Request::is('providers*') ? 'active' : '' }}">
-        <table style="width: -webkit-fill-available;">
-            <tr>
-                <td width="20%" style="text-align: center"><i class="fas fa-file-invoice-dollar"></i></td>
-                <td width="75%" style="text-align: left"><p>Quản lý chi phí</p></td>
-                <td width="5%" style="text-align: right"><i class="right fa fa-angle-left"></i></td>
-            </tr>
-        </table>
-    </a>
-    <ul class="nav nav-treeview nav-pills nav-sidebar ">
-        <li class="nav-item">
-            <a href="{{ route('rawMaterialImports.create') }}"
-               class="nav-link {{ Request::is('*create') ? 'active' : '' }}">
-                <table style="width: -webkit-fill-available;">
-                    <tr>
-                        <td width="20%" style="text-align: center"><i class="fas fa-plus"></i></td>
-                        <td width="80%" style="text-align: left"><p>Tạo mới chi phí</p></td>
-                    </tr>
-                </table>
+<li class="app-sidebar__heading">Chi phí</li>
 
+<li class="nav-item has-treeview nav-pills {{ Request::is('rawMaterialImports*')||Request::is('providers*') ? 'menu-open' : '' }}">
+    <a href="#" class="{{ Request::is('rawMaterialImports*')||Request::is('providers*') ? 'mm-active' : '' }}">
+        <i class="metismenu-icon pe-7s-cash"></i>
+        Quản lý chi phí
+        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+    </a>
+    <ul class="nav nav-treeview nav-pills nav-sidebar {{ Request::is('rawMaterialImports*')||Request::is('providers*') ? 'mm-show' : '' }}">
+        <li class="nav-item">
+            <a href="{{ route('rawMaterialImports.create') }}" class="{{ Request::is('*create') ? 'mm-active' : '' }}">
+                <i class="metismenu-icon pe-7s-cash"></i>
+                Tạo mới
             </a>
         </li>
         <li class="nav-item">
             <a href="{{ route('rawMaterialImports.index') }}"
-               class="nav-link {{ Request::is('rawMaterialImports') ? 'active' : '' }}">
-                <table style="width: -webkit-fill-available;">
-                    <tr>
-                        <td width="20%" style="text-align: center"><i class="fas fa-store"></i></td>
-                        <td width="80%" style="text-align: left"><p>Thống kê chi phí</p></td>
-                    </tr>
-                </table>
-
+               class="{{ Request::is('rawMaterialImports') ? 'mm-active' : '' }}">
+                <i class="metismenu-icon pe-7s-cash"></i>
+                Thống kê
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('providers.index') }}"
-               class="nav-link {{ Request::is('providers*') ? 'active' : '' }}">
-                <table style="width: -webkit-fill-available;">
-                    <tr>
-                        <td width="20%" style="text-align: center"><i class="fas fa-shopping-cart"></i></td>
-                        <td width="80%" style="text-align: left"><p>Nhà cung cấp</p></td>
-                    </tr>
-                </table>
+            <a href="{{ route('providers.index') }}" class="{{ Request::is('providers*') ? 'mm-active' : '' }}">
+                <i class="metismenu-icon pe-7s-cash"></i>
+                Nhà cung cấp
             </a>
         </li>
     </ul>
 </li>
+<li class="app-sidebar__heading">Nhân sự</li>
+
 <li class="nav-item has-treeview nav-pills {{ Request::is('employees*')||Request::is('positions*') ? 'menu-open' : '' }}">
-    <a href="#" class="nav-link parent-link {{ Request::is('employees*')||Request::is('positions*') ? 'active' : '' }}">
-        <table style="width: -webkit-fill-available;">
-            <tr>
-                <td width="20%" style="text-align: center"><i class="fas fa-users"></i></td>
-                <td width="75%" style="text-align: left"><p>Quản trị nhân viên</p></td>
-                <td width="5%" style="text-align: right"><i class="right fa fa-angle-left"></i></td>
-            </tr>
-        </table>
+    <a href="#" class="{{ Request::is('employees*')||Request::is('positions*') ? 'mm-active' : '' }}">
+        <i class="metismenu-icon pe-7s-users"></i>
+        Quản trị nhân sự
+        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
     </a>
-    <ul class="nav nav-treeview nav-pills nav-sidebar ">
+
+    <ul class="nav nav-treeview nav-pills nav-sidebar {{ Request::is('employees*')||Request::is('positions*') ? 'mm-show' : '' }}">
         <li class="nav-item">
-            <a href="{{ route('employees.index') }}"
-               class="nav-link {{ Request::is('employees*') ? 'active' : '' }}">
-                <table style="width: -webkit-fill-available;">
-                    <tr>
-                        <td width="20%" style="text-align: center"><i class="fas fa-users"></i></td>
-                        <td width="75%" style="text-align: left"><p>Thống kê nhân viên</p></td>
-                    </tr>
-                </table>
+            <a href="{{ route('employees.index') }}" class="{{ Request::is('employees*') ? 'mm-active' : '' }}">
+                <i class="metismenu-icon pe-7s-cash"></i>
+                Thống kê
+            </a>
+
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('positions.index') }}" class="{{ Request::is('positions*') ? 'mm-active' : '' }}">
+                <i class="metismenu-icon pe-7s-cash"></i>
+                Vị trí làm việc
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('positions.index') }}"
-               class="nav-link {{ Request::is('positions*') ? 'active' : '' }}">
-                <table style="width: -webkit-fill-available;">
-                    <tr>
-                        <td width="20%" style="text-align: center"><i class="fas fa-briefcase"></i></td>
-                        <td width="75%" style="text-align: left"><p>Vị trí làm việc</p></td>
-                    </tr>
-                </table>
+            <a href="" class="">
+                <i class="metismenu-icon pe-7s-cash"></i>
+                Chấm công
             </a>
-        </li>
-        <li class="nav-item">
-            <a href=""
-               class="nav-link ">
-                <table style="width: -webkit-fill-available;">
-                    <tr>
-                        <td width="20%" style="text-align: center"><i class="fas fa-calendar"></i></td>
-                        <td width="75%" style="text-align: left"><p>Chấm công</p></td>
-                    </tr>
-                </table>
-            </a>
+
         </li>
 
 
     </ul>
 </li>
+<li class="app-sidebar__heading">Cài đặt</li>
 
-<li class="nav-item has-treeview nav-pills {{ Request::is('units*')? 'menu-open' : '' }}">
-    <a href="#" class="nav-link parent-link {{ Request::is('units*')? 'active' : '' }}">
-        <table style="width: -webkit-fill-available;">
-            <tr>
-                <td width="20%" style="text-align: center"><i class="fas fa-cogs"></i></td>
-                <td width="75%" style="text-align: left"><p>Cài đặt</p></td>
-                <td width="5%" style="text-align: right"><i class="right fa fa-angle-left"></i></td>
-            </tr>
-        </table>
+<li class="nav-item has-treeview nav-pills {{ Request::is('units*')? 'mm-active' : '' }}">
+    <a href="#" class="{{ Request::is('units*')? 'mm-active' : '' }}">
+        <i class="metismenu-icon pe-7s-settings"></i>
+        Cài đặt chung
+        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
     </a>
-    <ul class="nav nav-treeview nav-pills nav-sidebar">
+    <ul class="nav nav-treeview nav-pills nav-sidebar {{ Request::is('units*')? 'mm-show' : '' }}">
         <li class="nav-item">
-
-            <a href="{{ route('units.index') }}"
-               class="nav-link {{ Request::is('units*') ? 'active' : '' }}">
-                <table style="width: -webkit-fill-available;">
-                    <tr>
-                        <td width="20%" style="text-align: center"><i class="fas fa-balance-scale-right"></i></td>
-                        <td width="75%" style="text-align: left"><p>Đơn vị tính</p></td>
-                    </tr>
-                </table>
+            <a href="{{ route('units.index') }}" class="{{ Request::is('units*') ? 'mm-active' : '' }}">
+                <i class="metismenu-icon pe-7s-cash"></i>
+                Đơn vị tính
             </a>
-        </li>
 
+        </li>
 
 
     </ul>

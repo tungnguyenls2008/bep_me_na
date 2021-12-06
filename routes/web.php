@@ -26,6 +26,8 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
 Auth::routes();
+Route::get('login', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login-view')->middleware(['restrictLogin']);
+Route::post('login', [\App\Http\Controllers\Auth\LoginController::class,'login'])->name('login')->middleware(['restrictLogin']);
 // Registration Routes...
 Route::get('organization/register', [\App\Http\Controllers\LandingController::class, 'showOrganizationRegistrationForm'])->name('organization-register');
 Route::post('organization/register', [\App\Http\Controllers\LandingController::class, 'registerOrganization'])->name('organization-register');

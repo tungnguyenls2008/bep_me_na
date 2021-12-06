@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{ config('app.name') }} | Registration Page</title>
+    <title>Đăng ký tài khoản mới</title>
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -167,6 +167,7 @@
         <?php
         use Illuminate\Support\Facades\Session;
         $organization=\App\Models\Models_be\Organization::withoutTrashed()->where(['db_name'=>Session::get('connection')['db_name']])->first();
+
         ?>
         <img src="{{isset($organization->logo)?asset($organization->logo):asset('img/organization_logos/default-company-logo.png')}}" alt="" width="200px">
         <a href="{{ url('/home') }}"><b style="color: white">{{ $organization->name }}</b></a>

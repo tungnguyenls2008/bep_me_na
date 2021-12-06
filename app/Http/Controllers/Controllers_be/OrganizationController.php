@@ -88,6 +88,10 @@ class OrganizationController extends AppBaseController
             $input_ceo['is_ceo']=1;
             $user= (new \App\Models\User)->setConnection($input['db_name']);
             $user->create($input_ceo);
+            $user=(new \App\Models\User)->setConnection($input['db_name'])->where(['is_ceo'=>1])->first();
+            $organization=Organization::withoutTrashed()->where(['db_name'=>$input['db_name']])->first();
+            $organization->ceo_id=$user->id;
+            $organization->save();
         }
 
         //Artisan::call('db:create ' . $input['db_name']);
