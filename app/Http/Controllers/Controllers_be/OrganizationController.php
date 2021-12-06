@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateOrganizationRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Models_be\Organization;
 use App\Models\Models_be\Profile;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Flash;
 use Illuminate\Support\Facades\App;
@@ -14,7 +15,9 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 use Response;
 
@@ -67,6 +70,25 @@ class OrganizationController extends AppBaseController
         /** @var Organization $organization */
         $organization = Organization::create($input);
         cloneCoreDb($input['db_name']);
+
+        $rules = [
+            'ceo_name' => 'required',
+            'ceo_email'    => 'required',
+            'ceo_password' => 'required',
+        ];
+        $input_ceo     = $request->only('ceo_name', 'ceo_email','ceo_password','ceo_password_confirmation');
+        $validation = Validator::make( $input_ceo, $rules );
+        if ( $validation->fails() ) {
+            return redirect(route('organization-register'));
+        }
+        if ($input_ceo['ceo_password']==$input_ceo['ceo_password_confirmation']){
+            $input_ceo['name']=$input_ceo['ceo_name'];
+            $input_ceo['email']=$input_ceo['ceo_email'];
+            $input_ceo['password']=Hash::make($input_ceo['ceo_password']);
+            $input_ceo['is_ceo']=1;
+            $user= (new \App\Models\User)->setConnection($input['db_name']);
+            $user->create($input_ceo);
+        }
 
         //Artisan::call('db:create ' . $input['db_name']);
         Flash::success('Khởi tạo cửa hàng thành công.');

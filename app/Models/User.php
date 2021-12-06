@@ -15,7 +15,9 @@ class User extends Authenticatable
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->connection = Session::get('connection')['db_name'];
+        if (isset(Session::get('connection')['db_name'])){
+            $this->connection = Session::get('connection')['db_name'];
+        }
     }
 
     /**
@@ -27,6 +29,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_ceo',
     ];
 
     /**
@@ -47,4 +50,5 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 }
