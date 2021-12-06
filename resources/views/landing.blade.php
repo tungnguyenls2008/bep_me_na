@@ -68,7 +68,7 @@
                     @auth
                         <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Trang chủ</a>
                     @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Đăng nhập</a>
+                        <a href="{{ route('organization') }}" class="text-sm text-gray-700 underline">Đăng nhập</a>
 
                     @endauth
 
