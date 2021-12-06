@@ -112,7 +112,7 @@
            class="form-control"
            placeholder="Nhập lại mật khẩu">
 </div>
-<p style="color: red">*Vui lòng không chia sẻ tài khoản quản lý này cho bất kỳ ai</p>
+<p style="color: red">*Vui lòng KHÔNG chia sẻ tài khoản quản lý này cho bất kỳ ai</p>
 <script>
     $(function() {
         $('#db_name').on('keypress', function(e) {

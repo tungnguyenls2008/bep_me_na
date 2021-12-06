@@ -286,8 +286,8 @@
 </style>
 <div class="wrapper">
     <div class="container">
-        <h1>Xin chào, mời bạn nhập Mã cửa hàng</h1>
-        <h3>*là id mà bạn được cung cấp khi đăng ký</h3>
+        <h1>Xin chào, mời bạn nhập Mã định danh cửa hàng</h1>
+        <h3>*Viết liền chữ thường không dấu</h3>
         <div class="form">
             <input type="text" placeholder="Mã cửa hàng" id="organization_id" name="organization_id">
             <button type="submit" id="login-button" class="btn btn-outline-success">Tiếp tục</button>
