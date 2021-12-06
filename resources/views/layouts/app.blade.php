@@ -74,6 +74,9 @@ $connection=\Illuminate\Support\Facades\Session::get('connection');
     @stack('page_css')
 </head>
 <style>
+    body{
+        color: #2d3748;
+    }
     .select2-container .select2-selection--single {
         box-sizing: border-box;
         cursor: pointer;
@@ -96,7 +99,19 @@ $connection=\Illuminate\Support\Facades\Session::get('connection');
         </ul>
 
         <ul class="navbar-nav ml-auto">
+            <li style="margin: auto">
+                <?php
+                $connection=\Illuminate\Support\Facades\Session::get('connection');
+                $organization=\App\Models\Models_be\Organization::withoutTrashed()->where(['db_name'=>$connection['db_name']])->first();
+                ?>
+                @if($organization->status==0)
+                    <span class="badge badge-pill badge-warning" style="color: white">Dùng thử</span>
+                    @elseif($organization->status==1)
+                        <span class="badge badge-success" style="color: white">Chính thức</span>
+                    @endif
+            </li>
             <li class="nav-item dropdown user-menu">
+
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                     <img src="{{$connection['logo']!=''?asset($connection['logo']):asset('img/organization_logos/default-company-logo.png')}}"
                          class="user-image img-circle elevation-2" alt="User Image">

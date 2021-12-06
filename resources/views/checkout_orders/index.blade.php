@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Thống kê doanh thu </h1>
+                    <h1>Thống kê doanh thu <a href="{{ route('checkoutOrders.create') }}"><i class="fas fa-plus"></i></a></h1>
                     <a href="{{route('bill-export')}}" class="badge badge-pill badge-success">Xuất excel</a>
                 </div>
 

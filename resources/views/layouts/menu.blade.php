@@ -65,8 +65,20 @@
     </a>
     <ul class="nav nav-treeview nav-pills nav-sidebar ">
         <li class="nav-item child-item">
+            <a href="{{ route('checkoutOrders.create') }}"
+               class="nav-link {{ Request::is('*create') ? 'active' : '' }}">
+                <table style="width: -webkit-fill-available;">
+                    <tr>
+                        <td width="20%" style="text-align: center"><i class="fas fa-plus"></i></td>
+                        <td width="80%" style="text-align: left"><p>Tạo mới doanh thu</p></td>
+                    </tr>
+                </table>
+
+            </a>
+        </li>
+        <li class="nav-item child-item">
             <a href="{{ route('checkoutOrders.index') }}"
-               class="nav-link {{ Request::is('checkoutOrders*') ? 'active' : '' }}">
+               class="nav-link {{ Request::is('checkoutOrders') ? 'active' : '' }}">
                 <table style="width: -webkit-fill-available;">
                     <tr>
                         <td width="20%" style="text-align: center"><i class="fas fa-file-invoice-dollar"></i></td>
@@ -102,8 +114,20 @@
     </a>
     <ul class="nav nav-treeview nav-pills nav-sidebar ">
         <li class="nav-item">
+            <a href="{{ route('rawMaterialImports.create') }}"
+               class="nav-link {{ Request::is('*create') ? 'active' : '' }}">
+                <table style="width: -webkit-fill-available;">
+                    <tr>
+                        <td width="20%" style="text-align: center"><i class="fas fa-plus"></i></td>
+                        <td width="80%" style="text-align: left"><p>Tạo mới chi phí</p></td>
+                    </tr>
+                </table>
+
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="{{ route('rawMaterialImports.index') }}"
-               class="nav-link {{ Request::is('rawMaterialImports*') ? 'active' : '' }}">
+               class="nav-link {{ Request::is('rawMaterialImports') ? 'active' : '' }}">
                 <table style="width: -webkit-fill-available;">
                     <tr>
                         <td width="20%" style="text-align: center"><i class="fas fa-store"></i></td>

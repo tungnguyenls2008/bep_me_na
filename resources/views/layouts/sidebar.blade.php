@@ -2,11 +2,13 @@
     <a href="{{ route('home') }}" class="brand-link">
         <?php
         $connection=\Illuminate\Support\Facades\Session::get('connection');
+        $organization=\App\Models\Models_be\Organization::withoutTrashed()->where(['db_name'=>$connection['db_name']])->first();
         ?>
         <img src="{{$connection['logo']!=''?asset($connection['logo']):asset('img/organization_logos/default-company-logo.png')}}"
              alt="{{$connection['logo']!=''?asset($connection['logo']):asset('img/organization_logos/default-company-logo.png')}} Logo"
              class="brand-image img-circle elevation-3">
-        <span class="brand-text font-weight-light">{{ \Illuminate\Support\Facades\Session::get('connection')['name'] }}</span>
+        <span class="brand-text font-weight-light">{{ \Illuminate\Support\Facades\Session::get('connection')['name'] }}</span><br>
+
     </a>
 
     <div class="sidebar">
