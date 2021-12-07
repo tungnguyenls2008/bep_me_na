@@ -50,7 +50,9 @@ class ProviderController extends AppBaseController
         $input = $request->all();
 
         /** @var Provider $provider */
-        $provider = Provider::create($input);
+        $provider = new Provider();
+        $provider->fill($input);
+        $provider->save();
 
         Flash::success('Provider saved successfully.');
 

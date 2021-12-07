@@ -27,13 +27,14 @@ class Employee extends Model
     use SoftDeletes;
 
     use HasFactory;
-    protected $connection;
+    public $table = 'employee';
+    public $connection;
 
     public function __construct()
     {
         $this->connection = Session::get('connection')['db_name'];
     }
-    public $table = 'employee';
+
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';

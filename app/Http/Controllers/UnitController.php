@@ -50,7 +50,9 @@ class UnitController extends AppBaseController
         $input = $request->all();
 
         /** @var Unit $unit */
-        $unit = Unit::create($input);
+        $unit = new Unit();
+        $unit->fill($input);
+        $unit->save();
 
         Flash::success('Unit saved successfully.');
 

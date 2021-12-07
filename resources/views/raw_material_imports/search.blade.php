@@ -63,6 +63,7 @@
         <div class="col-md-4">
             <?php
             $providers=\App\Models\Provider::all();
+            $provider_select=[];
             foreach ($providers as $provider){
                 $provider_select[$provider->id]=$provider->name;
             }

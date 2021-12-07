@@ -50,7 +50,9 @@ class PositionController extends AppBaseController
         $input = $request->all();
 
         /** @var Position $position */
-        $position = Position::create($input);
+        $position = new Position();
+        $position->fill($input);
+        $position->save();
 
         Flash::success('Position saved successfully.');
 

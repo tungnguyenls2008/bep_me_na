@@ -17,6 +17,7 @@
 </div>
 <?php
 $positions=\App\Models\Position::where(['status'=>0])->get();
+$position_select=[];
 foreach ($positions as $position){
     $position_select[$position->id]=$position->name;
 }

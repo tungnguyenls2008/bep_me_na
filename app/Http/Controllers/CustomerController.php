@@ -50,7 +50,9 @@ class CustomerController extends AppBaseController
         $input = $request->all();
         $input['favorites']=json_encode($input['favorites']);
         /** @var Customer $customer */
-        $customer = Customer::create($input);
+        $customer = new Customer();
+        $customer->fill($input);
+        $customer->save();
 
         Flash::success('Customer saved successfully.');
 

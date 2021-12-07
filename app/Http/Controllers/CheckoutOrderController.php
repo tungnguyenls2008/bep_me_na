@@ -119,7 +119,9 @@ class CheckoutOrderController extends AppBaseController
         if (isset($input['note'])) {
             $new_note['bill_code'] = $input['bill_code'];
             $new_note['content'] = $input['note'];
-            $note = Note::create($new_note);
+            $note = new Note();
+            $note->fill($new_note);
+            $note->save();
         }
         if (isset($input['regular_customer_id'])){
             $customer=Customer::find($input['regular_customer_id']);
@@ -127,7 +129,9 @@ class CheckoutOrderController extends AppBaseController
             $customer->save();
         }
 
-        $checkoutOrder = CheckoutOrder::create($input);
+        $checkoutOrder = new CheckoutOrder();
+        $checkoutOrder->fill($input);
+        $checkoutOrder->save();
         $checkoutOrder = $checkoutOrder->toArray();
         $checkoutOrder['menu_id'] = json_decode($checkoutOrder['menu_id'], true);
         foreach ($checkoutOrder['menu_id'] as $key => $item) {

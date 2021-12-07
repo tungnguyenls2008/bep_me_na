@@ -23,6 +23,7 @@
                 <td>
                     <?php
                     $positions = \App\Models\Position::all();
+                    $position_select=[];
                     foreach ($positions as $position) {
                         $position_select[$position->id] = $position->name;
                     }

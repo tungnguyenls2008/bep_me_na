@@ -55,7 +55,7 @@
                     @auth('backend')
                         <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Trang chủ</a>
                     @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Đăng nhập</a>
+                        <a href="{{ route('backend-login-view') }}" class="text-sm text-gray-700 underline">Đăng nhập</a>
 
                     @endauth
 

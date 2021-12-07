@@ -10,7 +10,8 @@
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
                        href="{{ route('employees.create') }}">
-                        Add New
+                        <span class="metismenu-icon pe-7s-add-user"></span>
+                        Thêm nhân viên mới
                     </a>
                 </div>
             </div>
@@ -29,7 +30,7 @@
 
                 <div class="card-footer clearfix float-right">
                     <div class="float-right">
-                        
+
                     </div>
                 </div>
             </div>

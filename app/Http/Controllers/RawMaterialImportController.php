@@ -91,7 +91,9 @@ class RawMaterialImportController extends AppBaseController
             $provider->save();
         }
         /** @var RawMaterialImport $rawMaterialImport */
-        $rawMaterialImport = RawMaterialImport::create($input);
+        $rawMaterialImport = new RawMaterialImport();
+        $rawMaterialImport->fill($input);
+        $rawMaterialImport->save();
 
         Flash::success('Raw Material Import saved successfully.');
 

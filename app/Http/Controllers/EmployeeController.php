@@ -43,14 +43,15 @@ class EmployeeController extends AppBaseController
      *
      * @param CreateEmployeeRequest $request
      *
-     * @return Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|Response
      */
     public function store(CreateEmployeeRequest $request)
     {
         $input = $request->all();
-
         /** @var Employee $employee */
-        $employee = Employee::create($input);
+        $employee = new Employee();
+        $employee->fill($input);
+        $employee->save();
 
         Flash::success('Employee saved successfully.');
 

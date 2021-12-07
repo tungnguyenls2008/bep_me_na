@@ -51,8 +51,11 @@ class MenuController extends AppBaseController
         $input = $request->all();
 
         /** @var Menu $menu */
-        $menu = Menu::create($input);
-
+        $menu = new Menu();
+        $menu->fill($input);
+        $menu->count = 0;
+        $menu->status = 0;
+        $menu->save();
         Flash::success('Menu saved successfully.');
 
         return redirect(route('menus.index'));

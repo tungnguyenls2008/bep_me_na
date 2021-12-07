@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Models_be\Product;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Product;
+
 
 class CreateProductRequest extends FormRequest
 {
