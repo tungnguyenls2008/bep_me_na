@@ -162,7 +162,7 @@ class RawMaterialImportController extends AppBaseController
 
             return redirect(route('rawMaterialImports.index'));
         }
-        if (Auth::id()==$rawMaterialImport->user_id) {
+        if (Auth::id()==$rawMaterialImport->user_id||Auth::user()->is_ceo==1) {
             $rawMaterialImport->fill($input);
             $rawMaterialImport->save();
 
@@ -196,7 +196,7 @@ class RawMaterialImportController extends AppBaseController
 
             return redirect(route('rawMaterialImports.index'));
         }
-        if (Auth::id()==$rawMaterialImport->user_id) {
+        if (Auth::id()==$rawMaterialImport->user_id||Auth::user()->is_ceo==1) {
             if ($rawMaterialImport->provider_id!=null){
                 $provider=Provider::find($rawMaterialImport->provider_id);
                 $provider->count-=1;
@@ -225,7 +225,7 @@ class RawMaterialImportController extends AppBaseController
         }elseif ($order->status==1){
             $order->status=0;
         }
-        if(Auth::id()==$order->user_id){
+        if(Auth::id()==$order->user_id||Auth::user()->is_ceo==1){
             if($order->save()){
                 Flash::success('Chuyển đổi trạng thái khoản chi thành công!');
                 return redirect(route('rawMaterialImports.index'));

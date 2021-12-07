@@ -22,7 +22,7 @@ class UnitController extends AppBaseController
     public function index(Request $request)
     {
         /** @var Unit $units */
-        $units = Unit::all();
+        $units = Unit::where(['deleted_at'=>null])->get();
 
         return view('units.index')
             ->with('units', $units);

@@ -268,7 +268,7 @@ class CheckoutOrderController extends AppBaseController
 
             return redirect(route('checkoutOrders.index'));
         }
-        if (Auth::id()==$checkoutOrder->user_id){
+        if (Auth::id()==$checkoutOrder->user_id||Auth::user()->is_ceo==1){
             $customer=Customer::find($checkoutOrder->regular_customer_id);
             if ($customer!=null){
                 $customer->order_count-=1;
@@ -549,7 +549,7 @@ class CheckoutOrderController extends AppBaseController
         }elseif ($order->status==1){
             $order->status=0;
         }
-        if(Auth::id()==$order->user_id){
+        if(Auth::id()==$order->user_id||Auth::user()->is_ceo==1){
             if($order->save()){
                 Flash::success('Chuyển đổi trạng thái đơn hàng thành công!');
                 return redirect(route('checkoutOrders.index'));
