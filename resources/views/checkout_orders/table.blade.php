@@ -145,7 +145,7 @@
                     </a>
                     <div class="modal fade" id="{{$checkoutOrder->bill_code}}" tabindex="-1" role="dialog"
                          aria-labelledby="{{$checkoutOrder->bill_code}}" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-dialog " role="document" style="margin-top: 10%;z-index: 10">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLongTitle">Ghi chú</h5>

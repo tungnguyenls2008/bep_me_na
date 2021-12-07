@@ -22,7 +22,7 @@ class NoteController extends AppBaseController
     public function index(Request $request)
     {
         /** @var Note $notes */
-        $notes = Note::all();
+        $notes = Note::where(['deleted_at'=>null])->get();
 
         return view('notes.index')
             ->with('notes', $notes);
@@ -49,7 +49,9 @@ class NoteController extends AppBaseController
     {
         $input = $request->all();
         /** @var Note $note */
-        $note = Note::create($input);
+        $note = new Note();
+        $note->fill($input);
+        $note->save();
 
         Flash::success('Note saved successfully.');
 

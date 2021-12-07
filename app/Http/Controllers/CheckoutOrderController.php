@@ -315,7 +315,9 @@ class CheckoutOrderController extends AppBaseController
     public function createNote(Request $request)
     {
         $input = $request->all();
-        $note = Note::create($input);
+        $note = new Note();
+        $note->fill($input);
+        $note->save();
         Flash::success('Tạo ghi chú thành công');
         $checkoutOrders = CheckoutOrder::OrderBy('created_at', 'desc')->paginate(15);
 
