@@ -22,7 +22,7 @@ class ProviderController extends AppBaseController
     public function index(Request $request)
     {
         /** @var Provider $providers */
-        $providers = Provider::all();
+        $providers = Provider::where(['deleted_at'=>null])->get();
 
         return view('providers.index')
             ->with('providers', $providers);

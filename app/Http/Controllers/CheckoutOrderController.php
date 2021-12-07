@@ -35,7 +35,7 @@ class CheckoutOrderController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $checkoutOrders = CheckoutOrder::OrderBy('created_at', 'desc')->paginate(15);
+        $checkoutOrders = CheckoutOrder::where(['deleted_at'=>null])->OrderBy('created_at', 'desc')->paginate(15);
 
 
         return view('checkout_orders.index')
@@ -44,7 +44,7 @@ class CheckoutOrderController extends AppBaseController
     public function search(Request $request)
     {
         $search=$request->post();
-        $checkoutOrders= CheckoutOrder::OrderBy('created_at','desc');
+        $checkoutOrders= CheckoutOrder::where(['deleted_at'=>null])->OrderBy('created_at','desc');
         if (isset($search['bill_code'])){
             $checkoutOrders->where('bill_code','like','%'.$search['bill_code'].'%');
         }
@@ -282,11 +282,16 @@ class CheckoutOrderController extends AppBaseController
                 $menu->count-=$item;
                 $menu->save();
             }
-            $checkoutOrder->delete();
+            if($checkoutOrder->delete()){
+                Flash::success('Đã xóa thành công hóa đơn '.$checkoutOrder->bill_code.'.');
 
-            Flash::success('Đã xóa thành công hóa đơn '.$checkoutOrder->bill_code.'.');
+            }else{
+                Flash::error('Có lỗi xảy ra, hóa đơn không được xóa.');
 
+            }
             return redirect(route('checkoutOrders.index'));
+
+
         }else{
             Flash::error('Bạn không có quyền xóa hóa đơn này.');
 

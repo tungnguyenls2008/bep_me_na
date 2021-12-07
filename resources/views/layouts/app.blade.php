@@ -37,16 +37,11 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
           crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/metismenu/dist/metisMenu.min.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"
-            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
-            integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
-            crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
     <script src="https://use.fontawesome.com/e57c0d7c9a.js"></script>
@@ -629,33 +624,33 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
             <footer class="app-wrapper-footer">
                 <div class="app-footer">
                     <div class="app-footer__inner">
-                        <div class="app-footer-left">
-                            <ul class="nav">
-                                <li class="nav-item">
-                                    <a href="javascript:void(0);" class="nav-link">
-                                        Footer Link 1
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="javascript:void(0);" class="nav-link">
-                                        Footer Link 2
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+{{--                        <div class="app-footer-left">--}}
+{{--                            <ul class="nav">--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="javascript:void(0);" class="nav-link">--}}
+{{--                                        Footer Link 1--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="javascript:void(0);" class="nav-link">--}}
+{{--                                        Footer Link 2--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                            </ul>--}}
+{{--                        </div>--}}
                         <div class="app-footer-right">
                             <ul class="nav">
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="javascript:void(0);" class="nav-link">--}}
+{{--                                        Footer Link 3--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
                                 <li class="nav-item">
-                                    <a href="javascript:void(0);" class="nav-link">
-                                        Footer Link 3
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="javascript:void(0);" class="nav-link">
+                                    <a href="mailto:tungnguyenls2008@gmail.com" class="nav-link">
                                         <div class="badge badge-success mr-1 ml-0">
-                                            <small>NEW</small>
+                                            <small>2021</small>
                                         </div>
-                                        Footer Link 4
+                                        All rights reserved @ THUCHI
                                     </a>
                                 </li>
                             </ul>

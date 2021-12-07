@@ -26,7 +26,7 @@ class RawMaterialImportController extends AppBaseController
     public function index(Request $request)
     {
         /** @var RawMaterialImport $rawMaterialImports */
-        $rawMaterialImports = RawMaterialImport::OrderBy('created_at','desc')->get();
+        $rawMaterialImports = RawMaterialImport::where(['deleted_at'=>null])->OrderBy('created_at','desc')->get();
 
         return view('raw_material_imports.index')
             ->with('rawMaterialImports', $rawMaterialImports);
@@ -34,7 +34,7 @@ class RawMaterialImportController extends AppBaseController
     public function search(Request $request)
     {
         $search=$request->post();
-        $spending= RawMaterialImport::OrderBy('created_at','desc');
+        $spending= RawMaterialImport::where(['deleted_at'=>null])->OrderBy('created_at','desc');
 
         if (isset($search['create_from'])|| isset($search['create_to'])){
             if (!isset($search['create_from'])){

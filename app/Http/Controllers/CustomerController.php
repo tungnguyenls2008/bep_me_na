@@ -22,7 +22,7 @@ class CustomerController extends AppBaseController
     public function index(Request $request)
     {
         /** @var Customer $customers */
-        $customers = Customer::all();
+        $customers = Customer::where(['deleted_at'=>null])->get();
 
         return view('customers.index')
             ->with('customers', $customers);
