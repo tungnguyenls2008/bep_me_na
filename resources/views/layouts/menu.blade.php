@@ -79,7 +79,7 @@
         <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
     </a>
 
-    <ul class="nav nav-treeview nav-pills nav-sidebar {{ Request::is('employees*')||Request::is('positions*') ? 'mm-show' : '' }}">
+    <ul class="nav nav-treeview nav-pills nav-sidebar {{ Request::is('employees*')||Request::is('positions*')||Request::is('attendances*') ? 'mm-show' : '' }}">
         <li class="nav-item">
             <a href="{{ route('employees.index') }}" class="{{ Request::is('employees*') ? 'mm-active' : '' }}">
                 <i class="metismenu-icon pe-7s-cash"></i>
@@ -94,7 +94,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="" class="">
+            <a href="{{ route('attendances.index') }}" class="{{ Request::is('attendances*') ? 'mm-active' : '' }}">
                 <i class="metismenu-icon pe-7s-cash"></i>
                 Chấm công
             </a>

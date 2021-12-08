@@ -36,6 +36,7 @@ Route::post('organization/check', [\App\Http\Controllers\Controllers_be\Organiza
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('checkoutOrders/search',[\App\Http\Controllers\CheckoutOrderController::class,'search'])->name('order-search');
 Route::get('rawMaterialImports/search',[\App\Http\Controllers\RawMaterialImportController::class,'search'])->name('spending-search');
+Route::get('attendances/search',[\App\Http\Controllers\AttendanceController::class,'search'])->name('attendance-search');
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('menus', App\Http\Controllers\MenuController::class);
@@ -58,6 +59,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('positions', App\Http\Controllers\PositionController::class);
     Route::resource('employees', App\Http\Controllers\EmployeeController::class);
     Route::resource('units', App\Http\Controllers\UnitController::class);
+    Route::get('attendances/create-additional',[\App\Http\Controllers\AttendanceController::class,'createAdditional'])->name('attendance-create-additional');
+    Route::post('attendances/store-additional',[\App\Http\Controllers\AttendanceController::class,'storeAdditional'])->name('attendances-store-additional');
+    Route::resource('attendances', App\Http\Controllers\AttendanceController::class);
+
 });
 
 

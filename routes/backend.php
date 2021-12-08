@@ -38,3 +38,5 @@ Route::middleware(['backend'])->prefix('backend')->group(function () {
     Route::resource('products', \App\Http\Controllers\Controllers_be\ProductController::class);
     Route::resource('profiles', \App\Http\Controllers\Controllers_be\ProfileController::class);
 });
+
+

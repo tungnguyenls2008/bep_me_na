@@ -62,7 +62,7 @@
                             <?php
                             $import_count = \App\Models\RawMaterialImport::where(['deleted_at' => null])->count();
                             $sum_import = \App\Models\RawMaterialImport::where(['deleted_at' => null])->sum('total');
-                            $sum_paid_import=\App\Models\RawMaterialImport::where(['deleted_at' => null,'status'=>1])->sum('total');
+                            $sum_paid_import = \App\Models\RawMaterialImport::where(['deleted_at' => null, 'status' => 1])->sum('total');
                             ?>
                             <div id="total-revenue-chart">Bạn có <b>{{$import_count}}</b> khoản chi <br>
                                 Tổng chi phí tạm tính là <b>{{number_format($sum_import)}}đ</b><br>
@@ -150,8 +150,8 @@
 
 
         </div>
-        <div class="row">
-            <div class="col-md-12 col-xl-12">
+        <div class="row" >
+            <div class="col-md-6 col-xl-6">
 
                 <div class="card card-success">
                     <div class="card-header">
@@ -160,24 +160,69 @@
                     <div class="card-body">
                         <div class="container">
                             <?php
-                            $profit=$sum_sale_done-$sum_import;
-                            if ($profit<=0){
-                                $state='<b style="color: red">tạm lỗ</b>'.' <b style="color: red">'. number_format(($profit)).'đ!</b>';
-                            }else{
-                                $state='<b style="color: darkgreen">tạm lãi</b>'.' <b style="color: darkgreen">'. number_format(($profit)).'đ!</b>';
+                            $profit = $sum_sale_done - $sum_import;
+                            if ($profit <= 0) {
+                                $state = '<b style="color: red">tạm lỗ</b>' . ' <b style="color: red">' . number_format(($profit)) . 'đ!</b>';
+                            } else {
+                                $state = '<b style="color: darkgreen">tạm lãi</b>' . ' <b style="color: darkgreen">' . number_format(($profit)) . 'đ!</b>';
                             }
-                            echo '<p>Sau trừ tất cả chi phí, bạn đang '.$state.'</p>'
+                            echo '<p>Sau trừ tất cả chi phí, bạn đang ' . $state . '</p>'
                             ?>
-                                <br>
-                                <p>Bạn còn <b>{{\App\Models\RawMaterialImport::where(['deleted_at' => null,'status'=>0])->count()}}</b>
-                                    <a href="{{route('rawMaterialImports.index')}}">khoản chi</a> chưa thanh toán!</p><br>
-                                <p>Bạn còn <b>{{\App\Models\CheckoutOrder::where(['deleted_at' => null,'status'=>0])->count()}}</b>
-                                    <a href="{{route('checkoutOrders.index')}}">hóa đơn</a> chưa thu tiền!</p><br>
-{{--                            <button id="profit-button" class="btn btn-outline-success">Hiển thị</button>--}}
+                            <br>
+                            <p>Bạn còn
+                                <b>{{\App\Models\RawMaterialImport::where(['deleted_at' => null,'status'=>0])->count()}}</b>
+                                <a href="{{route('rawMaterialImports.index')}}">khoản chi</a> chưa thanh toán!</p><br>
+                            <p>Bạn còn
+                                <b>{{\App\Models\CheckoutOrder::where(['deleted_at' => null,'status'=>0])->count()}}</b>
+                                <a href="{{route('checkoutOrders.index')}}">hóa đơn</a> chưa thu tiền!</p><br>
+                            {{--                            <button id="profit-button" class="btn btn-outline-success">Hiển thị</button>--}}
 
-                            <div id="profit-display" >
+                            <div id="profit-display">
                                 @include('charts.order-chart')
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-xl-3">
+                <?php
+                $check_attended = \App\Models\Attendance::whereDate('date', \Carbon\Carbon::today())->get();
+                ?>
+                @if($check_attended!=null)
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title text-white">Trạng thái chấm công</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="container" style="text-align: center">
+                                <img src="{{asset('img/success.gif')}}" alt="" width="200px">
+                                ĐÃ chấm công nhân viên <a href="{{route('attendances.index')}}" class="btn btn-sm btn-outline-success">Kiểm tra</a>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <div class="card card-danger">
+                        <div class="card-header">
+                            <h3 class="card-title text-white">Trạng thái chấm công</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="container" style="text-align: center">
+                                <img src="{{asset('img/failed.gif')}}" alt="" width="200px">
+                                CHƯA chấm công nhân viên <a href="{{route('attendances.create')}}" class="btn btn-sm btn-outline-success">Chấm công ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            </div>
+            <div class="col-md-3 col-xl-3">
+
+                <div class="card card-success">
+                    <div class="card-header">
+                        <h3 class="card-title text-white">Sử dụng sau</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                            ...
                         </div>
                     </div>
                 </div>
@@ -219,26 +264,28 @@
                                     margin: 0 auto;
                                     color: #1f1f1a;
                                     @switch($data->weather[0]->icon)
-                                    @case('01d')         background: url({{asset('img/w_clear_sky.gif')}});
-                                    @case('01n')         background: url({{asset('img/w_clear_sky.gif')}});
-                                    @case('02d')         background: url({{asset('img/w_few_cloud.gif')}});
-                                    @case('02n')         background: url({{asset('img/w_few_cloud.gif')}});
-                                    @case('03d')         background: url({{asset('img/w_scattered_clouds.gif')}});
-                                    @case('03n')         background: url({{asset('img/w_scattered_clouds.gif')}});
-                                    @case('04d')         background: url({{asset('img/w_broken_clouds.gif')}});
-                                    @case('04n')         background: url({{asset('img/w_broken_clouds.gif')}});
-                                    @case('09d')         background: url({{asset('img/w_shower_rain.gif')}});
-                                    @case('09n')         background: url({{asset('img/w_shower_rain.gif')}});
-                                    @case('10d')         background: url({{asset('img/w_rain.gif')}});
-                                    @case('10n')         background: url({{asset('img/w_rain.gif')}});
-                                    @case('11d')         background: url({{asset('img/w_thunder_storm.gif')}});
-                                    @case('11n')         background: url({{asset('img/w_thunder_storm.gif')}});
-                                    @case('13d')         background: url("https://images.techhive.com/images/article/2017/05/cloud_blueprint_schematic-100722515-large.jpg?auto=webp");
-                                    @case('13n')         background: url("https://images.techhive.com/images/article/2017/05/cloud_blueprint_schematic-100722515-large.jpg?auto=webp");
-                                    @case('50d')         background: url({{asset('img/w_mist.gif')}});
-                                    @case('50n')         background: url({{asset('img/w_mist.gif')}});
+                                    @case('01d')           background: url({{asset('img/w_clear_sky.gif')}});
+                                    @case('01n')           background: url({{asset('img/w_clear_sky.gif')}});
+                                    @case('02d')           background: url({{asset('img/w_few_cloud.gif')}});
+                                    @case('02n')           background: url({{asset('img/w_few_cloud.gif')}});
+                                    @case('03d')           background: url({{asset('img/w_scattered_clouds.gif')}});
+                                    @case('03n')           background: url({{asset('img/w_scattered_clouds.gif')}});
+                                    @case('04d')           background: url({{asset('img/w_broken_clouds.gif')}});
+                                    @case('04n')           background: url({{asset('img/w_broken_clouds.gif')}});
+                                    @case('09d')           background: url({{asset('img/w_shower_rain.gif')}});
+                                    @case('09n')           background: url({{asset('img/w_shower_rain.gif')}});
+                                    @case('10d')           background: url({{asset('img/w_rain.gif')}});
+                                    @case('10n')           background: url({{asset('img/w_rain.gif')}});
+                                    @case('11d')           background: url({{asset('img/w_thunder_storm.gif')}});
+                                    @case('11n')           background: url({{asset('img/w_thunder_storm.gif')}});
+                                    @case('13d')           background: url("https://images.techhive.com/images/article/2017/05/cloud_blueprint_schematic-100722515-large.jpg?auto=webp");
+                                    @case('13n')           background: url("https://images.techhive.com/images/article/2017/05/cloud_blueprint_schematic-100722515-large.jpg?auto=webp");
+                                    @case('50d')           background: url({{asset('img/w_mist.gif')}});
+                                    @case('50n')           background: url({{asset('img/w_mist.gif')}});
 
                                 @endswitch
+
+
 
 
 

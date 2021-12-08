@@ -108,6 +108,7 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
 <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
     <div class="app-header header-shadow">
         <div class="app-header__logo">
+            <a href="{{route('home')}}" style="display: contents;color: #2d3748">
             <div class="logo-src">
                 <img
                     src="{{$connection['logo']!=''?asset($connection['logo']):asset('img/organization_logos/default-company-logo.png')}}"
@@ -116,6 +117,7 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
             <div class="logo-src company-name">
                 <p><h4>{{$connection['name']}}</h4></p>
             </div>
+            </a>
             <div class="header__pane ml-auto">
                 <div>
                     <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"

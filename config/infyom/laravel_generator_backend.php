@@ -13,13 +13,13 @@ return [
 
         'migration'         => database_path('migrations/'),
 
-        'model'             => app_path('Models/'),
+        'model'             => app_path('Models/Models_be/'),
 
         'datatables'        => app_path('DataTables/'),
 
         'repository'        => app_path('Repositories/'),
 
-        'routes'            => base_path('routes/web.php'),
+        'routes'            => base_path('routes/backend.php'),
 
         'api_routes'        => base_path('routes/api.php'),
 
@@ -27,7 +27,7 @@ return [
 
         'api_request'       => app_path('Http/Requests/API/'),
 
-        'controller'        => app_path('Http/Controllers/'),
+        'controller'        => app_path('Http/Controllers/Controller_be/'),
 
         'api_controller'    => app_path('Http/Controllers/API/'),
 
@@ -39,7 +39,7 @@ return [
 
         'tests'             => base_path('tests/'),
 
-        'views'             => resource_path('views/'),
+        'views'             => resource_path('views/backend/'),
 
         'schema_files'      => resource_path('model_schemas/'),
 
@@ -63,21 +63,21 @@ return [
 
     'namespace' => [
 
-        'model'             => 'App\Models',
+        'model'             => 'App\Models\Models_be',
 
         'datatables'        => 'App\DataTables',
 
-        'repository'        => 'App\Repositories',
+        'repository'        => 'App\Repositories\Repositories_be',
 
-        'controller'        => 'App\Http\Controllers',
+        'controller'        => 'App\Http\Controllers\Controllers_be',
 
-        'api_controller'    => 'App\Http\Controllers\API',
+        'api_controller'    => 'App\Http\Controllers\API\API_be',
 
-        'api_resource'      => 'App\Http\Resources',
+        'api_resource'      => 'App\Http\Resources\Resources_be',
 
-        'request'           => 'App\Http\Requests',
+        'request'           => 'App\Http\Requests\Requests_be',
 
-        'api_request'       => 'App\Http\Requests\API',
+        'api_request'       => 'App\Http\Requests\API\APT_be',
 
         'seeder'            => 'Database\Seeders',
 
