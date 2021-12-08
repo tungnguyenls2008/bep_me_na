@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Edit Employee</h1>
+                    <h1>Sửa hồ sơ nhân viên</h1>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Cập nhật', ['class' => 'btn btn-primary']) !!}
                 <a href="{{ route('employees.index') }}" class="btn btn-default">Cancel</a>
             </div>
 

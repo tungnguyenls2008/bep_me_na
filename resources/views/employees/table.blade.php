@@ -60,11 +60,22 @@
                     @switch($employee->status)
                         @case(0) <a href="{{route('employee-toggle-status',['id'=>$employee->id])}}"
                                     class="badge badge-success"
-                                    onclick="return confirm('Bạn chắc chắn muốn đổi trạng thái nhân viên này?')">Đang
-                            làm việc</a>@break
+                                    onclick="return confirm('Bạn chắc chắn muốn đổi trạng thái nhân viên này?')">
+                            <?php
+                            $attendance=\App\Models\Attendance::where(['employee_id'=>$employee->id,'date'=>\Carbon\Carbon::today()])->first();
+                            if ($attendance!=null){
+                                switch ($attendance->status){
+                                    case 2: echo 'Đang nghỉ phép';break;
+                                    case 3: echo 'Đang nghỉ không lương';break;
+                                    default: echo 'Đang làm việc';break;
+                                }
+                            }else{
+                                echo 'Chưa chấm công';
+                            }
+                            ?></a>@break
                         @case(1) <a href="{{route('employee-toggle-status',['id'=>$employee->id])}}"
                                     class="badge badge-danger"
-                                    onclick="return confirm('Bạn chắc chắn muốn đổi trạng thái nhân viên này?')">Nghỉ</a>@break
+                                    onclick="return confirm('Bạn chắc chắn muốn đổi trạng thái nhân viên này?')">Đã nghỉ việc</a>@break
                     @endswitch
                 </td>
                 <?php

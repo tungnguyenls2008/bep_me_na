@@ -36,7 +36,7 @@
 <div class="form-group col-sm-3">
     {!! Form::label('date', 'Ngày:') !!}
 
-        {!! Form::text('date', null, ['class' => 'form-control date','id'=>'date','autocomplete'=>'off']) !!}
+        {!! Form::text('date',isset($attendance)!=null? date('d-m-Y',strtotime($attendance->date)):null, ['class' => 'form-control','id'=>'date','autocomplete'=>'off']) !!}
 
 </div>
 
@@ -48,9 +48,12 @@
             sideBySide: true,
             maxDate: new Date()
         })
-        $(".reason-div").hide()
         $(function () {
-
+            if ($("#status").val() != 0) {
+                $(".reason-div").fadeIn().show()
+            } else {
+                $(".reason-div").fadeOut().hide()
+            }
             $("#status").on('change', function () {
                 if ($(this).val() != 0) {
                     $(".reason-div").fadeIn().show()

@@ -649,10 +649,11 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
 {{--                                </li>--}}
                                 <li class="nav-item">
                                     <a href="mailto:tungnguyenls2008@gmail.com" class="nav-link">
-                                        <div class="badge badge-success mr-1 ml-0">
-                                            <small>2021</small>
-                                        </div>
+
                                         All rights reserved @ THUCHI
+                                        <div class="badge badge-success mr-1 ml-0">
+                                            <small>{{date('Y',time())}}</small>
+                                        </div>
                                     </a>
                                 </li>
                             </ul>

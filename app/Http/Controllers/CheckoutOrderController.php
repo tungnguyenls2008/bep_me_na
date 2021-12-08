@@ -17,6 +17,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Flash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
@@ -381,9 +382,15 @@ class CheckoutOrderController extends AppBaseController
         $last_price = $this->searchInSheet($spreadsheet, '{price}');
         $last_total = $this->searchInSheet($spreadsheet, '{total}');
         $this->setMassBlankValue($sheet,[$last_menu_id,$last_price,$last_quantity,$last_total]);
-
+        $sheet->getStyle('D8')->applyFromArray(
+            array(
+                'alignment' => [
+                    'wrapText' => true,
+                ],
+            )
+        );
         $helper = new ExcelSample();
-        $file_name = $data['bill_code'] . '-' . date('d-m-Y') . '.xls';
+        $file_name = Session::get('connection')['db_name'].'_'.$data['bill_code'] . '-' . date('d-m-Y') . '.xls';
         $helper->write($spreadsheet, $file_name);
         return $file_name;
     }

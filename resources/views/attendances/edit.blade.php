@@ -21,7 +21,7 @@
 
             <div class="card-body">
                 <div class="row">
-                    @include('attendances.fields')
+                    @include('attendances.fields-additional')
                 </div>
             </div>
 
