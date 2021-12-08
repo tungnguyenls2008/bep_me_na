@@ -3,7 +3,7 @@
         <thead>
         <tr>
             <th style="text-align: center">Hóa đơn</th>
-            <th style="text-align: center">Danh sách thực đơn</th>
+            <th style="text-align: center">Danh sách sản phẩm</th>
             <th style="text-align: center">Số lượng</th>
             <th style="text-align: center">Đơn giá</th>
             <th style="text-align: center"><i class="fas fa-dollar-sign" style="color: darkgreen"></i> / <i class="fas fa-gift"
