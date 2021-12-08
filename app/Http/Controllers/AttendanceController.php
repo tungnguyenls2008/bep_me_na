@@ -180,7 +180,7 @@ class AttendanceController extends AppBaseController
         $attendance = Attendance::find($id);
 
         if (empty($attendance)) {
-            Flash::error('Attendance not found');
+            Flash::error('Không tìm thấy nhật ký chấm công này.');
 
             return redirect(route('attendances.index'));
         }
@@ -199,9 +199,8 @@ class AttendanceController extends AppBaseController
     {
         /** @var Attendance $attendance */
         $attendance = Attendance::find($id);
-
         if (empty($attendance)) {
-            Flash::error('Attendance not found');
+            Flash::error('Không tìm thấy nhật ký chấm công này.');
 
             return redirect(route('attendances.index'));
         }
@@ -223,7 +222,7 @@ class AttendanceController extends AppBaseController
         $attendance = Attendance::find($id);
 
         if (empty($attendance)) {
-            Flash::error('Attendance not found');
+            Flash::error('Không tìm thấy nhật ký chấm công này.');
 
             return redirect(route('attendances.index'));
         }
@@ -231,7 +230,7 @@ class AttendanceController extends AppBaseController
         $attendance->fill($request->all());
         $attendance->save();
 
-        Flash::success('Attendance updated successfully.');
+        Flash::success('Cập nhật chấm công thành công.');
 
         return redirect(route('attendances.index'));
     }
