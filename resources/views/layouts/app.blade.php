@@ -110,8 +110,16 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
         <div class="app-header__logo">
             <a href="{{route('home')}}" style="display: contents;color: #2d3748">
             <div class="logo-src">
+                <?php
+                if (file_exists(realpath('img/organization_logos/'.Session::get('connection')['db_name'].'.png'))){
+                    $src=(asset('img/organization_logos/'.(Session::get('connection')['db_name']).'.png')); // put your path and image here
+                }
+                else{
+                    $src=(asset('img/organization_logos/default-company-logo.png')); // put your path and image here
+                }
+                ?>
                 <img
-                    src="{{$connection['logo']!=''?asset($connection['logo']):asset('img/organization_logos/default-company-logo.png')}}"
+                    src="{{$src}}"
                     alt="logo" width="42px">
             </div>
             <div class="logo-src company-name">

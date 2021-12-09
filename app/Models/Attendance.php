@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Class Attendance
@@ -23,7 +24,12 @@ class Attendance extends Model
     use HasFactory;
 
     public $table = 'attendance';
+    protected $connection;
 
+    public function __construct()
+    {
+        $this->connection = Session::get('connection')['db_name'];
+    }
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 

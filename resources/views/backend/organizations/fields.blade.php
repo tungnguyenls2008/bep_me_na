@@ -72,7 +72,7 @@
 <!-- Logo Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('logo', 'Ảnh đại diện:') !!}
-    {!! Form::file('logo', ['class' => 'form-control','accept'=>'image/x-png,image/gif,image/jpeg']) !!}
+    {!! Form::file('logo', ['class' => 'form-control','accept'=>'image/x-png,image/jpeg']) !!}
 </div>
 <!-- Db Name Field -->
 <div class="form-group col-sm-12">

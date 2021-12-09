@@ -77,6 +77,7 @@ function cloneCoreDb($db_name){
     }
     foreach ($tables_names as $tables_name) {
         DB::statement('CREATE TABLE ' . $db_name . '.' . $tables_name . ' LIKE core_db.' . $tables_name);
+        DB::statement('INSERT INTO ' . $db_name . '.' . $tables_name . ' SELECT * FROM core_db.' . $tables_name);
 
     }
 }
