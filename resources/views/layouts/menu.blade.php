@@ -16,7 +16,7 @@
 <li class="nav-item">
     <a href="{{ route('checkoutOrders.create') }}" class="{{ Request::is('checkoutOrders/create') ? 'mm-active' : '' }}">
         <i class="metismenu-icon pe-7s-plus"></i>
-        Tạo đơn hàng mới
+        Tạo doanh thu mới
     </a>
 
 </li>
