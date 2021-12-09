@@ -112,5 +112,14 @@ foreach ($industries as $industry){
 <!-- Logo Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('logo', 'Logo cửa hàng:') !!}
-    {!! Form::file('logo', null, ['class' => 'form-control']) !!}
+    {!! Form::file('logo', ['accept'=>'image/jpeg,image/x-png']) !!}
+    <?php
+    if (file_exists(realpath('img/organization_logos/'.Session::get('connection')['db_name'].'.png'))){
+        $src=(asset('img/organization_logos/'.(Session::get('connection')['db_name']).'.png')); // put your path and image here
+    }
+    else{
+        $src=(asset('img/organization_logos/default-company-logo.png')); // put your path and image here
+    }
+    ?>
+    <img src="{{$src}}" alt="" style="width: 200px">
 </div>

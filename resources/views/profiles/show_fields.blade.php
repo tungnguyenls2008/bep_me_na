@@ -69,20 +69,19 @@ else{
     </div>
 
 </div>
-<div class="col-md-6">
+<div class="col-md-6" style="text-align: center">
     <?php
     if (file_exists(realpath('img/organization_logos/'.Session::get('connection')['db_name'].'.png'))){
         $src=(asset('img/organization_logos/'.(Session::get('connection')['db_name']).'.png')); // put your path and image here
     }
     else{
         $src=(asset('img/organization_logos/default-company-logo.png')); // put your path and image here
-
     }
     ?>
     <img
         src="{{$src}}"
         alt=""
         width="500px"
-        class="shadow"
+        class="elevation-3"
     >
 </div>
