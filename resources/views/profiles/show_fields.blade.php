@@ -55,11 +55,17 @@ else{
         {!! Form::label('address', 'Địa chỉ:') !!}
         <p>{{ $profile->address }}</p>
     </div>
-
+<?php
+if ($profile->dob!=null){
+    $dob=date('d-m-Y',strtotime($profile->dob));
+}else{
+    $dob=null;
+}
+?>
     <!-- Dob Field -->
     <div class="col-sm-12">
         {!! Form::label('dob', 'Ngày thành lập:') !!}
-        <p>{{ date('d-m-Y',strtotime($profile->dob)) }}</p>
+        <p>{{ $dob }}</p>
     </div>
 
     <!-- Phone Field -->
