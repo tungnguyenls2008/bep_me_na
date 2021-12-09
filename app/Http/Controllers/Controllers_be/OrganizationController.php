@@ -54,7 +54,7 @@ class OrganizationController extends AppBaseController
      *
      * @param CreateOrganizationRequest $request
      *
-     * @return Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|Response
      */
     public function store(CreateOrganizationRequest $request)
     {
@@ -62,8 +62,10 @@ class OrganizationController extends AppBaseController
         $input['licence'] = uniqidReal(36);
         if ($request->file('logo') !== null) {
             $image = $request->file('logo');
-            $image->move('img/organization_logos', $input['db_name'] . '.' . $image->getClientOriginalExtension())->getPathname();
-            $input['logo']='img/organization_logos/'.$input['db_name'] . '.' . $image->getClientOriginalExtension();
+            //$image->move('img/organization_logos', $input['db_name'] . '.' . $image->getClientOriginalExtension())->getPathname();
+            $image->move('img/organization_logos', $input['db_name'] . '.png')->getPathname();
+            //$input['logo']='img/organization_logos/'.$input['db_name'] . '.' . $image->getClientOriginalExtension();
+            $input['logo']='img/organization_logos/'.$input['db_name'] . '.png';
         }
         $profile = Profile::create(['name' => $input['name']]);
         $input['profile_id'] = $profile->id;
@@ -95,7 +97,7 @@ class OrganizationController extends AppBaseController
         }
 
         //Artisan::call('db:create ' . $input['db_name']);
-        Flash::success('Khởi tạo cửa hàng thành công.');
+        Flash::success('Khởi tạo cửa hàng thành công với mã <span class="badge badge-success">'.$input['db_name'].'</span>.');
 
         return redirect(route('organization'));
     }

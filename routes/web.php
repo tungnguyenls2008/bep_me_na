@@ -62,6 +62,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('attendances/create-additional',[\App\Http\Controllers\AttendanceController::class,'createAdditional'])->name('attendance-create-additional');
     Route::post('attendances/store-additional',[\App\Http\Controllers\AttendanceController::class,'storeAdditional'])->name('attendances-store-additional');
     Route::resource('attendances', App\Http\Controllers\AttendanceController::class);
+    Route::post('profile/get-product-ids',[\App\Http\Controllers\ProfileController::class,'getProductIds'])->name('profiles-get-product-ids');
+    Route::resource('profiles', \App\Http\Controllers\ProfileController::class)->except(['index','create','destroy']);
 
 });
 

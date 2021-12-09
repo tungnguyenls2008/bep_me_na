@@ -188,7 +188,7 @@
                 <?php
                 $check_attended = \App\Models\Attendance::whereDate('date', \Carbon\Carbon::today())->get();
                 ?>
-                @if($check_attended!=null)
+                @if(!$check_attended->isEmpty())
                     <div class="card card-success">
                         <div class="card-header">
                             <h3 class="card-title text-white">Trạng thái chấm công</h3>

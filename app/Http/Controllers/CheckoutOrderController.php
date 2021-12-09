@@ -10,7 +10,9 @@ use App\Models\CheckoutOrder;
 use App\Models\Customer;
 use App\models\ExcelSample;
 use App\Models\Menu;
+use App\Models\Models_be\Organization;
 use App\Models\Note;
+use App\Models\Profile;
 use App\Models\User;
 use backend\models\Sample;
 use Carbon\Carbon;
@@ -162,6 +164,11 @@ class CheckoutOrderController extends AppBaseController
         if ($checkoutOrder['customer_info'] == null) {
             $checkoutOrder['customer_info'] = 'Không có';
         }
+        $org=Organization::withoutTrashed()->where(['db_name'=>Session::get('connection')['db_name']])->first();
+        $org_profile=Profile::withoutTrashed()->where(['id'=>$org->profile_id])->first();
+        $checkoutOrder['company_name']=$org_profile->name;
+        $checkoutOrder['company_address']=$org_profile->address;
+        $checkoutOrder['company_phone']=$org_profile->phone;
         $bill=$this->printInvoice($checkoutOrder);
         $order_update=CheckoutOrder::find($checkoutOrder['id']);
         $order_update->bill_path='/files/'.$bill;
@@ -356,6 +363,9 @@ class CheckoutOrderController extends AppBaseController
         }
 
 
+        $this->replaceInSheet($spreadsheet, $data, '{company_name}');
+        $this->replaceInSheet($spreadsheet, $data, '{company_address}');
+        $this->replaceInSheet($spreadsheet, $data, '{company_phone}');
         $this->replaceInSheet($spreadsheet, $data, '{bill_code}');
         $this->replaceInSheet($spreadsheet, $data, '{user_id}');
         $this->replaceInSheet($spreadsheet, $data, '{customer_info}');
@@ -382,6 +392,23 @@ class CheckoutOrderController extends AppBaseController
         $last_price = $this->searchInSheet($spreadsheet, '{price}');
         $last_total = $this->searchInSheet($spreadsheet, '{total}');
         $this->setMassBlankValue($sheet,[$last_menu_id,$last_price,$last_quantity,$last_total]);
+        foreach ($sheet->getDrawingCollection() as $drawing) {
+            $drawing->setName('logo');
+            $drawing->setDescription('logo');
+            if (file_exists(realpath('img/organization_logos/'.Session::get('connection')['db_name'].'.png'))){
+                $drawing->setPath(asset('img/organization_logos/'.(Session::get('connection')['db_name']).'.png')); // put your path and image here
+            }
+            else{
+                $drawing->setPath(asset('img/organization_logos/default-company-logo.png')); // put your path and image here
+
+            }
+            //$drawing->setCoordinates('B1');
+//            $drawing->setOffsetX(110);
+//            $drawing->setRotation(25);
+//            $drawing->getShadow()->setVisible(true);
+//            $drawing->getShadow()->setDirection(45);
+
+        }
         $sheet->getStyle('D8')->applyFromArray(
             array(
                 'alignment' => [

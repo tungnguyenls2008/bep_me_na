@@ -85,6 +85,7 @@
     .wrapper.form-success .container h1 {
         transform: translateY(85px);
     }
+
     .wrapper.form-success .container h3 {
         visibility: hidden;
         opacity: 0;
@@ -286,10 +287,12 @@
 </style>
 <div class="wrapper">
     <div class="container">
+        @include('flash::message')
         <h1>Xin chào, mời bạn nhập Mã định danh cửa hàng</h1>
         <h3>*Viết liền chữ thường không dấu</h3>
         <div class="form">
-            <input type="text" placeholder="Mã cửa hàng" id="organization_id" name="organization_id">
+            <input type="text" placeholder="Mã cửa hàng" id="organization_id" name="organization_id"
+            >
             <button type="submit" id="login-button" class="btn btn-outline-success">Tiếp tục</button>
         </div>
 
@@ -311,8 +314,8 @@
 <script>
     $(function () {
         $("#login-button").click(function (event) {
-            if($("#organization_id").val()!=''){
-                var organization_id= $("#organization_id").val();
+            if ($("#organization_id").val() != '') {
+                var organization_id = $("#organization_id").val();
                 $('.form').fadeOut(500);
                 $('.wrapper').addClass('form-success');
                 $('.wrapper.form-success .container h1').html('Xin đợi trong giây lát')
@@ -326,10 +329,10 @@
                         },
                         //dataType: 'json',
                         success: function (data) {
-                            if (data==true){
-                                window.location.href='{{route('login')}}'
+                            if (data == true) {
+                                window.location.href = '{{route('login')}}'
                                 //return false;
-                            }else{
+                            } else {
 
                             }
                         },
@@ -337,7 +340,7 @@
                             //console.log(data)
                         }
                     });
-                },500)
+                }, 500)
             }
             //event.preventDefault();
 

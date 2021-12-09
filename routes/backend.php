@@ -36,7 +36,7 @@ Route::middleware(['backend'])->prefix('backend')->group(function () {
     Route::resource('ceos', \App\Http\Controllers\Controllers_be\CeoController::class);
     Route::resource('industries', \App\Http\Controllers\Controllers_be\IndustryController::class);
     Route::resource('products', \App\Http\Controllers\Controllers_be\ProductController::class);
-    Route::resource('profiles', \App\Http\Controllers\Controllers_be\ProfileController::class);
+    Route::resource('backend-profiles', \App\Http\Controllers\Controllers_be\ProfileController::class);
 });
 
 

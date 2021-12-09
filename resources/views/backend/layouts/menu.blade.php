@@ -49,7 +49,7 @@
 </li>
 
 <li class="nav-item">
-    <a href="{{ route('profiles.index') }}"
+    <a href="{{ route('backend-profiles.index') }}"
        class="nav-link {{ Request::is('backend/profiles*') ? 'active' : '' }}">
         <table style="width: -webkit-fill-available;">
             <tr>

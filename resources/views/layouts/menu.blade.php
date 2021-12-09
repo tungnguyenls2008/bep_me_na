@@ -109,9 +109,24 @@
 
     </ul>
 </li>
-<li class="app-sidebar__heading">Cài đặt</li>
+<li class="app-sidebar__heading">Thiết lập</li>
+<?php
+use App\Models\Profile;
+?>
+@if(\Illuminate\Support\Facades\Auth::user()->is_ceo==1)
+    <?php
 
+    $profile = Profile::where(['name'=>\Illuminate\Support\Facades\Session::get('connection')['name']])->first();
+    ?>
+    <li class="nav-item">
+    <a href="{{route('profiles.show',[$profile->id])}}" class="{{ Request::is('profiles*')? 'mm-active' : '' }}">
+        <i class="metismenu-icon pe-7s-settings"></i>
+        Thiết lập cửa hàng
+    </a>
+    </li>
+@endif
 <li class="nav-item has-treeview nav-pills {{ Request::is('units*')? 'mm-active' : '' }}">
+
     <a href="#" class="{{ Request::is('units*')? 'mm-active' : '' }}">
         <i class="metismenu-icon pe-7s-settings"></i>
         Cài đặt chung
