@@ -11,6 +11,7 @@ use App\Models\RawMaterialImport;
 use Illuminate\Http\Request;
 use Flash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 use Response;
 
@@ -89,6 +90,18 @@ class RawMaterialImportController extends AppBaseController
             $provider=Provider::find($input['provider_id']);
             $provider->count+=1;
             $provider->save();
+        }
+        $last_import = RawMaterialImport::latest()->first();
+        if ($last_import == null) {
+            $input['bill_code'] = idGenerator('IMPORT',1);
+        } else {
+            $input['bill_code'] = idGenerator('IMPORT',$last_import->id + 1);
+        }
+        if ($request->file('proof') !== null) {
+            $image = $request->file('proof');
+            $image->move('img/import_proofs/'.Session::get('connection')['db_name'].'/', $input['bill_code']. '.png')->getPathname();
+            $input['proof']='img/import_proofs/'.Session::get('connection')['db_name'].'/'.$input['bill_code'] . '.png';
+
         }
         /** @var RawMaterialImport $rawMaterialImport */
         $rawMaterialImport = new RawMaterialImport();

@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
-function idGenerator($num): string
+function idGenerator($prefix,$num): string
 {
-    return 'BILL-'.str_pad($num,6,'0',STR_PAD_LEFT);
+    return $prefix.'-'.str_pad($num,6,'0',STR_PAD_LEFT);
 }
 function uniqidReal($lenght = 13) {
     // uniqid gives 13 chars, but you could adjust it to your needs.

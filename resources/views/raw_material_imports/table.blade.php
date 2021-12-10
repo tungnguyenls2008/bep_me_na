@@ -1,3 +1,8 @@
+<style>
+    .modal-backdrop {
+        z-index: -1;
+    }
+</style>
 <div class="table-responsive">
     <table class="table" id="rawMaterialImports-table">
         <thead>
@@ -30,9 +35,36 @@
                             <b>Nhà cung cấp:</b> <a
                                 href="{{route('providers.show',['provider'=>$rawMaterialImport->provider_id])}}">{{$provider->name}}</a>@if($provider->status==1)
                                 <div class="badge badge-secondary" data-toggle="tooltip" data-placement="top"
-                                     title="Tạm ngừng"><i class="fas fa-pause-circle"></i></div>
+                                     title="Tạm ngừng"><i class="fas fa-pause-circle"></i>
+                                </div>
+
                             @endif
                         @endif
+                    @endif
+                    <hr>
+                    @if($rawMaterialImport->proof!=null)
+                        <button type="button" class="btn mr-2 mb-2 btn-outline-success" data-toggle="modal"
+                                data-target=".proof-{{$rawMaterialImport->id}}">Ảnh hóa đơn
+                        </button>
+                        <div class="modal fade proof-{{$rawMaterialImport->id}}" tabindex="-1" role="dialog"
+                             aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog modal-lg"
+                                 style="max-width: 90%;width: 70%;max-height: 90%;height: 90%;margin-top: 5%">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="{{$rawMaterialImport->proof}}" alt=""
+                                             style="width: -webkit-fill-available">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                     @endif
                 </td>
                 <td>{{ $rawMaterialImport->quantity }}</td>

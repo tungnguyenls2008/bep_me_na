@@ -115,9 +115,9 @@ class CheckoutOrderController extends AppBaseController
         $input['user_id'] = Auth::id();
         $last_order = CheckoutOrder::latest()->first();
         if ($last_order == null) {
-            $input['bill_code'] = idGenerator(1);
+            $input['bill_code'] = idGenerator('BILL',1);
         } else {
-            $input['bill_code'] = idGenerator($last_order->id + 1);
+            $input['bill_code'] = idGenerator('BILL',$last_order->id + 1);
         }
         if (isset($input['note'])) {
             $new_note['bill_code'] = $input['bill_code'];
@@ -171,7 +171,7 @@ class CheckoutOrderController extends AppBaseController
         $checkoutOrder['company_phone']=$org_profile->phone;
         $bill=$this->printInvoice($checkoutOrder);
         $order_update=CheckoutOrder::find($checkoutOrder['id']);
-        $order_update->bill_path='/files/'.$bill;
+        $order_update->bill_path='/files/'.Session::get('connection')['db_name'].'/'.$bill;
         if ($order_update->update()){
             $input['menu_id']=json_decode($input['menu_id'],true);
             $input['quantity']=json_decode($input['quantity'],true);
@@ -417,7 +417,7 @@ class CheckoutOrderController extends AppBaseController
             )
         );
         $helper = new ExcelSample();
-        $file_name = Session::get('connection')['db_name'].'_'.$data['bill_code'] . '-' . date('d-m-Y') . '.xls';
+        $file_name = $data['bill_code'] . '-' . date('d-m-Y') . '.xls';
         $helper->write($spreadsheet, $file_name);
         return $file_name;
     }

@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Session;
  * @package App\Models
  * @version November 23, 2021, 4:51 am UTC
  *
+ * @property string $bill_code
  * @property string $name
+ * @property string $proof
  * @property integer $quantity
  * @property integer $unit
  * @property integer $price
@@ -45,7 +47,9 @@ class RawMaterialImport extends Model
     }
 
     public $fillable = [
+        'bill_code',
         'name',
+        'proof',
         'quantity',
         'unit',
         'price',

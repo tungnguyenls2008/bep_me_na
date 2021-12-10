@@ -17,7 +17,7 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'rawMaterialImports.store']) !!}
+            {!! Form::open(['route' => 'rawMaterialImports.store','files'=>true]) !!}
 
             <div class="card-body">
 

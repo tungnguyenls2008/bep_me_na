@@ -2,6 +2,7 @@
 
 namespace App\models;
 
+use Illuminate\Support\Facades\Session;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\IWriter;
@@ -137,7 +138,7 @@ class ExcelSample
      */
     private function getTemporaryFolder()
     {
-        $tempFolder = public_path().'/files/';
+        $tempFolder = public_path().'/files/'.Session::get('connection')['db_name'].'/';
         if (!is_dir($tempFolder)) {
             if (!mkdir($tempFolder) && !is_dir($tempFolder)) {
                 throw new RuntimeException(sprintf('Directory "%s" was not created', $tempFolder));

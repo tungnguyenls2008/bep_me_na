@@ -119,7 +119,8 @@ class AttendanceController extends AppBaseController
             $index[$key]['date'] = $item;
         }
         foreach ($index as $item) {
-            Attendance::create($item);
+          $attendance= new Attendance();
+          $attendance->fill($item)->save();
         }
 
         Flash::success('Chấm công ngày ' . date('d-m-Y', time()) . ' đã hoàn thành.');
