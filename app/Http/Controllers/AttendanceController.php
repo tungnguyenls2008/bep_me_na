@@ -24,7 +24,9 @@ class AttendanceController extends AppBaseController
     {
         /** @var Attendance $attendances */
         $attendances = Attendance::OrderBy('created_at', 'desc')->paginate(15);
-
+        if ($attendances->isEmpty()) {
+            Flash::warning('Bạn chưa đăng ký thông tin nhân viên.');
+        }
         return view('attendances.index')
             ->with('attendances', $attendances);
     }
@@ -64,6 +66,10 @@ class AttendanceController extends AppBaseController
      */
     public function create()
     {
+        $employees = \App\Models\Employee::where(['status' => 0])->get();
+        if ($employees->isEmpty()) {
+            Flash::warning('Bạn chưa đăng ký thông tin nhân viên.');
+        }
         return view('attendances.create');
     }
 
@@ -119,8 +125,8 @@ class AttendanceController extends AppBaseController
             $index[$key]['date'] = $item;
         }
         foreach ($index as $item) {
-          $attendance= new Attendance();
-          $attendance->fill($item)->save();
+            $attendance = new Attendance();
+            $attendance->fill($item)->save();
         }
 
         Flash::success('Chấm công ngày ' . date('d-m-Y', time()) . ' đã hoàn thành.');

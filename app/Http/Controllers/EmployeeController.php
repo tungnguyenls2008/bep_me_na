@@ -23,7 +23,9 @@ class EmployeeController extends AppBaseController
     {
         /** @var Employee $employees */
         $employees = Employee::all();
-
+        if ($employees->isEmpty()) {
+            Flash::warning('Bạn chưa đăng ký thông tin nhân viên.');
+        }
         return view('employees.index')
             ->with('employees', $employees);
     }

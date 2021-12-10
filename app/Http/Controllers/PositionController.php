@@ -23,7 +23,9 @@ class PositionController extends AppBaseController
     {
         /** @var Position $positions */
         $positions = Position::all();
-
+        if ($positions->isEmpty()) {
+            Flash::warning('Bạn chưa tạo vị trí làm việc.');
+        }
         return view('positions.index')
             ->with('positions', $positions);
     }

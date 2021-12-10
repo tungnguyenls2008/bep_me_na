@@ -2,6 +2,7 @@
 <div class="form-group col-sm-3">
     <?php
     $employees = \App\Models\Employee::where(['status' => 0])->get();
+
 ?>
     {!! Form::label('employee_id', 'Nhân viên:') !!}
     @foreach($employees as $employee)

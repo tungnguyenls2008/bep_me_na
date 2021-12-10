@@ -26,10 +26,16 @@
                 </div>
 
             </div>
-
+            <?php
+            use App\Models\Employee;$disabled = false;
+            $employees = Employee::all();
+            if ($employees->isEmpty()) {
+                $disabled = true;
+            }
+            ?>
             <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('attendances.index') }}" class="btn btn-default">Cancel</a>
+                {!! Form::submit('Chấm công', ['class' => 'btn btn-primary','disabled'=>$disabled]) !!}
+                <a href="{{ route('attendances.index') }}" class="btn btn-default">Hủy</a>
             </div>
 
             {!! Form::close() !!}
