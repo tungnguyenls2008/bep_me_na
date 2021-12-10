@@ -25,12 +25,12 @@
             <td>{{ $profile->dob }}</td>
             <td>{{ $profile->phone }}</td>
                 <td width="120">
-                    {!! Form::open(['route' => ['profiles.destroy', $profile->id], 'method' => 'delete']) !!}
+                    {!! Form::open(['route' => ['backend-profiles.destroy', $profile->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('profiles.show', [$profile->id]) }}" class='btn btn-default btn-xs'>
+                        <a href="{{ route('backend-profiles.show', [$profile->id]) }}" class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('profiles.edit', [$profile->id]) }}" class='btn btn-default btn-xs'>
+                        <a href="{{ route('backend-profiles.edit', [$profile->id]) }}" class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>
                         {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
