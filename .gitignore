@@ -1,7 +1,5 @@
 /node_modules
 /public/hot
-/public/files/*
-/public/img/organization_logos/*
 /public/storage
 /storage/*.key
 /vendor
@@ -19,3 +17,5 @@ yarn-error.log
 .env.backup
 fields_sample.json
 !/public/img/organization_logos/default-company-logo.png
+/public/img/import_proofs/*
+/public/img/organization_logos/*
