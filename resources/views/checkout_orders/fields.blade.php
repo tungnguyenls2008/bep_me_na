@@ -29,7 +29,7 @@ foreach ($customers as $customer){
             <!-- Menu Id Field -->
             <div class="form-group col-sm-3">
                 {!! Form::label('menu_id', 'Món') !!}
-                {!! Form::select('menu_id[0]',$menu_select,null,['id'=>'menu_id-0','placeholder'=>'Chọn...']) !!}
+                {!! Form::select('menu_id[0]',$menu_select,null,['id'=>'menu_id-0','placeholder'=>'Chọn...', 'required'=>true]) !!}
 
             </div>
             <!-- Quantity Field -->

@@ -24,7 +24,9 @@ class MenuController extends AppBaseController
     {
         /** @var Menu $menus */
         $menus = Menu::OrderBy('created_at', 'desc')->paginate(15);
-
+        if ($menus->isEmpty()) {
+            Flash::warning('Bạn chưa đăng ký sản phẩm nào.');
+        }
         return view('menus.index')
             ->with('menus', $menus);
     }

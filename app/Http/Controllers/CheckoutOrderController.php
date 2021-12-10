@@ -86,6 +86,10 @@ class CheckoutOrderController extends AppBaseController
      */
     public function create()
     {
+        $menus = Menu::OrderBy('created_at', 'desc')->paginate(15);
+        if ($menus->isEmpty()) {
+            Flash::warning('Bạn chưa đăng ký sản phẩm nào.');
+        }
         return view('checkout_orders.create');
     }
 
