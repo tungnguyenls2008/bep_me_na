@@ -441,10 +441,10 @@ class CheckoutOrderController extends AppBaseController
                     if (($data==0&& $data_record=='price')||$data==0&& $data_record=='total'){
                         $data="Tặng kèm";
                     }
-                    $sheet->setCellValue($matched[0], $data);
+                    if ($data!=null){
+                        $sheet->setCellValue($matched[0], $data);
+                    }
                 }
-
-
             }
         }
     }
