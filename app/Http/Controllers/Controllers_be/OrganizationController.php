@@ -200,13 +200,45 @@ class OrganizationController extends AppBaseController
     public function organizationCheck(Request $request): bool
     {
         $db_name=$request->get('organization_id');
-        $organization=Organization::withoutTrashed()->where(['db_name'=>$db_name])->first();
+        $organization=Organization::withoutTrashed()->where(['db_name'=>$db_name,'lock_status'=>0])->first();
         if ($organization!=null){
             $connection= $organization->toArray();
             Session::put('connection',$connection);
             return true;
         }else{
             return false;
+        }
+    }
+    public function toggleStatus(Request $request)
+    {
+        $order = Organization::find($request->id);
+        if ($order->status == 0) {
+            $order->status = 1;
+        } elseif ($order->status == 1) {
+            $order->status = 0;
+        }
+
+        if ($order->save()) {
+            Flash::success('Chuyển đổi trạng thái cửa hàng thành công!');
+            return redirect(route('organizations.index'));
+        }
+    }
+    public function toggleLock(Request $request)
+    {
+        $order = Organization::find($request->id);
+        if ($order->lock_status == 0) {
+            $order->lock_status = 1;
+        } elseif ($order->lock_status == 1) {
+            $order->lock_status = 0;
+        }
+
+        if ($order->save()) {
+            if ($order->lock_status == 0) {
+                Flash::success('MỞ KHÓA cửa hàng thành công!');
+            } elseif ($order->lock_status == 1) {
+                Flash::success('KHÓA cửa hàng thành công!');
+            }
+            return redirect(route('organizations.index'));
         }
     }
 }

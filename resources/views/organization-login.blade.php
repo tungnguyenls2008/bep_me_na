@@ -166,12 +166,12 @@
     }
 
     .bg-bubbles {
-        position: absolute;
+        /*position: absolute;*/
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: 1;
+        z-index: 0;
     }
 
     .bg-bubbles li {
@@ -333,7 +333,12 @@
                                 window.location.href = '{{route('login')}}'
                                 //return false;
                             } else {
-
+                                $('.wrapper.form-success .container h1').html('Cửa hàng của bạn đang<br> Tạm khóa,' +
+                                    '<br>Xin liên hệ số đường dây nóng 8888-8888 để được giải quyết,' +
+                                    '<br>Xin thứ lỗi vì sự bất tiện.' +
+                                    '<br><a href="{{route('landing')}}">Trở về trang chủ</a>')
+                                $('.wrapper.form-success .container h1').css('z-index',2)
+                                $('.bg-bubbles').css('z-index',0)
                             }
                         },
                         error: function (data) {

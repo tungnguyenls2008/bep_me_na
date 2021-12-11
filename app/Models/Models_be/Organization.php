@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $licence
  * @property string $db_name
  * @property integer $status
+ * @property integer $lock_status
  */
 class Organization extends Model
 {
@@ -40,7 +41,8 @@ class Organization extends Model
         'ceo_id',
         'licence',
         'db_name',
-        'status'
+        'status',
+        'lock_status',
     ];
 
     /**

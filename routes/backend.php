@@ -32,11 +32,14 @@ Route::get('backend/email/resend',  [\App\Http\Controllers\Controllers_be\Auth\V
 //================================END======================================
 Route::middleware(['backend'])->prefix('backend')->group(function () {
     Route::get('home',[\App\Http\Controllers\Controllers_be\HomeController::class,'index'])->name('backend-home');
-    Route::resource('organizations', \App\Http\Controllers\Controllers_be\OrganizationController::class);
+    Route::resource('organizations', \App\Http\Controllers\Controllers_be\OrganizationController::class)->except(['edit','update','destroy']);
     Route::resource('ceos', \App\Http\Controllers\Controllers_be\CeoController::class);
     Route::resource('industries', \App\Http\Controllers\Controllers_be\IndustryController::class);
     Route::resource('products', \App\Http\Controllers\Controllers_be\ProductController::class);
     Route::resource('backend-profiles', \App\Http\Controllers\Controllers_be\ProfileController::class);
+    Route::get('organization-toggle-status',[\App\Http\Controllers\Controllers_be\OrganizationController::class,'toggleStatus'])->name('organization-toggle-status');
+    Route::get('organization-toggle-lock',[\App\Http\Controllers\Controllers_be\OrganizationController::class,'toggleLock'])->name('organization-toggle-lock');
+
 });
 
 

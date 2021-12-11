@@ -109,16 +109,48 @@
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
                 <div class="icon-box">
                     <div class="icon"><i class="ri-stack-line"></i></div>
-                    <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-                    <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+                    <h4 class="title"><a href="">Chúng tôi hiện có:</a></h4>
+                    <p class="description">
+                        <?php
+                        $organizations=\App\Models\Models_be\Organization::withoutTrashed()->get();
+                        ?>
+                        {{$organizations->count()}} Cửa hàng
+                    </p>
                 </div>
             </div>
 
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
                 <div class="icon-box">
                     <div class="icon"><i class="ri-palette-line"></i></div>
-                    <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-                    <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                    <h4 class="title"><a href="">Doanh số cao nhất:</a></h4>
+                    <p class="description">
+                        <?php
+                        $sum_sale=[];
+                        $sum_total = [];
+                        foreach ($organizations as $key=> $organization){
+                            $checkoutOrders =[];
+                            $checkoutOrders[$organization->db_name] = \Illuminate\Support\Facades\DB::connection($organization->db_name)->table('checkout_order')->where(['deleted_at' => null])->get();
+
+                            $sum_total_done = [];
+                            $total = [];
+                            $order_total=[];
+                            foreach ($checkoutOrders[$organization->db_name] as $c_key => $checkoutOrder) {
+                                $quantity = json_decode($checkoutOrder->quantity, true);
+                                $price = json_decode($checkoutOrder->price, true);
+
+                                for ($i = 0; $i < count($price); $i++) {
+                                    $total[$i] = $quantity[$i] * $price[$i];
+                                }
+                                $order_total[$c_key] = array_sum($total);
+                                //$sum_total[$c_key]= array_sum($order_total);
+
+                            }
+                            $sum_sale[$organization->db_name]=array_sum($order_total);
+                        }
+
+                        ?>
+                        <b>{{number_format(max($sum_sale))}}đ</b> thuộc về cửa hàng <b>{{array_keys($sum_sale,max($sum_sale))[0]}}</b>
+                    </p>
                 </div>
             </div>
 

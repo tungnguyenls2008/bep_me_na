@@ -1,4 +1,4 @@
-@extends('views.layouts.app')
+@extends('backend.layouts.app')
 
 @section('content')
     <section class="content-header">
@@ -21,7 +21,7 @@
 
             <div class="card-body">
                 <div class="row">
-                    @include('fields')
+                    @include('backend.organizations.fields')
                 </div>
             </div>
 
