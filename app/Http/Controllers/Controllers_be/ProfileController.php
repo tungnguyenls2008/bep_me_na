@@ -68,7 +68,6 @@ class ProfileController extends AppBaseController
     {
         /** @var Profile $profile */
         $profile = Profile::find($id);
-
         if (empty($profile)) {
             Flash::error('Profile not found');
 
@@ -77,6 +76,7 @@ class ProfileController extends AppBaseController
 
         return view('backend.profiles.show')->with('profile', $profile);
     }
+
 
     /**
      * Show the form for editing the specified Profile.

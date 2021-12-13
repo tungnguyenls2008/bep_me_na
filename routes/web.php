@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -34,6 +35,7 @@ Route::post('organization/register', [\App\Http\Controllers\LandingController::c
 Route::post('organization/check', [\App\Http\Controllers\Controllers_be\OrganizationController::class, 'organizationCheck'])->name('organization-check');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('organization-show/{id}', [ProfileController::class, 'showLanding'])->name('organization-show');
 Route::get('checkoutOrders/search',[\App\Http\Controllers\CheckoutOrderController::class,'search'])->name('order-search');
 Route::get('rawMaterialImports/search',[\App\Http\Controllers\RawMaterialImportController::class,'search'])->name('spending-search');
 Route::get('attendances/search',[\App\Http\Controllers\AttendanceController::class,'search'])->name('attendance-search');

@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @version December 1, 2021, 4:23 pm +07
  *
  * @property string $name
+ * @property integer $organization_id
  * @property integer $ceo_id
  * @property string $product_ids
  * @property integer $industry_id
@@ -38,6 +39,7 @@ class Profile extends Model
 
     public $fillable = [
         'name',
+        'organization_id',
         'ceo_id',
         'product_ids',
         'industry_id',

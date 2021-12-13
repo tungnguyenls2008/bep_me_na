@@ -14,7 +14,9 @@
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -95,8 +97,10 @@
             @auth
                 <a href="{{ url('/home') }}" class="btn-get-started scrollto">Trang chủ</a>
             @else
-                <a href="{{ route('organization') }}" class="btn-get-started scrollto" style="background: green;width: 250px">Đăng nhập</a>
-                <a href="{{ route('organization-register') }}" class="btn-get-started scrollto" style="background: blue;width: 250px">Tạo cửa hàng</a>
+                <a href="{{ route('organization') }}" class="btn-get-started scrollto"
+                   style="background: green;width: 250px">Đăng nhập</a>
+                <a href="{{ route('organization-register') }}" class="btn-get-started scrollto"
+                   style="background: blue;width: 250px">Tạo cửa hàng</a>
 
                 {{--                        @if (Route::has('register'))--}}
                 {{--                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>--}}
@@ -106,87 +110,97 @@
         </div>
 
         <div class="row icon-boxes">
-            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
+            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in"
+                 data-aos-delay="200">
                 <div class="icon-box">
                     <div class="icon"><i class="ri-stack-line"></i></div>
                     <h4 class="title"><a href="">Chúng tôi hiện có:</a></h4>
                     <p class="description">
                         <?php
-                        $organizations=\App\Models\Models_be\Organization::withoutTrashed()->get();
+                        $organizations = \App\Models\Models_be\Organization::withoutTrashed()->get();
                         ?>
                         {{$organizations->count()}} Cửa hàng
                     </p>
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
+            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in"
+                 data-aos-delay="300">
                 <div class="icon-box">
                     <div class="icon"><i class="ri-palette-line"></i></div>
                     <h4 class="title"><a href="">Doanh số cao nhất:</a></h4>
                     <p class="description">
                         <?php
-                        $sum_sale=[];
+                        $sum_sale = [];
                         $sum_total = [];
-                        foreach ($organizations as $key=> $organization){
-                            $checkoutOrders =[];
+                        foreach ($organizations as $key => $organization) {
+                            $checkoutOrders = [];
                             $checkoutOrders[$organization->db_name] = \Illuminate\Support\Facades\DB::connection($organization->db_name)
                                 ->table('checkout_order')->where(['deleted_at' => null])->get();
 
                             $sum_total_done = [];
                             $total = [];
-                            $order_total=[];
+                            $order_total = [];
                             foreach ($checkoutOrders[$organization->db_name] as $c_key => $checkoutOrder) {
                                 $quantity = json_decode($checkoutOrder->quantity, true);
                                 $price = json_decode($checkoutOrder->price, true);
 
                                 for ($i = 0; $i < count($price); $i++) {
-                                    $total[$i] = ($quantity[$i] * $price[$i])*$checkoutOrder->discount_percent/100;
+                                    $total[$i] = ($quantity[$i] * $price[$i]) * $checkoutOrder->discount_percent / 100;
                                 }
                                 $order_total[$c_key] = array_sum($total);
                                 //$sum_total[$c_key]= array_sum($order_total);
 
                             }
-                            $sum_sale[$organization->db_name]=array_sum($order_total);
+                            $sum_sale[$organization->db_name] = array_sum($order_total);
                         }
-                        $top_sale_organization=\App\Models\Models_be\Organization::withoutTrashed()
-                            ->where(['db_name'=>array_keys($sum_sale,max($sum_sale))[0]])->first();
+                        $top_sale_organization = \App\Models\Models_be\Organization::withoutTrashed()
+                            ->where(['db_name' => array_keys($sum_sale, max($sum_sale))[0]])->first();
                         ?>
-                        <b>{{number_format(max($sum_sale))}}đ</b> thuộc về cửa hàng <b>{{$top_sale_organization->name}}</b>
+                        <b>{{number_format(max($sum_sale))}}đ</b> thuộc về cửa hàng
+                        <b><a href="{{ route('organization-show', [$top_sale_organization->profile_id]) }}">
+                                {{$top_sale_organization->name}}
+                            </a></b>
                     </p>
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
+            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in"
+                 data-aos-delay="400">
                 <div class="icon-box">
                     <div class="icon"><i class="ri-command-line"></i></div>
                     <h4 class="title"><a href="">Top cửa hàng "khủng":</a></h4>
                     <p class="description">
-                        <table class="table table-bordered">
+                    <table class="table table-bordered">
 
-                            <?php
+                        <?php
 
-                            arsort($sum_sale);
-                            ?>
-                                <tr>
+                        arsort($sum_sale);
+                        $sum_sale = array_slice($sum_sale, 0, 5);
+                        ?>
+                        <tr>
                             @foreach($sum_sale as $key=> $top)
                                 <td>
                                     <?php
-                                    $top_organization=\App\Models\Models_be\Organization::withoutTrashed()->where(['db_name'=>$key])->first();
+                                    $top_organization = \App\Models\Models_be\Organization::withoutTrashed()->where(['db_name' => $key])->first();
                                     ?>
-                                    {{$top_organization->name}}
+                                        <a href="{{ route('organization-show', [$top_organization->profile_id]) }}">
+                                            {{$top_organization->name}}
+                                        </a>
                                 </td>
                                 <td>
                                     {{number_format($top).'đ'}}
                                 </td>
-                                </tr>
-                            @endforeach
+                        </tr>
+                        @endforeach
 
                     </table>
                     </p>
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="500">
+            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in"
+                 data-aos-delay="500">
                 <div class="icon-box">
                     <div class="icon"><i class="ri-fingerprint-line"></i></div>
                     <h4 class="title"><a href="">Nemo Enim</a></h4>
@@ -199,9 +213,9 @@
 </section><!-- End Hero -->
 
 
-
 <div id="preloader"></div>
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
 <script src="assets/vendor/aos/aos.js"></script>

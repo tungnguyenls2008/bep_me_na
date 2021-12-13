@@ -79,7 +79,18 @@ class ProfileController extends AppBaseController
 
         return view('profiles.show')->with('profile', $profile);
     }
+    public function showLanding($id)
+    {
+        /** @var Profile $profile */
+        $profile = Profile::find($id);
+        if (empty($profile)) {
+            Flash::error('Profile not found');
 
+            return redirect(route('profiles.index'));
+        }
+
+        return view('profiles.show-landing')->with('profile', $profile);
+    }
     /**
      * Show the form for editing the specified Profile.
      *

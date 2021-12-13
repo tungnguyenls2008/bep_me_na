@@ -67,7 +67,6 @@ class OrganizationController extends AppBaseController
             //$input['logo']='img/organization_logos/'.$input['db_name'] . '.' . $image->getClientOriginalExtension();
             $input['logo']='img/organization_logos/'.$input['db_name'] . '.png';
         }
-        $profile = Profile::create(['name' => $input['name']]);
         $input['profile_id'] = $profile->id;
         /** @var Organization $organization */
         $organization = Organization::create($input);
@@ -94,6 +93,8 @@ class OrganizationController extends AppBaseController
             $organization=Organization::withoutTrashed()->where(['db_name'=>$input['db_name']])->first();
             $organization->ceo_id=$user->id;
             $organization->save();
+            $profile = Profile::create(['name' => $input['name'],'organization_id'=>$organization->id]);
+
         }
 
         //Artisan::call('db:create ' . $input['db_name']);
