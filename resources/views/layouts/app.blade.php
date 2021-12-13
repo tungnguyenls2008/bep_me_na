@@ -40,7 +40,7 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
 {{--=========================FONT==================================--}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans&display=swap" rel="stylesheet">
 {{--    ======================END FONT===========================--}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.js"></script>
@@ -85,7 +85,7 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
     }
     body {
         margin: 0;
-        font-family: 'Prata', serif;
+        font-family: 'Encode Sans', sans-serif;
         /*font-family: "Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";*/
         font-size: 1rem;
         font-weight: 400;
