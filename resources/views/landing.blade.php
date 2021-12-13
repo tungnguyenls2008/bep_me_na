@@ -114,7 +114,7 @@
                  data-aos-delay="200">
                 <div class="icon-box">
                     <div class="icon"><i class="ri-stack-line"></i></div>
-                    <h4 class="title"><a href="">Chúng tôi hiện có:</a></h4>
+                    <h4 class="title"><a href="">Chào mừng bạn đến với:</a></h4>
                     <p class="description">
                         <?php
                         $organizations = \App\Models\Models_be\Organization::withoutTrashed()->get();
@@ -189,7 +189,7 @@
                                         </a>
                                 </td>
                                 <td>
-                                    {{number_format($top).'đ'}}
+                                    {{\Illuminate\Support\Facades\DB::connection($key)->table('menu')->count()}} Sản phẩm
                                 </td>
                         </tr>
                         @endforeach
@@ -203,8 +203,27 @@
                  data-aos-delay="500">
                 <div class="icon-box">
                     <div class="icon"><i class="ri-fingerprint-line"></i></div>
-                    <h4 class="title"><a href="">Nemo Enim</a></h4>
-                    <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+                    <h4 class="title"><a href="">Danh sách ngành hàng</a></h4>
+                    <p class="description">
+                        <table class="table table-bordered">
+                        <?php
+                        $industries=\App\Models\Models_be\Industry::withoutTrashed()->get();
+                        ?>
+                        @foreach($industries as $industry)
+                            <tr>
+                                <td>
+                                    {{$industry->name}}
+                                </td>
+                                <td>
+                                    <?php
+                                    $profiles_count=\App\Models\Models_be\Profile::withoutTrashed()->where(['industry_id'=>$industry->id])->count();
+                                    ?> {{$profiles_count}} Cửa hàng
+                                </td>
+                            </tr>
+                        @endforeach
+                    </table>
+
+                    </p>
                 </div>
             </div>
 
