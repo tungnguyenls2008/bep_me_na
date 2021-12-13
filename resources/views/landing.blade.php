@@ -37,7 +37,15 @@
     * License: https://bootstrapmade.com/license/
     ======================================================== -->
 </head>
-
+<style>
+    /*section {*/
+    /*    padding: 120px 0;*/
+    /*    overflow: hidden;*/
+    /*}*/
+    #hero .container {
+        padding-top: 130px;
+    }
+</style>
 <body>
 
 <!-- ======= Header ======= -->

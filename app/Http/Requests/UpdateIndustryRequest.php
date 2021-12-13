@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Models_be\Industry;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Industry;
+
 
 class UpdateIndustryRequest extends FormRequest
 {
@@ -26,7 +27,7 @@ class UpdateIndustryRequest extends FormRequest
     public function rules()
     {
         $rules = Industry::$rules;
-        
+
         return $rules;
     }
 }
