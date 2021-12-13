@@ -129,7 +129,8 @@
                         $sum_total = [];
                         foreach ($organizations as $key=> $organization){
                             $checkoutOrders =[];
-                            $checkoutOrders[$organization->db_name] = \Illuminate\Support\Facades\DB::connection($organization->db_name)->table('checkout_order')->where(['deleted_at' => null])->get();
+                            $checkoutOrders[$organization->db_name] = \Illuminate\Support\Facades\DB::connection($organization->db_name)
+                                ->table('checkout_order')->where(['deleted_at' => null])->get();
 
                             $sum_total_done = [];
                             $total = [];
@@ -139,7 +140,7 @@
                                 $price = json_decode($checkoutOrder->price, true);
 
                                 for ($i = 0; $i < count($price); $i++) {
-                                    $total[$i] = $quantity[$i] * $price[$i];
+                                    $total[$i] = ($quantity[$i] * $price[$i])*$checkoutOrder->discount_percent/100;
                                 }
                                 $order_total[$c_key] = array_sum($total);
                                 //$sum_total[$c_key]= array_sum($order_total);
@@ -147,9 +148,10 @@
                             }
                             $sum_sale[$organization->db_name]=array_sum($order_total);
                         }
-
+                        $top_sale_organization=\App\Models\Models_be\Organization::withoutTrashed()
+                            ->where(['db_name'=>array_keys($sum_sale,max($sum_sale))[0]])->first();
                         ?>
-                        <b>{{number_format(max($sum_sale))}}đ</b> thuộc về cửa hàng <b>{{array_keys($sum_sale,max($sum_sale))[0]}}</b>
+                        <b>{{number_format(max($sum_sale))}}đ</b> thuộc về cửa hàng <b>{{$top_sale_organization->name}}</b>
                     </p>
                 </div>
             </div>
@@ -157,8 +159,30 @@
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
                 <div class="icon-box">
                     <div class="icon"><i class="ri-command-line"></i></div>
-                    <h4 class="title"><a href="">Magni Dolores</a></h4>
-                    <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+                    <h4 class="title"><a href="">Top cửa hàng "khủng":</a></h4>
+                    <p class="description">
+                        <table class="table table-bordered">
+
+                            <?php
+
+                            arsort($sum_sale);
+                            ?>
+                                <tr>
+                            @foreach($sum_sale as $key=> $top)
+                                <td>
+                                    <?php
+                                    $top_organization=\App\Models\Models_be\Organization::withoutTrashed()->where(['db_name'=>$key])->first();
+                                    ?>
+                                    {{$top_organization->name}}
+                                </td>
+                                <td>
+                                    {{number_format($top).'đ'}}
+                                </td>
+                                </tr>
+                            @endforeach
+
+                    </table>
+                    </p>
                 </div>
             </div>
 
