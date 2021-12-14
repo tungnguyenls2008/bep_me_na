@@ -9,6 +9,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+            @include('flash::message')
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <div class="alert alert-info">
                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">&times;</button>
                     Chào mừng bạn quay trở lại, <strong>{{\Illuminate\Support\Facades\Auth::user()->name}}.</strong>

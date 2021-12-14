@@ -25,6 +25,7 @@ class Menu extends Model
     public function __construct()
     {
         $this->connection = Session::get('connection')['db_name'];
+
     }
     public $table = 'menu';
 

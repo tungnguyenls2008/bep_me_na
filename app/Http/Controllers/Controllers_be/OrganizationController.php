@@ -205,6 +205,8 @@ class OrganizationController extends AppBaseController
         if ($organization!=null){
             $connection= $organization->toArray();
             Session::put('connection',$connection);
+            Session::put('permissions',[1,2,3,4]);
+
             return true;
         }else{
             return false;

@@ -9,10 +9,12 @@ use App\Models\Attendance;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Session;
 use Response;
 
 class AttendanceController extends AppBaseController
 {
+
     /**
      * Display a listing of the Attendance.
      *
