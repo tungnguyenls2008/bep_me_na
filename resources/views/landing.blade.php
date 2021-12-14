@@ -136,39 +136,63 @@
                  data-aos-delay="300">
                 <div class="icon-box">
                     <div class="icon"><i class="ri-palette-line"></i></div>
-                    <h4 class="title"><a href="">Doanh số cao nhất:</a></h4>
+                    <h4 class="title"><a href="">Top doanh số cao nhất:</a></h4>
                     <p class="description">
-                        <?php
-                        $sum_sale = [];
-                        $sum_total = [];
-                        foreach ($organizations as $key => $organization) {
-                            $checkoutOrders = [];
-                            $checkoutOrders[$organization->db_name] = \Illuminate\Support\Facades\DB::connection($organization->db_name)
-                                ->table('checkout_order')->where(['deleted_at' => null])->get();
+                    <?php
+                    $sum_sale = [];
+                    $sum_total = [];
+                    foreach ($organizations as $key => $organization) {
+                        $checkoutOrders = [];
+                        $checkoutOrders[$organization->db_name] = \Illuminate\Support\Facades\DB::connection($organization->db_name)
+                            ->table('checkout_order')->where(['deleted_at' => null])->get();
 
-                            $sum_total_done = [];
-                            $total = [];
-                            $order_total = [];
-                            foreach ($checkoutOrders[$organization->db_name] as $c_key => $checkoutOrder) {
-                                $quantity = json_decode($checkoutOrder->quantity, true);
-                                $price = json_decode($checkoutOrder->price, true);
+                        $sum_total_done = [];
+                        $total = [];
+                        $order_total = [];
+                        foreach ($checkoutOrders[$organization->db_name] as $c_key => $checkoutOrder) {
+                            $quantity = json_decode($checkoutOrder->quantity, true);
+                            $price = json_decode($checkoutOrder->price, true);
 
-                                for ($i = 0; $i < count($price); $i++) {
-                                    $total[$i] = (($quantity[$i] * $price[$i]))-(($quantity[$i] * $price[$i]) * $checkoutOrder->discount_percent / 100);
-                                }
-                                $order_total[$c_key] = array_sum($total);
-                                //$sum_total[$c_key]= array_sum($order_total);
-
+                            for ($i = 0; $i < count($price); $i++) {
+                                $total[$i] = (($quantity[$i] * $price[$i])) - (($quantity[$i] * $price[$i]) * $checkoutOrder->discount_percent / 100);
                             }
-                            $sum_sale[$organization->db_name] = array_sum($order_total);
+                            $order_total[$c_key] = array_sum($total);
+                            //$sum_total[$c_key]= array_sum($order_total);
+
                         }
-                        $top_sale_organization = \App\Models\Models_be\Organization::withoutTrashed()
-                            ->where(['db_name' => array_keys($sum_sale, max($sum_sale))[0]])->first();
-                        ?>
-                        <b>{{number_format(max($sum_sale))}}đ</b> thuộc về cửa hàng
-                        <b><a href="{{ route('organization-show', [$top_sale_organization->profile_id]) }}">
-                                {{$top_sale_organization->name}}
-                            </a></b>
+                        $sum_sale[$organization->db_name] = array_sum($order_total);
+                    }
+                    //                    $top_sale_organization = \App\Models\Models_be\Organization::withoutTrashed()
+                    //                        ->where(['db_name' => array_keys($sum_sale, max($sum_sale))[0]])->first();
+                    $stt = 1;
+                    arsort($sum_sale);
+                    $sum_sale = array_slice($sum_sale, 0, 5);
+                    ?>
+                    <table class="table table-bordered">
+
+                        @foreach($sum_sale as $top_key=> $top_sale)
+                            <?php
+                            $top_sale_organization = \App\Models\Models_be\Organization::withoutTrashed()
+                                ->where(['db_name' => $top_key])->first();
+                            ?>
+                            <tr>
+                                <td>
+                                    {{$stt}}
+                                </td>
+                                <td>
+                                    <b>{{number_format($top_sale)}}đ</b>
+                                </td>
+                                <td>
+                                    <b><a href="{{ route('organization-show', [$top_sale_organization->profile_id]) }}">
+                                            {{$top_sale_organization->name}}
+                                        </a></b>
+                                </td>
+                            </tr>
+                            <?php $stt++; ?>
+                        @endforeach
+
+                    </table>
+
                     </p>
                 </div>
             </div>
@@ -182,24 +206,26 @@
                     <table class="table table-bordered">
 
                         <?php
+                        $stt2 = 1;
 
-                        arsort($sum_sale);
-                        $sum_sale = array_slice($sum_sale, 0, 5);
                         ?>
                         <tr>
                             @foreach($sum_sale as $key=> $top)
+                                <td>{{$stt2}}</td>
                                 <td>
                                     <?php
                                     $top_organization = \App\Models\Models_be\Organization::withoutTrashed()->where(['db_name' => $key])->first();
                                     ?>
-                                        <a href="{{ route('organization-show', [$top_organization->profile_id]) }}">
-                                            {{$top_organization->name}}
-                                        </a>
+                                    <a href="{{ route('organization-show', [$top_organization->profile_id]) }}">
+                                        {{$top_organization->name}}
+                                    </a>
                                 </td>
                                 <td>
-                                    {{\Illuminate\Support\Facades\DB::connection($key)->table('menu')->count()}} Sản phẩm
+                                    {{\Illuminate\Support\Facades\DB::connection($key)->table('menu')->count()}} Sản
+                                    phẩm
                                 </td>
                         </tr>
+                        <?php $stt2++; ?>
                         @endforeach
 
                     </table>
@@ -213,9 +239,9 @@
                     <div class="icon"><i class="ri-fingerprint-line"></i></div>
                     <h4 class="title"><a href="">Danh sách ngành hàng</a></h4>
                     <p class="description">
-                        <table class="table table-bordered">
+                    <table class="table table-bordered">
                         <?php
-                        $industries=\App\Models\Models_be\Industry::withoutTrashed()->get();
+                        $industries = \App\Models\Models_be\Industry::withoutTrashed()->get();
                         ?>
                         @foreach($industries as $industry)
                             <tr>
@@ -224,7 +250,7 @@
                                 </td>
                                 <td>
                                     <?php
-                                    $profiles_count=\App\Models\Models_be\Profile::withoutTrashed()->where(['industry_id'=>$industry->id])->count();
+                                    $profiles_count = \App\Models\Models_be\Profile::withoutTrashed()->where(['industry_id' => $industry->id])->count();
                                     ?> {{$profiles_count}} Cửa hàng
                                 </td>
                             </tr>
