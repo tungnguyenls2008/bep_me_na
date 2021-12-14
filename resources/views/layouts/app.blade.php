@@ -180,26 +180,32 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
                     </div>
                     <button class="close"></button>
                 </div>
-{{--                <ul class="header-menu nav">--}}
-{{--                    <li class="nav-item">--}}
-{{--                        <a href="javascript:void(0);" class="nav-link">--}}
-{{--                            <i class="nav-link-icon fa fa-database"> </i>--}}
-{{--                            Statistics--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                    <li class="btn-group nav-item">--}}
-{{--                        <a href="javascript:void(0);" class="nav-link">--}}
-{{--                            <i class="nav-link-icon fa fa-edit"></i>--}}
-{{--                            Projects--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                    <li class="dropdown nav-item">--}}
-{{--                        <a href="javascript:void(0);" class="nav-link">--}}
-{{--                            <i class="nav-link-icon fa fa-cog"></i>--}}
-{{--                            Settings--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                </ul>--}}
+                <ul class="header-menu nav">
+                    <li class="nav-item">
+                        <a href="{{route('menus.create')}}" class="nav-link">
+                            <i class="nav-link-icon fa fa-database"> </i>
+                            Thêm sản phẩm
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('checkoutOrders.create')}}" class="nav-link">
+                            <i class="nav-link-icon fa fa-plus"> </i>
+                            Tạo doanh thu
+                        </a>
+                    </li>
+                    <li class="btn-group nav-item">
+                        <a href="{{route('rawMaterialImports.create')}}" class="nav-link">
+                            <i class="nav-link-icon fa fa-plus-circle"></i>
+                            Tạo chi phí
+                        </a>
+                    </li>
+                    <li class="dropdown nav-item">
+                        <a href="{{route('employees.index')}}" class="nav-link">
+                            <i class="nav-link-icon fa fa-users"></i>
+                            Quản trị nhân sự
+                        </a>
+                    </li>
+                </ul>
             </div>
             <div class="app-header-right">
                 <div class="header-btn-lg pr-0">

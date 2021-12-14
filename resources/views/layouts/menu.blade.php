@@ -14,7 +14,8 @@
 
 <li class="app-sidebar__heading">Doanh thu</li>
 <li class="nav-item">
-    <a href="{{ route('checkoutOrders.create') }}" class="{{ Request::is('checkoutOrders/create') ? 'mm-active' : '' }}">
+    <a href="{{ route('checkoutOrders.create') }}"
+       class="{{ Request::is('checkoutOrders/create') ? 'mm-active' : '' }}">
         <i class="metismenu-icon pe-7s-plus"></i>
         Tạo doanh thu mới
     </a>
@@ -49,7 +50,8 @@
 </li>
 <li class="app-sidebar__heading">Chi phí</li>
 <li class="nav-item">
-    <a href="{{ route('rawMaterialImports.create') }}" class="{{ Request::is('rawMaterialImports/create') ? 'mm-active' : '' }}">
+    <a href="{{ route('rawMaterialImports.create') }}"
+       class="{{ Request::is('rawMaterialImports/create') ? 'mm-active' : '' }}">
         <i class="metismenu-icon pe-7s-plus"></i>
         Tạo chi phí mới
     </a>
@@ -81,6 +83,14 @@
     <a href="{{ route('attendances.index') }}" class="{{ Request::is('attendances*') ? 'mm-active' : '' }}">
         <i class="metismenu-icon pe-7s-id"></i>
         Chấm công
+        <?php
+        $check_attended = \App\Models\Attendance::whereDate('date', \Carbon\Carbon::today())->get();
+        ?>
+        @if($check_attended->isEmpty())
+            <div class="metismenu-icon pe-7s-info text-xl-right" style="color: red"></div>
+        @else
+            <div class="metismenu-icon pe-7s-check text-xl-right" style="color: green"></div>
+        @endif
     </a>
 </li>
 <li class="nav-item has-treeview nav-pills {{ Request::is('employees*')||Request::is('positions*') ? 'menu-open' : '' }}">
@@ -106,7 +116,6 @@
         </li>
 
 
-
     </ul>
 </li>
 <li class="app-sidebar__heading">Thiết lập</li>
@@ -116,13 +125,13 @@ use App\Models\Profile;
 @if(\Illuminate\Support\Facades\Auth::user()->is_ceo==1)
     <?php
 
-    $profile = Profile::where(['name'=>\Illuminate\Support\Facades\Session::get('connection')['name']])->first();
+    $profile = Profile::where(['name' => \Illuminate\Support\Facades\Session::get('connection')['name']])->first();
     ?>
     <li class="nav-item">
-    <a href="{{route('profiles.show',[$profile->id])}}" class="{{ Request::is('profiles*')? 'mm-active' : '' }}">
-        <i class="metismenu-icon pe-7s-settings"></i>
-        Thiết lập cửa hàng
-    </a>
+        <a href="{{route('profiles.show',[$profile->id])}}" class="{{ Request::is('profiles*')? 'mm-active' : '' }}">
+            <i class="metismenu-icon pe-7s-settings"></i>
+            Thiết lập cửa hàng
+        </a>
     </li>
 @endif
 <li class="nav-item has-treeview nav-pills {{ Request::is('units*')? 'mm-active' : '' }}">
