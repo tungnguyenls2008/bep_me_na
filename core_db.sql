@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 15, 2021 lúc 05:34 AM
+-- Thời gian đã tạo: Th12 15, 2021 lúc 07:41 AM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 7.4.23
 
@@ -278,7 +278,7 @@ CREATE TABLE `users` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `is_ceo` int(11) NOT NULL DEFAULT 0,
-  `permissions` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '1=>''Quản lý sản phẩm'',\r\n    2=>''Quản lý doanh thu'',\r\n    3=>''Quản lý chi phí'',\r\n    4=>''Quản trị nhân sự'',',
+  `permissions` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '["8"]',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

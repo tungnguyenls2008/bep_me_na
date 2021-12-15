@@ -152,7 +152,9 @@ use App\Models\Profile;
         @if(\Illuminate\Support\Facades\Auth::user()->is_ceo==1)
             <li class="nav-item">
                 <a href="{!! route('users.index') !!}" class="{{ Request::is('users*') ? 'mm-active' : '' }}">
-                    <i class="metismenu-icon pe-7s-users"></i><span>Tài khoản</span></a>
+                    <i class="metismenu-icon pe-7s-users"></i>
+                    Tài khoản
+                </a>
             </li>
         @endif
 
