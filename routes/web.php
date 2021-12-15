@@ -40,18 +40,13 @@ Route::get('checkoutOrders/search', [\App\Http\Controllers\CheckoutOrderControll
 Route::get('rawMaterialImports/search', [\App\Http\Controllers\RawMaterialImportController::class, 'search'])->name('spending-search');
 Route::get('attendances/search', [\App\Http\Controllers\AttendanceController::class, 'search'])->name('attendance-search');
 
-Route::middleware(['auth', 'checkPermission'])->group(function () {
+Route::middleware(['auth','checkPermission'])->group(function () {
 
-
-    Route::resource('menus', App\Http\Controllers\MenuController::class);
-
-    Route::resource('rawMaterialImports', App\Http\Controllers\RawMaterialImportController::class);
-    Route::resource('checkoutOrders', App\Http\Controllers\CheckoutOrderController::class);
-    Route::resource('notes', App\Http\Controllers\NoteController::class);
-    Route::resource('customers', App\Http\Controllers\CustomerController::class);
     Route::post('checkoutOrders/create-note', [\App\Http\Controllers\CheckoutOrderController::class, 'createNote'])->name('create-note');
     Route::post('checkoutOrders/update-note', [\App\Http\Controllers\CheckoutOrderController::class, 'updateNote'])->name('update-note');
     Route::post('get-menu-price', [\App\Http\Controllers\CheckoutOrderController::class, 'getMenuPrice'])->name('get-menu-price');
+    Route::post('attendances/store-additional', [\App\Http\Controllers\AttendanceController::class, 'storeAdditional'])->name('attendances-store-additional');
+    Route::post('profile/get-product-ids', [\App\Http\Controllers\ProfileController::class, 'getProductIds'])->name('profiles-get-product-ids');
     Route::get('order-toggle-status', [\App\Http\Controllers\CheckoutOrderController::class, 'toggleStatus'])->name('order-toggle-status');
     Route::get('import-toggle-status', [\App\Http\Controllers\RawMaterialImportController::class, 'toggleStatus'])->name('import-toggle-status');
     Route::get('menu-toggle-status', [\App\Http\Controllers\MenuController::class, 'toggleStatus'])->name('menu-toggle-status');
@@ -60,18 +55,24 @@ Route::middleware(['auth', 'checkPermission'])->group(function () {
     Route::get('employee-toggle-status', [\App\Http\Controllers\EmployeeController::class, 'toggleStatus'])->name('employee-toggle-status');
     Route::get('spending-export/', [\App\Http\Controllers\RawMaterialImportController::class, 'export'])->name('spending-export');
     Route::get('bill-export', [\App\Http\Controllers\CheckoutOrderController::class, 'export'])->name('bill-export');
+    Route::get('attendances/create-additional', [\App\Http\Controllers\AttendanceController::class, 'createAdditional'])->name('attendance-create-additional');
+
+
+    Route::resource('menus', App\Http\Controllers\MenuController::class);
+    Route::resource('rawMaterialImports', App\Http\Controllers\RawMaterialImportController::class);
+    Route::resource('checkoutOrders', App\Http\Controllers\CheckoutOrderController::class);
+    Route::resource('notes', App\Http\Controllers\NoteController::class);
+    Route::resource('customers', App\Http\Controllers\CustomerController::class);
     Route::resource('providers', App\Http\Controllers\ProviderController::class);
     Route::resource('positions', App\Http\Controllers\PositionController::class);
     Route::resource('employees', App\Http\Controllers\EmployeeController::class);
     Route::resource('units', App\Http\Controllers\UnitController::class);
-    Route::get('attendances/create-additional', [\App\Http\Controllers\AttendanceController::class, 'createAdditional'])->name('attendance-create-additional');
-    Route::post('attendances/store-additional', [\App\Http\Controllers\AttendanceController::class, 'storeAdditional'])->name('attendances-store-additional');
     Route::resource('attendances', App\Http\Controllers\AttendanceController::class);
-    Route::post('profile/get-product-ids', [\App\Http\Controllers\ProfileController::class, 'getProductIds'])->name('profiles-get-product-ids');
     Route::resource('profiles', \App\Http\Controllers\ProfileController::class)->except(['index', 'create', 'destroy']);
     Route::resource('users', \App\Http\Controllers\UserController::class);
-
 });
+
+
 
 
 

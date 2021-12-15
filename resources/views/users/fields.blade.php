@@ -22,14 +22,16 @@
     {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
 </div>
 <!-- Permission Field -->
+<?php
+$roles=\App\Models\Models_be\Role::withoutTrashed()->get();
+$role_select=[];
+foreach ($roles as $role){
+    $role_select[$role->id]=$role->description;
+}
+?>
 <div class="form-group col-sm-6">
     {!! Form::label('permissions', 'Phân quyền') !!}
-    {!! Form::select('permissions[]',[
-    1=>'Quản lý sản phẩm',
-    2=>'Quản lý doanh thu',
-    3=>'Quản lý chi phí',
-    4=>'Quản trị nhân sự',
-], null,['class' => 'form-control','multiple'=>true]) !!}
+    {!! Form::select('permissions[]',$role_select, null,['class' => 'form-control','multiple'=>true]) !!}
 </div>
 
 <!-- Submit Field -->

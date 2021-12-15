@@ -25,9 +25,7 @@ class MenuController extends AppBaseController
      */
     public function index(Request $request)
     {
-        if ($request->allowed!=1){
-            redirect(route('home'));
-        }
+
         /** @var Menu $menus */
         $menus = Menu::OrderBy('created_at', 'desc')->paginate(15);
         if ($menus->isEmpty()) {
