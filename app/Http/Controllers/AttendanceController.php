@@ -161,8 +161,9 @@ class AttendanceController extends AppBaseController
 
         }
 
-
-        Attendance::create($input);
+        $attendance = new Attendance();
+        $attendance->fill($input)->save();
+        //Attendance::create($input);
         $employee = \App\Models\Employee::where(['status' => 0, 'id' => $input['employee_id']])->first();
         if ($employee != null) {
             Flash::success('Chấm công cho nhân viên ' . $employee->name . ' ngày ' . date('d-m-Y', time()) . ' đã hoàn thành.');
