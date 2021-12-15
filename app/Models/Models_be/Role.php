@@ -1,33 +1,28 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Models_be;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Session;
 
 /**
- * Class Menu
+ * Class Role
  * @package App\Models
- * @version November 23, 2021, 4:45 am UTC
+ * @version December 15, 2021, 8:50 am +07
  *
- * @property string $name
- * @property integer $price
+ * @property string $description
+ * @property string $route
+ * @property integer $status
  */
-class Menu extends Model
+class Role extends Model
 {
     use SoftDeletes;
 
     use HasFactory;
-    protected $connection;
+    public $connection = "backend";
 
-    public function __construct()
-    {
-        $this->connection = Session::get('connection')['db_name'];
-
-    }
-    public $table = 'menu';
+    public $table = 'role';
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
@@ -38,10 +33,9 @@ class Menu extends Model
 
 
     public $fillable = [
-        'name',
-        'price',
-        'count',
-        'status',
+        'description',
+        'route',
+        'status'
     ];
 
     /**
@@ -51,9 +45,9 @@ class Menu extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'name' => 'string',
-        'price' => 'integer',
-        'count' => 'integer'
+        'description' => 'string',
+        'route' => 'string',
+        'status' => 'integer'
     ];
 
     /**
@@ -62,10 +56,9 @@ class Menu extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required|string|max:255',
-        'price' => 'required|integer',
+        'description' => 'required|string|max:500',
         'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
+        'deleted_at' => 'nullable',
     ];
 
 

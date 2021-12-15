@@ -39,6 +39,7 @@ Route::middleware(['backend'])->prefix('backend')->group(function () {
     Route::resource('backend-profiles', \App\Http\Controllers\Controllers_be\ProfileController::class);
     Route::get('organization-toggle-status',[\App\Http\Controllers\Controllers_be\OrganizationController::class,'toggleStatus'])->name('organization-toggle-status');
     Route::get('organization-toggle-lock',[\App\Http\Controllers\Controllers_be\OrganizationController::class,'toggleLock'])->name('organization-toggle-lock');
+    Route::resource('roles', App\Http\Controllers\Controllers_be\RoleController::class);
 
 });
 

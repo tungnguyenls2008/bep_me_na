@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use InfyOm\Generator\Utils\ResponseUtil;
+use Flash;
 use Response;
 
 /**
@@ -34,5 +38,16 @@ class AppBaseController extends Controller
             'success' => true,
             'message' => $message
         ], 200);
+    }
+
+    public function checkPermission(Request $request, $permission)
+    {
+
+        if ($request->allowed != $permission) {
+
+            Flash::warning('Bạn không có quyền sử dụng chức năng này.');
+            return false;
+        }
+        return true;
     }
 }

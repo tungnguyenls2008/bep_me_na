@@ -9,24 +9,29 @@ use App\Models\Menu;
 use Illuminate\Http\Request;
 use Flash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Response;
 
 class MenuController extends AppBaseController
 {
+
+
     /**
      * Display a listing of the Menu.
      *
      * @param Request $request
      *
-     * @return Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|Response
      */
     public function index(Request $request)
     {
+
         /** @var Menu $menus */
         $menus = Menu::OrderBy('created_at', 'desc')->paginate(15);
         if ($menus->isEmpty()) {
             Flash::warning('Bạn chưa đăng ký sản phẩm nào.');
         }
+
         return view('menus.index')
             ->with('menus', $menus);
     }

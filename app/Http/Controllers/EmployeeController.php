@@ -8,10 +8,12 @@ use App\Http\Controllers\AppBaseController;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Session;
 use Response;
 
 class EmployeeController extends AppBaseController
 {
+
     /**
      * Display a listing of the Employee.
      *

@@ -17,6 +17,7 @@ use Response;
 
 class RawMaterialImportController extends AppBaseController
 {
+
     /**
      * Display a listing of the RawMaterialImport.
      *

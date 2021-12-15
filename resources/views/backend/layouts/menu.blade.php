@@ -63,3 +63,18 @@
 
 
 
+
+
+
+<li class="nav-item">
+    <a href="{{ route('roles.index') }}"
+       class="nav-link {{ Request::is('roles*') ? 'active' : '' }}">
+        <table style="width: -webkit-fill-available;">
+            <tr>
+                <td width="20%" style="text-align: center"><i class="fas fa-balance-scale-right"></i></td>
+                <td width="75%" style="text-align: left"><p>Roles</p></td>
+            </tr>
+        </table>
+    </a>
+</li>
+

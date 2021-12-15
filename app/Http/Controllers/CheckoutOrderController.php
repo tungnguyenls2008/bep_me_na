@@ -29,6 +29,7 @@ use Response;
 
 class CheckoutOrderController extends AppBaseController
 {
+
     /**
      * Display a listing of the CheckoutOrder.
      *
@@ -38,6 +39,11 @@ class CheckoutOrderController extends AppBaseController
      */
     public function index(Request $request)
     {
+
+//        $check=$this->checkPermission($request,2);
+//        if ($check==false){
+//            return redirect(route('home'));
+//        }
         $checkoutOrders = CheckoutOrder::where(['deleted_at'=>null])->OrderBy('created_at', 'desc')->paginate(15);
 
 

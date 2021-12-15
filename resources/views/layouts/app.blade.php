@@ -1,5 +1,6 @@
 <?php
 $connection = \Illuminate\Support\Facades\Session::get('connection');
+
 ?>
     <!DOCTYPE html>
 <html>

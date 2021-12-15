@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
@@ -78,6 +79,27 @@ function cloneCoreDb($db_name){
     foreach ($tables_names as $tables_name) {
         DB::statement('CREATE TABLE ' . $db_name . '.' . $tables_name . ' LIKE core_db.' . $tables_name);
         DB::statement('INSERT INTO ' . $db_name . '.' . $tables_name . ' SELECT * FROM core_db.' . $tables_name);
-
     }
+}
+function array_in_string($str, array $arr): bool
+{
+    foreach($arr as $arr_value) { //start looping the array
+        if (stripos($str,$arr_value) !== false) return true; //if $arr_value is found in $str return true
+    }
+    return false; //else return false
+}
+function array_flatten($array) {
+    if (!is_array($array)) {
+        return FALSE;
+    }
+    $result = array();
+    foreach ($array as $key => $value) {
+        if (is_array($value)) {
+            $result = array_merge($result, array_flatten($value));
+        }
+        else {
+            $result[$key] = $value;
+        }
+    }
+    return $result;
 }
