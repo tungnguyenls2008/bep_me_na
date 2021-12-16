@@ -26,7 +26,7 @@ foreach ($industries as $industry){
 <!-- Industry Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('industry_id', 'Ngành nghề:') !!}
-    {!! Form::select('industry_id',$industry_select, null, ['class' => 'form-control']) !!}
+    {!! Form::select('industry_id',$industry_select, null, ['class' => 'form-control','placeholder'=>true]) !!}
 </div>
 
 <!-- Product Ids Field -->
@@ -69,7 +69,10 @@ foreach ($industries as $industry){
             sideBySide: true
         })
         $(function () {
-            $("#industry_id").select2().on('change',function () {
+            $("#industry_id").select2({
+                placeholder: 'Chọn...',
+                allowClear: true
+            }).on('change',function () {
                 $.ajax({
                     url:'{{route('profiles-get-product-ids')}}',
                     method:'POST',

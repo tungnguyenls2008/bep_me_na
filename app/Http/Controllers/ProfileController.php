@@ -137,7 +137,9 @@ class ProfileController extends AppBaseController
             $org->save();
         }
         $profile->fill($request->all());
-        $profile->product_ids = json_encode($request->all()['product_ids']);
+        if (isset($request->all()['product_ids'])){
+            $profile->product_ids = json_encode($request->all()['product_ids']);
+        }
         $profile->save();
 
         Flash::success('Cập nhật thông tin cửa hàng thành công!');
