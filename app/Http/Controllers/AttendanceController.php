@@ -27,7 +27,7 @@ class AttendanceController extends AppBaseController
         /** @var Attendance $attendances */
         $attendances = Attendance::OrderBy('created_at', 'desc')->paginate(15);
         if ($attendances->isEmpty()) {
-            Flash::warning('Bạn chưa đăng ký thông tin nhân viên.');
+            Flash::warning('Danh sách chấm công rỗng.');
         }
         return view('attendances.index')
             ->with('attendances', $attendances);
