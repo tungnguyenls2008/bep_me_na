@@ -648,7 +648,7 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
         <div class="app-main__outer">
             <div class="app-main__inner">
 
-                <div class="" data-aos="fade-in">
+                <div class="" data-aos="fade-in" data-aos-delay="300">
                     @yield('content')
                 </div>
             </div>
