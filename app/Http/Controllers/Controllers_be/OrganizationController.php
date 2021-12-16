@@ -67,9 +67,9 @@ class OrganizationController extends AppBaseController
             //$input['logo']='img/organization_logos/'.$input['db_name'] . '.' . $image->getClientOriginalExtension();
             $input['logo']='img/organization_logos/'.$input['db_name'] . '.png';
         }
-        $input['profile_id'] = $profile->id;
         /** @var Organization $organization */
         $organization = Organization::create($input);
+
         cloneCoreDb($input['db_name']);
 
         $rules = [
@@ -91,9 +91,10 @@ class OrganizationController extends AppBaseController
             $user->create($input_ceo);
             $user=(new \App\Models\User)->setConnection($input['db_name'])->where(['is_ceo'=>1])->first();
             $organization=Organization::withoutTrashed()->where(['db_name'=>$input['db_name']])->first();
-            $organization->ceo_id=$user->id;
-            $organization->save();
             $profile = Profile::create(['name' => $input['name'],'organization_id'=>$organization->id]);
+            $organization->ceo_id=$user->id;
+            $organization->profile_id=$profile->id;
+            $organization->save();
 
         }
 

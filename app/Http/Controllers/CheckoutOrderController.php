@@ -44,45 +44,46 @@ class CheckoutOrderController extends AppBaseController
 //        if ($check==false){
 //            return redirect(route('home'));
 //        }
-        $checkoutOrders = CheckoutOrder::where(['deleted_at'=>null])->OrderBy('created_at', 'desc')->paginate(15);
+        $checkoutOrders = CheckoutOrder::where(['deleted_at' => null])->OrderBy('created_at', 'desc')->paginate(15);
 
 
         return view('checkout_orders.index')
             ->with('checkoutOrders', $checkoutOrders);
     }
+
     public function search(Request $request)
     {
-        $search=$request->post();
-        $checkoutOrders= CheckoutOrder::where(['deleted_at'=>null])->OrderBy('created_at','desc');
-        if (isset($search['bill_code'])){
-            $checkoutOrders->where('bill_code','like','%'.$search['bill_code'].'%');
+        $search = $request->post();
+        $checkoutOrders = CheckoutOrder::where(['deleted_at' => null])->OrderBy('created_at', 'desc');
+        if (isset($search['bill_code'])) {
+            $checkoutOrders->where('bill_code', 'like', '%' . $search['bill_code'] . '%');
         }
-        if (isset($search['customer_info'])){
-            $checkoutOrders->where('customer_info','like','%'.$search['customer_info'].'%');
+        if (isset($search['customer_info'])) {
+            $checkoutOrders->where('customer_info', 'like', '%' . $search['customer_info'] . '%');
         }
-        if (isset($search['user_id'])){
-            $checkoutOrders->where(['user_id'=>$search['user_id']]);
+        if (isset($search['user_id'])) {
+            $checkoutOrders->where(['user_id' => $search['user_id']]);
         }
-        if (isset($search['regular_customer_id'])){
-            $checkoutOrders->where(['regular_customer_id'=>$search['regular_customer_id']]);
+        if (isset($search['regular_customer_id'])) {
+            $checkoutOrders->where(['regular_customer_id' => $search['regular_customer_id']]);
         }
-        if (isset($search['status'])){
-            $checkoutOrders->where(['status'=>$search['status']]);
+        if (isset($search['status'])) {
+            $checkoutOrders->where(['status' => $search['status']]);
         }
-        if (isset($search['create_from'])|| isset($search['create_to'])){
-            if (!isset($search['create_from'])){
-                $search['create_from']='1970-01-01';
+        if (isset($search['create_from']) || isset($search['create_to'])) {
+            if (!isset($search['create_from'])) {
+                $search['create_from'] = '1970-01-01';
             }
-            if (!isset($search['create_to'])){
-                $search['create_to']='2100-12-31';
+            if (!isset($search['create_to'])) {
+                $search['create_to'] = '2100-12-31';
             }
-            $from=date('Y-m-d H:i:s',strtotime($search['create_from'].' 00:00:00'));
-            $to=date('Y-m-d H:i:s',strtotime($search['create_to'].' 23:23:59'));
-            $checkoutOrders->whereBetween('created_at',[$from,$to]);
+            $from = date('Y-m-d H:i:s', strtotime($search['create_from'] . ' 00:00:00'));
+            $to = date('Y-m-d H:i:s', strtotime($search['create_to'] . ' 23:23:59'));
+            $checkoutOrders->whereBetween('created_at', [$from, $to]);
         }
-        $checkoutOrders=$checkoutOrders->paginate(15);
+        $checkoutOrders = $checkoutOrders->paginate(15);
         return view('checkout_orders.index')
-            ->with('checkoutOrders', $checkoutOrders,)->with('count',$checkoutOrders->total());
+            ->with('checkoutOrders', $checkoutOrders,)->with('count', $checkoutOrders->total());
     }
 
     /**
@@ -125,9 +126,9 @@ class CheckoutOrderController extends AppBaseController
         $input['user_id'] = Auth::id();
         $last_order = CheckoutOrder::latest()->first();
         if ($last_order == null) {
-            $input['bill_code'] = idGenerator('BILL',1);
+            $input['bill_code'] = idGenerator('BILL', 1);
         } else {
-            $input['bill_code'] = idGenerator('BILL',$last_order->id + 1);
+            $input['bill_code'] = idGenerator('BILL', $last_order->id + 1);
         }
         if (isset($input['note'])) {
             $new_note['bill_code'] = $input['bill_code'];
@@ -136,9 +137,9 @@ class CheckoutOrderController extends AppBaseController
             $note->fill($new_note);
             $note->save();
         }
-        if (isset($input['regular_customer_id'])){
-            $customer=Customer::find($input['regular_customer_id']);
-            $customer->order_count+=1;
+        if (isset($input['regular_customer_id'])) {
+            $customer = Customer::find($input['regular_customer_id']);
+            $customer->order_count += 1;
             $customer->save();
         }
 
@@ -174,22 +175,22 @@ class CheckoutOrderController extends AppBaseController
         if ($checkoutOrder['customer_info'] == null) {
             $checkoutOrder['customer_info'] = 'Không có';
         }
-        $org=Organization::withoutTrashed()->where(['db_name'=>Session::get('connection')['db_name']])->first();
-        $org_profile=Profile::withoutTrashed()->where(['id'=>$org->profile_id])->first();
-        $checkoutOrder['company_name']=$org_profile->name;
-        $checkoutOrder['company_address']=$org_profile->address;
-        $checkoutOrder['company_phone']=$org_profile->phone;
-        $bill=$this->printInvoice($checkoutOrder);
-        $order_update=CheckoutOrder::find($checkoutOrder['id']);
-        $order_update->bill_path='/files/'.Session::get('connection')['db_name'].'/'.$bill;
-        if ($order_update->update()){
-            $input['menu_id']=json_decode($input['menu_id'],true);
-            $input['quantity']=json_decode($input['quantity'],true);
-            $map_menu_quantity=array_combine($input['menu_id'],$input['quantity']);
-            foreach ($map_menu_quantity as $key=>$item){
-                    $menu_to_count=Menu::find($key);
-                    $menu_to_count->count=$menu_to_count->count+$item;
-                    $menu_to_count->save();
+        $org = Organization::withoutTrashed()->where(['db_name' => Session::get('connection')['db_name']])->first();
+        $org_profile = Profile::withoutTrashed()->where(['id' => $org->profile_id])->first();
+        $checkoutOrder['company_name'] = $org_profile->name;
+        $checkoutOrder['company_address'] = $org_profile->address;
+        $checkoutOrder['company_phone'] = $org_profile->phone;
+        $bill = $this->printInvoice($checkoutOrder);
+        $order_update = CheckoutOrder::find($checkoutOrder['id']);
+        $order_update->bill_path = '/files/' . Session::get('connection')['db_name'] . '/' . $bill;
+        if ($order_update->update()) {
+            $input['menu_id'] = json_decode($input['menu_id'], true);
+            $input['quantity'] = json_decode($input['quantity'], true);
+            $map_menu_quantity = array_combine($input['menu_id'], $input['quantity']);
+            foreach ($map_menu_quantity as $key => $item) {
+                $menu_to_count = Menu::find($key);
+                $menu_to_count->count = $menu_to_count->count + $item;
+                $menu_to_count->save();
             }
             Flash::success('Lưu hóa đơn thành công!');
 
@@ -286,31 +287,31 @@ class CheckoutOrderController extends AppBaseController
 
             return redirect(route('checkoutOrders.index'));
         }
-        if (Auth::id()==$checkoutOrder->user_id||Auth::user()->is_ceo==1){
-            $customer=Customer::find($checkoutOrder->regular_customer_id);
-            if ($customer!=null){
-                $customer->order_count-=1;
+        if (Auth::id() == $checkoutOrder->user_id || Auth::user()->is_ceo == 1) {
+            $customer = Customer::find($checkoutOrder->regular_customer_id);
+            if ($customer != null) {
+                $customer->order_count -= 1;
                 $customer->save();
             }
-            $menu_id=json_decode($checkoutOrder->menu_id,true);
-            $quantity=json_decode($checkoutOrder->quantity,true);
-            $match_menu_quantity=array_combine($menu_id,$quantity);
-            foreach ($match_menu_quantity as $key=>$item){
-                $menu=Menu::find($key);
-                $menu->count-=$item;
+            $menu_id = json_decode($checkoutOrder->menu_id, true);
+            $quantity = json_decode($checkoutOrder->quantity, true);
+            $match_menu_quantity = array_combine($menu_id, $quantity);
+            foreach ($match_menu_quantity as $key => $item) {
+                $menu = Menu::find($key);
+                $menu->count -= $item;
                 $menu->save();
             }
-            if($checkoutOrder->delete()){
-                Flash::success('Đã xóa thành công hóa đơn '.$checkoutOrder->bill_code.'.');
+            if ($checkoutOrder->delete()) {
+                Flash::success('Đã xóa thành công hóa đơn ' . $checkoutOrder->bill_code . '.');
 
-            }else{
+            } else {
                 Flash::error('Có lỗi xảy ra, hóa đơn không được xóa.');
 
             }
             return redirect(route('checkoutOrders.index'));
 
 
-        }else{
+        } else {
             Flash::error('Bạn không có quyền xóa hóa đơn này.');
 
             return redirect(route('checkoutOrders.index'));
@@ -327,7 +328,7 @@ class CheckoutOrderController extends AppBaseController
 
     public function export()
     {
-        return Excel::download(new CheckoutOrderExport(), 'thong-ke-doanh-thu-'.date('d-m-Y',time()).'.xlsx');
+        return Excel::download(new CheckoutOrderExport(), 'thong-ke-doanh-thu-' . date('d-m-Y', time()) . '.xlsx');
     }
 
     public function createNote(Request $request)
@@ -367,8 +368,8 @@ class CheckoutOrderController extends AppBaseController
         $src_row = (int)(filter_var($cell_to_dub, FILTER_SANITIZE_NUMBER_INT));
 
         $sheet->insertNewRowBefore($src_row, count($data['menu_id']));
-        for ($i = 1; $i <= count($data['menu_id']);$i++) {
-            $this->copyRange($sheet, 'A' . ($src_row + count($data['menu_id'])) . ':F' . ($src_row + count($data['menu_id'])), 'A' . ($src_row + count($data['menu_id'])- $i));
+        for ($i = 1; $i <= count($data['menu_id']); $i++) {
+            $this->copyRange($sheet, 'A' . ($src_row + count($data['menu_id'])) . ':F' . ($src_row + count($data['menu_id'])), 'A' . ($src_row + count($data['menu_id']) - $i));
 
         }
 
@@ -401,14 +402,15 @@ class CheckoutOrderController extends AppBaseController
         $last_quantity = $this->searchInSheet($spreadsheet, '{quantity}');
         $last_price = $this->searchInSheet($spreadsheet, '{price}');
         $last_total = $this->searchInSheet($spreadsheet, '{total}');
-        $this->setMassBlankValue($sheet,[$last_menu_id,$last_price,$last_quantity,$last_total]);
+        $last_address = $this->searchInSheet($spreadsheet, '{company_address}');
+        $last_phone = $this->searchInSheet($spreadsheet, '{company_phone}');
+        $this->setMassBlankValue($sheet, [$last_menu_id, $last_price, $last_quantity, $last_total,$last_address,$last_phone]);
         foreach ($sheet->getDrawingCollection() as $drawing) {
             $drawing->setName('logo');
             $drawing->setDescription('logo');
-            if (file_exists(realpath('img/organization_logos/'.Session::get('connection')['db_name'].'.png'))){
-                $drawing->setPath(asset('img/organization_logos/'.(Session::get('connection')['db_name']).'.png')); // put your path and image here
-            }
-            else{
+            if (file_exists(realpath('img/organization_logos/' . Session::get('connection')['db_name'] . '.png'))) {
+                $drawing->setPath(asset('img/organization_logos/' . (Session::get('connection')['db_name']) . '.png')); // put your path and image here
+            } else {
                 $drawing->setPath(asset('img/organization_logos/default-company-logo.png')); // put your path and image here
 
             }
@@ -437,21 +439,23 @@ class CheckoutOrderController extends AppBaseController
         $matched = $this->searchInSheet($spreadsheet, $string);
         $data_record = str_replace(['{', '}'], '', strtolower($string));
         if ($matched != []) {
-            foreach ($matched as $key => $cell) {
-                $sheet = $spreadsheet->getActiveSheet();
+            $sheet = $spreadsheet->getActiveSheet();
+            if (isset($data[$data_record]) && !is_array($data[$data_record])) {
+                $sheet->setCellValue($matched[0], $data[$data_record]);
 
-                if (isset($data[$data_record])) {
-                    $sheet->setCellValue($matched[0], $data[$data_record]);
-
-                } else {
-                    if (($data==0&& $data_record=='price')||$data==0&& $data_record=='total'){
-                        $data="Tặng kèm";
-                    }
-                    if ($data!=null){
-                        $sheet->setCellValue($matched[0], $data);
-                    }
+            } else {
+                if (($data == 0 && $data_record == 'price') || ($data == 0 && $data_record == 'total')) {
+                    $data = "Tặng kèm";
+                    $sheet->setCellValue($matched[0], $data);
                 }
+                if (!is_array($data)){
+                    $sheet->setCellValue($matched[0], $data);
+                }
+
+
             }
+
+            //$sheet->setCellValue($matched[0], $data);
         }
     }
 
@@ -588,20 +592,21 @@ class CheckoutOrderController extends AppBaseController
             }
         }
     }
-    public function toggleStatus(Request $request){
-        $order=CheckoutOrder::find($request->id);
-        if ($order->status==0){
-            $order->status=1;
-        }elseif ($order->status==1){
-            $order->status=0;
+
+    public function toggleStatus(Request $request)
+    {
+        $order = CheckoutOrder::find($request->id);
+        if ($order->status == 0) {
+            $order->status = 1;
+        } elseif ($order->status == 1) {
+            $order->status = 0;
         }
-        if(Auth::id()==$order->user_id||Auth::user()->is_ceo==1){
-            if($order->save()){
+        if (Auth::id() == $order->user_id || Auth::user()->is_ceo == 1) {
+            if ($order->save()) {
                 Flash::success('Chuyển đổi trạng thái đơn hàng thành công!');
                 return redirect(route('checkoutOrders.index'));
             }
-        }
-        else{
+        } else {
             Flash::error('Bạn không có quyền chuyển đổi trạng thái đơn hàng này!');
             return redirect(route('checkoutOrders.index'));
         }

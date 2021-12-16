@@ -24,7 +24,7 @@
                     } else if ($permissions != null) {
                         $roles = \App\Models\Models_be\Role::withoutTrashed()->whereIn('id', $permissions)->get();
                         foreach ($roles as $role) {
-                            echo '<div class="badge badge-success">' . $role->description . '</div>';
+                            echo '<div class="badge badge-success">' . $role->description . '</div><br>';
                         }
                     } ?>
                 </td>

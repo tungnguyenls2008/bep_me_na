@@ -31,7 +31,7 @@ foreach ($roles as $role){
 ?>
 <div class="form-group col-sm-6">
     {!! Form::label('permissions', 'Phân quyền') !!}
-    {!! Form::select('permissions[]',$role_select, null,['class' => 'form-control','multiple'=>true]) !!}
+    {!! Form::select('permissions[]',$role_select, 8,['class' => 'form-control','multiple'=>true]) !!}
 </div>
 
 <!-- Submit Field -->

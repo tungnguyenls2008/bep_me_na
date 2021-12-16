@@ -97,5 +97,6 @@ class UpdateDbStructure extends Command
                 }
             }
         }
+        echo 'All databases updated successfully!';
     }
 }
