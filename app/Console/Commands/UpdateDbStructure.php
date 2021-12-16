@@ -49,17 +49,15 @@ class UpdateDbStructure extends Command
         foreach ($dbs as $key => $db) {
             $dbs[$key] = $db->Database;
         }
+        $tables = DB::select("SHOW TABLES FROM core_db");
+        $tables_names = [];
+        $column_key = 'group_concat(COLUMN_NAME)';
+        foreach ($tables as $table) {
+            $tables_names[] = $table->Tables_in_core_db;
+        }
         foreach ($dbs as $key => $db) {
-            DB::statement('CREATE DATABASE IF NOT EXISTS ' . $db . '_backup CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;');
-            //DB::statement('USE '.$input['db_name']);
-            $tables = DB::select("SHOW TABLES FROM $db");
-            $tables_names = [];
-            foreach ($tables as $table) {
-                $obj_key = 'Tables_in_' . $db;
-                $tables_names[] = $table->$obj_key;
-            }
             foreach ($tables_names as $tables_name) {
-                $column_key = 'group_concat(COLUMN_NAME)';
+
                 $core_columns = DB::select("SELECT group_concat(COLUMN_NAME)
   FROM INFORMATION_SCHEMA.COLUMNS
   WHERE TABLE_SCHEMA = 'core_db' AND TABLE_NAME = '$tables_name';");
@@ -71,18 +69,22 @@ class UpdateDbStructure extends Command
                 $db_columns = explode(',', $db_columns[0]->$column_key);
                 $column_diffs = array_values(array_diff($core_columns, $db_columns));
                 if (!empty($column_diffs)) {
-                    dd($column_diffs);
-
+                    foreach ($column_diffs as $column_diff){
+                        $column_to_add=DB::select('SHOW COLUMNS FROM core_db.'.$tables_name.' LIKE \''.$column_diff.'\';');
+                        if ($column_to_add[0]->Null=='NO'){
+                            $null= 'NOT NULL';
+                        }else{
+                            $null='NULL';
+                        }
+                        if ($column_to_add[0]->Default==''){
+                            $default= '';
+                        }else{
+                            $default='DEFAULT(\''.$column_to_add[0]->Default.'\')';
+                        }
+                        DB::statement('ALTER TABLE '.$db.'.'.$tables_name.' ADD '.$column_diff.' '.$column_to_add[0]->Type.' '.$null.' '.$default);
+                    }
                 }
-                DB::statement('CREATE TABLE ' . $db . '_backup.' . $tables_name . ' LIKE ' . $db . '.' . $tables_name);
-                DB::statement('INSERT INTO ' . $db . '_backup.' . $tables_name . ' SELECT * FROM ' . $db . '.' . $tables_name);
-                DB::statement('DROP TABLE IF EXISTS ' . $db . '.' . $tables_name);
-                DB::statement('CREATE TABLE ' . $db . '.' . $tables_name . ' LIKE core_db.' . $tables_name);
-
-                DB::statement('INSERT INTO ' . $db . '.' . $tables_name . ' SELECT * FROM ' . $db . '_backup.' . $tables_name);
             }
-            DB::statement('DROP DATABASE IF EXISTS ' . $db . '_backup');
-
         }
     }
 }
