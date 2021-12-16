@@ -37,6 +37,7 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
           integrity="sha512-aEe/ZxePawj0+G2R+AaIxgrQuKT68I28qh+wgLrcAJOz3rxCP+TwrK5SPN+E5I+1IQjNtcfvb96HDagwrKRdBw=="
           crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/metismenu/dist/metisMenu.min.css">
+    <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
 
 {{--=========================FONT==================================--}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -75,6 +76,7 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
             integrity="sha512-J+763o/bd3r9iW+gFEqTaeyi+uAphmzkE/zU8FxY6iAvD3nQKXa+ZAWkBI9QS9QkYEKddQoiy0I5GDxKf/ORBA=="
             crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/metismenu"></script>
+    <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
 
     @yield('third_party_stylesheets')
 
@@ -122,7 +124,7 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
 </style>
 <body class="">
 <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
-    <div class="app-header header-shadow">
+    <div class="app-header header-shadow" data-aos="fade-down">
         <div class="app-header__logo">
             <a href="{{route('home')}}" style="display: contents;color: #2d3748">
 {{--            <div class="logo-src">--}}
@@ -646,7 +648,7 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
         <div class="app-main__outer">
             <div class="app-main__inner">
 
-                <div class="">
+                <div class="" data-aos="fade-in">
                     @yield('content')
                 </div>
             </div>
@@ -699,6 +701,7 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
 
 <script>
     $(function () {
+        AOS.init();
         bsCustomFileInput.init();
         $("#top-right-menu").on('click',function () {
             $(this).attr('aria-expanded','true')

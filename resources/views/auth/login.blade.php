@@ -5,6 +5,8 @@
 <title>Đăng nhập</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+<link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
         integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
         crossorigin="anonymous"></script>
@@ -16,6 +18,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
         integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
         crossorigin="anonymous"></script>
+<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+
 <style>
     @font-face {
         font-family: 'Montserrat', sans-serif;
@@ -287,8 +291,8 @@
     }
 
 </style>
-<div class="wrapper">
-    <div class="container">
+<div class="wrapper" data-aos="fade-in" data-aos-delay="200">
+    <div class="container" >
         <div>
             <?php
             use Illuminate\Support\Facades\Session;
@@ -383,6 +387,7 @@
 </div>
 <script>
     $(function () {
+        AOS.init();
         $("#login-button").click(function (event) {
             if ($("#organization_id").val() != '') {
                 var organization_id = $("#organization_id").val();

@@ -9,11 +9,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-            @include('flash::message')
+                @include('flash::message')
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-md-12 " data-aos="zoom-in" data-aos-delay="300">
                 <div class="alert alert-info">
                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">&times;</button>
                     Chào mừng bạn quay trở lại, <strong>{{\Illuminate\Support\Facades\Auth::user()->name}}.</strong>
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
             <div class="col-md-3 col-xl-3">
                 <div class="card card-primary">
                     <div class="card-header">
@@ -33,32 +33,32 @@
                         <div class="float-end mt-2">
                             <?php
                             $menu_count = \App\Models\Menu::count();
-                            $sold_count=\App\Models\Menu::sum('count');
-                            $max_sold_menu=\App\Models\Menu::orderBy('count','desc')->get()->take(5);
+                            $sold_count = \App\Models\Menu::sum('count');
+                            $max_sold_menu = \App\Models\Menu::orderBy('count', 'desc')->get()->take(5);
                             ?>
                             @if($menu_count==0)
                                 Bạn chưa tạo dữ liệu sản phẩm.
-                                    <a href="{{route('menus.create')}}" class="btn btn-outline-primary">Tạo ngay</a>
-                                @else
-                            <div id="total-revenue-chart">
-                                Bạn đang có <b>{{$menu_count}}</b> mặt hàng, trong đó: <br>
-                                Top 5 sản phẩm được yêu thích: <br>
-<table class="table table-bordered">
-    <thead>
-    <tr>
-        <th>Sản phẩm</th>
-        <th>Đã bán</th>
-    </tr>
-    </thead>
-    @foreach($max_sold_menu as $max_sold)
-        <tr>
-            <td>{{$max_sold->name}}</td>
-            <td>{{$max_sold->count}}</td>
-        </tr>
-    @endforeach
-</table>
-                            </div>
-                                @endif
+                                <a href="{{route('menus.create')}}" class="btn btn-outline-primary">Tạo ngay</a>
+                            @else
+                                <div id="total-revenue-chart">
+                                    Bạn đang có <b>{{$menu_count}}</b> mặt hàng, trong đó: <br>
+                                    Top sản phẩm được yêu thích: <br>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>Sản phẩm</th>
+                                            <th>Đã bán</th>
+                                        </tr>
+                                        </thead>
+                                        @foreach($max_sold_menu as $max_sold)
+                                            <tr>
+                                                <td>{{$max_sold->name}}</td>
+                                                <td>{{$max_sold->count}}</td>
+                                            </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
+                            @endif
                         </div>
 
                     </div>
@@ -80,14 +80,15 @@
                             ?>
                             @if($import_count==0)
                                 Bạn chưa tạo dữ liệu chi phí.
-                                    <a href="{{route('rawMaterialImports.create')}}" class="btn btn-outline-secondary">Tạo ngay</a>
-                                @else
-                            <div id="total-revenue-chart">Bạn có <b>{{$import_count}}</b> khoản chi <br>
-                                Tổng chi phí tạm tính là <b>{{number_format($sum_import)}}đ</b><br>
-                                Tổng thực chi là <b>{{number_format($sum_paid_import)}}đ</b><br>
+                                <a href="{{route('rawMaterialImports.create')}}" class="btn btn-outline-secondary">Tạo
+                                    ngay</a>
+                            @else
+                                <div id="total-revenue-chart">Bạn có <b>{{$import_count}}</b> khoản chi <br>
+                                    Tổng chi phí tạm tính là <b>{{number_format($sum_import)}}đ</b><br>
+                                    Tổng thực chi là <b>{{number_format($sum_paid_import)}}đ</b><br>
 
-                            </div>
-                                @endif
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -95,7 +96,8 @@
             <div class="col-md-3 col-xl-3">
                 <div class="card card-warning">
                     <div class="card-header ">
-                        <a href="{{route('checkoutOrders.index')}}"><h3 class="card-title text-white">Thống kê doanh thu</h3></a>
+                        <a href="{{route('checkoutOrders.index')}}"><h3 class="card-title text-white">Thống kê doanh
+                                thu</h3></a>
                     </div>
                     <div class="card-body">
                         <div class="float-end mt-2">
@@ -110,9 +112,9 @@
                                 $price = json_decode($checkoutOrder->price, true);
                                 $total = [];
                                 for ($i = 0; $i < count($price); $i++) {
-                                    $total[$i]=$quantity[$i] * $price[$i];
-                                    if ($checkoutOrder->discount_percent!=null){
-                                        $total[$i] = ($total[$i])-($total[$i]*$checkoutOrder->discount_percent/100);
+                                    $total[$i] = $quantity[$i] * $price[$i];
+                                    if ($checkoutOrder->discount_percent != null) {
+                                        $total[$i] = ($total[$i]) - ($total[$i] * $checkoutOrder->discount_percent / 100);
                                     }
                                 }
                                 $order_total = array_sum($total);
@@ -126,8 +128,8 @@
                                 for ($i = 0; $i < count($price_done); $i++) {
                                     $total_done[$i] = $quantity_done[$i] * $price_done[$i];
 
-                                    if ($checkoutOrder_done->discount_percent!=null){
-                                        $total_done[$i] = ($total_done[$i])-($total_done[$i]*$checkoutOrder_done->discount_percent/100);
+                                    if ($checkoutOrder_done->discount_percent != null) {
+                                        $total_done[$i] = ($total_done[$i]) - ($total_done[$i] * $checkoutOrder_done->discount_percent / 100);
                                     }
                                 }
                                 $order_total_done = array_sum($total_done);
@@ -137,14 +139,15 @@
                             ?>
                             @if($checkout_order_count==0)
                                 Bạn chưa tạo đơn hàng.
-                                    <a href="{{route('checkoutOrders.create')}}" class="btn btn-outline-warning">Tạo ngay</a>
-                                @else
-                            <div id="total-revenue-chart">
-                                Bạn đã thực hiện <b>{{$checkout_order_count}}</b> đơn hàng. <br>
-                                Tổng doanh số tạm tính là <b>{{number_format($sum_sale)}}đ</b><br>
-                                Tổng doanh số thực là <b>{{number_format($sum_sale_done)}}đ</b><br>
-                            </div>
-                                @endif
+                                <a href="{{route('checkoutOrders.create')}}" class="btn btn-outline-warning">Tạo
+                                    ngay</a>
+                            @else
+                                <div id="total-revenue-chart">
+                                    Bạn đã thực hiện <b>{{$checkout_order_count}}</b> đơn hàng. <br>
+                                    Tổng doanh số tạm tính là <b>{{number_format($sum_sale)}}đ</b><br>
+                                    Tổng doanh số thực là <b>{{number_format($sum_sale_done)}}đ</b><br>
+                                </div>
+                            @endif
                         </div>
 
 
@@ -154,39 +157,40 @@
             <div class="col-md-3 col-xl-3">
                 <div class="card card-primary ">
                     <div class="card-header ">
-                        <a href="{{route('customers.index')}}"><h3 class="card-title text-white">Thống kê khách hàng</h3></a>
+                        <a href="{{route('customers.index')}}"><h3 class="card-title text-white">Thống kê khách
+                                hàng</h3></a>
                     </div>
                     <div class="card-body">
                         <div class="float-end mt-2">
                             <?php
                             $customer = \App\Models\Customer::count();
-                            $buy_count=\App\Models\Customer::sum('order_count');
-                            $max_buy_customer=\App\Models\Customer::orderBy('order_count','desc')->get()->take(5);
+                            $buy_count = \App\Models\Customer::sum('order_count');
+                            $max_buy_customer = \App\Models\Customer::orderBy('order_count', 'desc')->get()->take(5);
                             ?>
                             <div id="total-revenue-chart">
                                 @if($customer==0)
                                     Bạn chưa tạo dữ liệu khách hàng thân thiết.
                                     <a href="{{route('customers.create')}}" class="btn btn-outline-primary">Tạo ngay</a>
-                                    @else
-                                Bạn đã lưu trữ <b>{{$customer}}</b> thông tin khách hàng, trong đó: <br>
-                                Top 5 khách hàng thân thiết:<br>
-                                <table class="table table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th>Khách hàng</th>
-                                        <th>Số lần mua hàng</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($max_buy_customer as $customer)
+                                @else
+                                    Bạn đã lưu trữ <b>{{$customer}}</b> thông tin khách hàng, trong đó: <br>
+                                    Top khách hàng thân thiết:<br>
+                                    <table class="table table-bordered">
+                                        <thead>
                                         <tr>
-                                            <td>{{$customer->name}}</td>
-                                            <td>{{$customer->order_count}}</td>
+                                            <th>Khách hàng</th>
+                                            <th>Số lần mua hàng</th>
                                         </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                                    @endif
+                                        </thead>
+                                        <tbody>
+                                        @foreach($max_buy_customer as $customer)
+                                            <tr>
+                                                <td>{{$customer->name}}</td>
+                                                <td>{{$customer->order_count}}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                @endif
                             </div>
                         </div>
                         <div>
@@ -205,7 +209,7 @@
 
 
         </div>
-        <div class="row" >
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
             <div class="col-md-6 col-xl-6">
 
                 <div class="card card-success">
@@ -251,7 +255,8 @@
                         <div class="card-body">
                             <div class="container" style="text-align: center">
                                 <img src="{{asset('img/success.gif')}}" alt="" width="200px">
-                                ĐÃ chấm công nhân viên <a href="{{route('attendances.index')}}" class="btn btn-sm btn-outline-success">Kiểm tra</a>
+                                ĐÃ chấm công nhân viên <a href="{{route('attendances.index')}}"
+                                                          class="btn btn-sm btn-outline-success">Kiểm tra</a>
                             </div>
                         </div>
                     </div>
@@ -263,7 +268,8 @@
                         <div class="card-body">
                             <div class="container" style="text-align: center">
                                 <img src="{{asset('img/failed.gif')}}" alt="" width="200px">
-                                CHƯA chấm công nhân viên <a href="{{route('attendances.create')}}" class="btn btn-sm btn-outline-success">Chấm công ngay</a>
+                                CHƯA chấm công nhân viên <a href="{{route('attendances.create')}}"
+                                                            class="btn btn-sm btn-outline-success">Chấm công ngay</a>
                             </div>
                         </div>
                     </div>
@@ -319,26 +325,27 @@
                                     margin: 0 auto;
                                     color: #1f1f1a;
                                     @switch($data->weather[0]->icon)
-                                    @case('01d')           background: url({{asset('img/w_clear_sky.gif')}});
-                                    @case('01n')           background: url({{asset('img/w_clear_sky.gif')}});
-                                    @case('02d')           background: url({{asset('img/w_few_cloud.gif')}});
-                                    @case('02n')           background: url({{asset('img/w_few_cloud.gif')}});
-                                    @case('03d')           background: url({{asset('img/w_scattered_clouds.gif')}});
-                                    @case('03n')           background: url({{asset('img/w_scattered_clouds.gif')}});
-                                    @case('04d')           background: url({{asset('img/w_broken_clouds.gif')}});
-                                    @case('04n')           background: url({{asset('img/w_broken_clouds.gif')}});
-                                    @case('09d')           background: url({{asset('img/w_shower_rain.gif')}});
-                                    @case('09n')           background: url({{asset('img/w_shower_rain.gif')}});
-                                    @case('10d')           background: url({{asset('img/w_rain.gif')}});
-                                    @case('10n')           background: url({{asset('img/w_rain.gif')}});
-                                    @case('11d')           background: url({{asset('img/w_thunder_storm.gif')}});
-                                    @case('11n')           background: url({{asset('img/w_thunder_storm.gif')}});
-                                    @case('13d')           background: url("https://images.techhive.com/images/article/2017/05/cloud_blueprint_schematic-100722515-large.jpg?auto=webp");
-                                    @case('13n')           background: url("https://images.techhive.com/images/article/2017/05/cloud_blueprint_schematic-100722515-large.jpg?auto=webp");
-                                    @case('50d')           background: url({{asset('img/w_mist.gif')}});
-                                    @case('50n')           background: url({{asset('img/w_mist.gif')}});
+                                    @case('01d')            background: url({{asset('img/w_clear_sky.gif')}});
+                                    @case('01n')            background: url({{asset('img/w_clear_sky.gif')}});
+                                    @case('02d')            background: url({{asset('img/w_few_cloud.gif')}});
+                                    @case('02n')            background: url({{asset('img/w_few_cloud.gif')}});
+                                    @case('03d')            background: url({{asset('img/w_scattered_clouds.gif')}});
+                                    @case('03n')            background: url({{asset('img/w_scattered_clouds.gif')}});
+                                    @case('04d')            background: url({{asset('img/w_broken_clouds.gif')}});
+                                    @case('04n')            background: url({{asset('img/w_broken_clouds.gif')}});
+                                    @case('09d')            background: url({{asset('img/w_shower_rain.gif')}});
+                                    @case('09n')            background: url({{asset('img/w_shower_rain.gif')}});
+                                    @case('10d')            background: url({{asset('img/w_rain.gif')}});
+                                    @case('10n')            background: url({{asset('img/w_rain.gif')}});
+                                    @case('11d')            background: url({{asset('img/w_thunder_storm.gif')}});
+                                    @case('11n')            background: url({{asset('img/w_thunder_storm.gif')}});
+                                    @case('13d')            background: url("https://images.techhive.com/images/article/2017/05/cloud_blueprint_schematic-100722515-large.jpg?auto=webp");
+                                    @case('13n')            background: url("https://images.techhive.com/images/article/2017/05/cloud_blueprint_schematic-100722515-large.jpg?auto=webp");
+                                    @case('50d')            background: url({{asset('img/w_mist.gif')}});
+                                    @case('50n')            background: url({{asset('img/w_mist.gif')}});
 
                                 @endswitch
+
 
 
 
