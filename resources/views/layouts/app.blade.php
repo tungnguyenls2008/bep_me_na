@@ -109,7 +109,7 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
         width: 50px;
         text-align: center;
         vertical-align: middle;
-        background: url({{$connection['logo']!=''?asset($connection['logo']):asset('img/organization_logos/default-company-logo.png')}});
+        {{--background: url({{$connection['logo']!=''?asset($connection['logo']):asset('img/organization_logos/default-company-logo.png')}});--}}
     }
 
     .app-header__logo .company-name {
@@ -125,7 +125,7 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
     <div class="app-header header-shadow">
         <div class="app-header__logo">
             <a href="{{route('home')}}" style="display: contents;color: #2d3748">
-            <div class="logo-src">
+{{--            <div class="logo-src">--}}
                 <?php
                 if (file_exists(realpath('img/organization_logos/'.Session::get('connection')['db_name'].'.png'))){
                     $src=(asset('img/organization_logos/'.(Session::get('connection')['db_name']).'.png')); // put your path and image here
@@ -134,10 +134,10 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
                     $src=(asset('img/organization_logos/default-company-logo.png')); // put your path and image here
                 }
                 ?>
-                <img
-                    src="{{$src}}"
-                    alt="logo" width="42px">
-            </div>
+{{--                <img--}}
+{{--                    src="{{$src}}"--}}
+{{--                    alt="logo" width="42px">--}}
+{{--            </div>--}}
             <div class="logo-src company-name">
                 <p><h4>{{$connection['name']}}</h4></p>
             </div>

@@ -38,10 +38,10 @@
     ======================================================== -->
 </head>
 <style>
-    /*section {*/
-    /*    padding: 120px 0;*/
-    /*    overflow: hidden;*/
-    /*}*/
+    section {
+        padding: 80px 0;
+        overflow: auto;
+    }
     #hero .container {
         padding-top: 130px;
     }
@@ -92,13 +92,13 @@
 </header><!-- End Header -->
 
 <!-- ======= Hero Section ======= -->
-<section id="hero" class="d-flex align-items-center">
+<section id="hero" class=" align-items-center">
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
         <div class="row justify-content-center">
             <div class="col-xl-7 col-lg-9 text-center">
                 <h1>THUCHI-SYSTEM</h1>
-                <h2>Giải pháp quản lí Thu-Chi hiệu quả của bạn!</h2>
-                <h3><i>[Nền tảng quản lí tài chính tập trung]</i></h3>
+                <h3>Giải pháp quản lí Thu-Chi hiệu quả của bạn!</h3>
+                <h2><i>[Nền tảng quản lí tài chính tập trung]</i></h2>
             </div>
         </div>
         <div class="text-center">
@@ -179,13 +179,14 @@
                                 <td>
                                     {{$stt}}
                                 </td>
-                                <td>
-                                    <b>{{number_format($top_sale)}}đ</b>
-                                </td>
+
                                 <td>
                                     <b><a href="{{ route('organization-show', [$top_sale_organization->profile_id]) }}">
                                             {{$top_sale_organization->name}}
                                         </a></b>
+                                </td>
+                                <td>
+                                    <b>{{number_format($top_sale)}}đ</b>
                                 </td>
                             </tr>
                             <?php $stt++; ?>

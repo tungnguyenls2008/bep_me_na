@@ -9,7 +9,9 @@
     <div class="col-sm-12">
         {!! Form::label('ceo_id', 'Tài khoản đại diện:') !!}
         <?php
-        use Illuminate\Support\Facades\Session;$user = \App\Models\User::where(['is_ceo' => 1])->first();
+        $organization=\App\Models\Models_be\Organization::withoutTrashed()->where(['id'=>$profile->organization_id])->first();
+
+        use Illuminate\Support\Facades\Session;$user = \App\Models\User::on($organization->db_name)->where(['id'=>$profile->ceo_id])->first();
 
         ?>
         <p>{{ $user->name }}</p>
@@ -76,7 +78,6 @@ if ($profile->dob != null) {
 </div>
 <div class="col-md-6" style="text-align: center">
     <?php
-    $organization=\App\Models\Models_be\Organization::withoutTrashed()->where(['id'=>$profile->organization_id])->first();
 
     if (file_exists(realpath('img/organization_logos/' . $organization->db_name . '.png'))) {
         $src = (asset('img/organization_logos/' . $organization->db_name  . '.png')); // put your path and image here

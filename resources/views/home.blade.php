@@ -36,6 +36,10 @@
                             $sold_count=\App\Models\Menu::sum('count');
                             $max_sold_menu=\App\Models\Menu::orderBy('count','desc')->get()->take(5);
                             ?>
+                            @if($menu_count==0)
+                                Bạn chưa tạo dữ liệu sản phẩm.
+                                    <a href="{{route('menus.create')}}" class="btn btn-outline-primary">Tạo ngay</a>
+                                @else
                             <div id="total-revenue-chart">
                                 Bạn đang có <b>{{$menu_count}}</b> mặt hàng, trong đó: <br>
                                 Top 5 sản phẩm được yêu thích: <br>
@@ -54,15 +58,7 @@
     @endforeach
 </table>
                             </div>
-                        </div>
-                        <div>
-                            <h4 class="mb-1 mt-1" style="text-align: center">
-                        <span>
-                        <h5 id="total_api_calls"></h5>
-{{--                            <img src="{{asset('images/api.gif')}}" alt="" style="height: 200px">--}}
-                        </span>
-                            </h4>
-
+                                @endif
                         </div>
 
                     </div>
@@ -82,11 +78,16 @@
                             $sum_import = \App\Models\RawMaterialImport::where(['deleted_at' => null])->sum('total');
                             $sum_paid_import = \App\Models\RawMaterialImport::where(['deleted_at' => null, 'status' => 1])->sum('total');
                             ?>
+                            @if($import_count==0)
+                                Bạn chưa tạo dữ liệu chi phí.
+                                    <a href="{{route('rawMaterialImports.create')}}" class="btn btn-outline-secondary">Tạo ngay</a>
+                                @else
                             <div id="total-revenue-chart">Bạn có <b>{{$import_count}}</b> khoản chi <br>
                                 Tổng chi phí tạm tính là <b>{{number_format($sum_import)}}đ</b><br>
                                 Tổng thực chi là <b>{{number_format($sum_paid_import)}}đ</b><br>
 
                             </div>
+                                @endif
                         </div>
                     </div>
                 </div>
@@ -134,11 +135,16 @@
                             }
                             $sum_sale_done = array_sum($sum_total_done);
                             ?>
+                            @if($checkout_order_count==0)
+                                Bạn chưa tạo đơn hàng.
+                                    <a href="{{route('checkoutOrders.create')}}" class="btn btn-outline-warning">Tạo ngay</a>
+                                @else
                             <div id="total-revenue-chart">
                                 Bạn đã thực hiện <b>{{$checkout_order_count}}</b> đơn hàng. <br>
                                 Tổng doanh số tạm tính là <b>{{number_format($sum_sale)}}đ</b><br>
                                 Tổng doanh số thực là <b>{{number_format($sum_sale_done)}}đ</b><br>
                             </div>
+                                @endif
                         </div>
 
 
@@ -158,6 +164,10 @@
                             $max_buy_customer=\App\Models\Customer::orderBy('order_count','desc')->get()->take(5);
                             ?>
                             <div id="total-revenue-chart">
+                                @if($customer==0)
+                                    Bạn chưa tạo dữ liệu khách hàng thân thiết.
+                                    <a href="{{route('customers.create')}}" class="btn btn-outline-primary">Tạo ngay</a>
+                                    @else
                                 Bạn đã lưu trữ <b>{{$customer}}</b> thông tin khách hàng, trong đó: <br>
                                 Top 5 khách hàng thân thiết:<br>
                                 <table class="table table-bordered">
@@ -176,6 +186,7 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+                                    @endif
                             </div>
                         </div>
                         <div>

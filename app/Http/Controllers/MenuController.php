@@ -63,7 +63,7 @@ class MenuController extends AppBaseController
         $menu->count = 0;
         $menu->status = 0;
         $menu->save();
-        Flash::success('Menu saved successfully.');
+        Flash::success('Tạo mới sản phẩm thành công.');
 
         return redirect(route('menus.index'));
     }
@@ -81,7 +81,7 @@ class MenuController extends AppBaseController
         $menu = Menu::find($id);
 
         if (empty($menu)) {
-            Flash::error('Menu not found');
+            Flash::error('Không tìm thấy sản phẩm.');
 
             return redirect(route('menus.index'));
         }
@@ -102,7 +102,7 @@ class MenuController extends AppBaseController
         $menu = Menu::find($id);
 
         if (empty($menu)) {
-            Flash::error('Menu not found');
+            Flash::error('Không tìm thấy sản phẩm');
 
             return redirect(route('menus.index'));
         }
@@ -124,7 +124,7 @@ class MenuController extends AppBaseController
         $menu = Menu::find($id);
 
         if (empty($menu)) {
-            Flash::error('Menu not found');
+            Flash::error('Không tìm thấy sản phẩm');
 
             return redirect(route('menus.index'));
         }
@@ -132,7 +132,7 @@ class MenuController extends AppBaseController
         $menu->fill($request->all());
         $menu->save();
 
-        Flash::success('Menu updated successfully.');
+        Flash::success('Cập nhật sản phẩm thành công.');
 
         return redirect(route('menus.index'));
     }
