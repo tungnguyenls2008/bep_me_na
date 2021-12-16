@@ -56,6 +56,17 @@ class UpdateDbStructure extends Command
             $tables_names[] = $table->Tables_in_core_db;
         }
         foreach ($dbs as $key => $db) {
+            $db_tables=DB::select("SHOW TABLES FROM $db");
+            $db_obj_key='Tables_in_'.$db;
+            $db_tables_names=[];
+            foreach ($db_tables as $db_table){
+                $db_tables_names[]=$db_table->$db_obj_key;
+            }
+            $table_diffs=array_values(array_diff($tables_names, $db_tables_names));
+            foreach ($table_diffs as $table_diff){
+                DB::statement('CREATE TABLE ' . $db . '.' . $table_diff . ' LIKE core_db.' . $table_diff);
+                DB::statement('INSERT INTO ' . $db . '.' . $table_diff . ' SELECT * FROM core_db.' . $table_diff);
+            }
             foreach ($tables_names as $tables_name) {
 
                 $core_columns = DB::select("SELECT group_concat(COLUMN_NAME)
