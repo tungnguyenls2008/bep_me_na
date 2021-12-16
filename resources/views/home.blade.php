@@ -27,19 +27,32 @@
             <div class="col-md-3 col-xl-3">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title text-white">Thống kê sản phẩm</h3>
+                        <a href="{{route('menus.index')}}"><h3 class="card-title text-white">Thống kê sản phẩm</h3></a>
                     </div>
                     <div class="card-body">
                         <div class="float-end mt-2">
                             <?php
                             $menu_count = \App\Models\Menu::count();
-                            $type_bun_count = \App\Models\Menu::where('name', 'like', '%Bún%')->count();
-                            $type_lau_count = \App\Models\Menu::where('name', 'like', '%Lẩu%')->count();
+                            $sold_count=\App\Models\Menu::sum('count');
+                            $max_sold_menu=\App\Models\Menu::orderBy('count','desc')->get()->take(5);
                             ?>
                             <div id="total-revenue-chart">
                                 Bạn đang có <b>{{$menu_count}}</b> mặt hàng, trong đó: <br>
-                                <b>{{$type_bun_count}}</b> món Bún. <br>
-                                <b>{{$type_lau_count}}</b> món Lẩu.
+                                Top 5 sản phẩm được yêu thích: <br>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Sản phẩm</th>
+        <th>Đã bán</th>
+    </tr>
+    </thead>
+    @foreach($max_sold_menu as $max_sold)
+        <tr>
+            <td>{{$max_sold->name}}</td>
+            <td>{{$max_sold->count}}</td>
+        </tr>
+    @endforeach
+</table>
                             </div>
                         </div>
                         <div>
@@ -58,9 +71,9 @@
             <div class="col-md-3 col-xl-3">
                 <div class="card card-info">
                     <div class="card-header">
-                        <h3 class="card-title text-white">
-                            Thống kê chi phí
-                        </h3>
+                        <a href="{{route('rawMaterialImports.index')}}"><h3 class="card-title text-white">
+                                Thống kê chi phí
+                            </h3></a>
                     </div>
                     <div class="card-body">
                         <div class="float-end mt-2">
@@ -81,7 +94,7 @@
             <div class="col-md-3 col-xl-3">
                 <div class="card card-warning">
                     <div class="card-header ">
-                        <h3 class="card-title text-white">Thống kê doanh thu</h3>
+                        <a href="{{route('checkoutOrders.index')}}"><h3 class="card-title text-white">Thống kê doanh thu</h3></a>
                     </div>
                     <div class="card-body">
                         <div class="float-end mt-2">
@@ -135,15 +148,34 @@
             <div class="col-md-3 col-xl-3">
                 <div class="card card-primary ">
                     <div class="card-header ">
-                        <h3 class="card-title text-white">Thống kê khách hàng</h3>
+                        <a href="{{route('customers.index')}}"><h3 class="card-title text-white">Thống kê khách hàng</h3></a>
                     </div>
                     <div class="card-body">
                         <div class="float-end mt-2">
                             <?php
                             $customer = \App\Models\Customer::count();
+                            $buy_count=\App\Models\Customer::sum('order_count');
+                            $max_buy_customer=\App\Models\Customer::orderBy('order_count','desc')->get()->take(5);
                             ?>
                             <div id="total-revenue-chart">
-                                Bạn đã lưu trữ <b>{{$customer}}</b> thông tin khách hàng <br>
+                                Bạn đã lưu trữ <b>{{$customer}}</b> thông tin khách hàng, trong đó: <br>
+                                Top 5 khách hàng thân thiết:<br>
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Khách hàng</th>
+                                        <th>Số lần mua hàng</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($max_buy_customer as $customer)
+                                        <tr>
+                                            <td>{{$customer->name}}</td>
+                                            <td>{{$customer->order_count}}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         <div>
