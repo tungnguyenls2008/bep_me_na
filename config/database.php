@@ -81,7 +81,8 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
-//====================organizations connections================'aaa' => [
+//====================organizations connections================
+'aaa' => [
             'driver'=>'mysql',
             'url'=>env('DATABASE_URL'),
             'host'=>env('DB_HOST_DEFAULT', '127.0.0.1'),
@@ -138,7 +139,7 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
-        
+
 
         'bep_me_na' => [
             'driver'=>'mysql',
@@ -146,6 +147,25 @@ return [
             'host'=>env('DB_HOST_DEFAULT', '127.0.0.1'),
             'port'=>env('DB_PORT_DEFAULT', '3306'),
             'database'=>'bep_me_na',
+            'username'=>env('DB_USERNAME_DEFAULT', 'forge'),
+            'password'=>env('DB_PASSWORD_DEFAULT', 'forge'),
+            'unix_socket'=>env('DB_SOCKET', ''),
+            'charset'=>'utf8mb4',
+            'collation'=>'utf8mb4_unicode_ci',
+            'prefix'=>'',
+            'prefix_indexes'=> true,
+            'strict'=> true,
+            'engine'=> null,
+            'options'=> extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+        'core_db' => [
+            'driver'=>'mysql',
+            'url'=>env('DATABASE_URL'),
+            'host'=>env('DB_HOST_DEFAULT', '127.0.0.1'),
+            'port'=>env('DB_PORT_DEFAULT', '3306'),
+            'database'=>'core_db',
             'username'=>env('DB_USERNAME_DEFAULT', 'forge'),
             'password'=>env('DB_PASSWORD_DEFAULT', 'forge'),
             'unix_socket'=>env('DB_SOCKET', ''),
