@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
+        <div class="row" >
             <div class="col-md-3 col-xl-3" data-aos="zoom-out-right" data-aos-delay="300">
                 <div class="card card-primary">
                     <div class="card-header">
@@ -93,7 +93,7 @@
                     </div>
                 </div>
             </div> <!-- end col-->
-            <div class="col-md-3 col-xl-3" data-aos="zoom-out-left" data-aos-delay="500">
+            <div class="col-md-3 col-xl-3" data-aos="zoom-out-left" data-aos-delay="700">
                 <div class="card card-warning">
                     <div class="card-header ">
                         <a href="{{route('checkoutOrders.index')}}"><h3 class="card-title text-white">Thống kê doanh
@@ -154,7 +154,7 @@
                     </div>
                 </div>
             </div> <!-- end col-->
-            <div class="col-md-3 col-xl-3" data-aos="zoom-out-left" data-aos-delay="300">
+            <div class="col-md-3 col-xl-3" data-aos="zoom-out-left" data-aos-delay="900">
                 <div class="card card-primary ">
                     <div class="card-header ">
                         <a href="{{route('customers.index')}}"><h3 class="card-title text-white">Thống kê khách
@@ -209,7 +209,7 @@
 
 
         </div>
-        <div class="row" data-aos="zoom-out-up" data-aos-delay="500">
+        <div class="row" data-aos="zoom-out-up" data-aos-delay="1100">
             <div class="col-md-6 col-xl-6">
 
                 <div class="card card-success">
@@ -289,7 +289,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" data-aos="zoom-out-up" data-aos-delay="200">
             <div class="col-md-12 col-xl-12">
 
                 <div class="card card-success">

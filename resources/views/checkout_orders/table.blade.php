@@ -38,7 +38,7 @@
                     <table class="table table-bordered table-striped">
                         @foreach($menu as $item)
                             <tr>
-                                <td>
+                                <td style="white-space: nowrap;">
                                     {{$item->name}}
                                     @if($item->status==1)
                                         <div class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="Tạm ngừng bán"><i class="fas fa-pause-circle"></i></div>
