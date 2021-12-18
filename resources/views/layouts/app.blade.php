@@ -127,7 +127,7 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
 </style>
 <body class="">
 <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
-    <div class="app-header header-shadow" data-aos="fade-down">
+    <div class="app-header header-shadow" @if(checkIfMobile()==false) data-aos="fade-down" @endif>
         <div class="app-header__logo">
             <a href="{{route('home')}}" style="display: contents;color: #2d3748">
 {{--            <div class="logo-src">--}}

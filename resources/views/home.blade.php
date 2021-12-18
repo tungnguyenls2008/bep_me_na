@@ -254,7 +254,7 @@
                         </div>
                         <div class="card-body">
                             <div class="container" style="text-align: center">
-                                <img src="{{asset('img/success.gif')}}" alt="" width="200px">
+                                <img src="{{asset('img/success.gif')}}" alt="" width="200px"><br>
                                 ĐÃ chấm công nhân viên <a href="{{route('attendances.index')}}"
                                                           class="btn btn-sm btn-outline-success">Kiểm tra</a>
                             </div>
@@ -267,7 +267,7 @@
                         </div>
                         <div class="card-body">
                             <div class="container" style="text-align: center">
-                                <img src="{{asset('img/failed.gif')}}" alt="" width="200px">
+                                <img src="{{asset('img/failed.gif')}}" alt="" width="200px"><br>
                                 CHƯA chấm công nhân viên <a href="{{route('attendances.create')}}"
                                                             class="btn btn-sm btn-outline-success">Chấm công ngay</a>
                             </div>

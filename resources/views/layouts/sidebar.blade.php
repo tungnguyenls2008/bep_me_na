@@ -1,4 +1,4 @@
-<div class="app-sidebar sidebar-shadow" data-aos="fade-right">
+<div class="app-sidebar sidebar-shadow" @if(checkIfMobile()==false) data-aos="fade-right" @endif>
 
     <div class="scrollbar-sidebar ps ps--active-y">
         <div class="app-sidebar__inner">
