@@ -612,4 +612,13 @@ class CheckoutOrderController extends AppBaseController
         }
 
     }
+    public function displayBill(Request $request){
+        $inputFileType=$request->get('inputFileType');
+        $inputFileName=$request->get('inputFileName');
+        $objReader = IOFactory::createReader($inputFileType);
+        $objPHPExcel = $objReader->load($inputFileName);
+
+        $objWriter = IOFactory::createWriter($objPHPExcel, 'Html');
+        $objWriter->save('php://output');
+    }
 }

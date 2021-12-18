@@ -20,8 +20,12 @@
             <tr class="aos-animate" data-aos="fade-in" data-aos-delay="100">
                 <td>
                     <b>Số hóa đơn: </b><a
-                        href="{{asset($checkoutOrder->bill_path)}}">{{ $checkoutOrder->bill_code }}<i
-                            class="fas fa-download"></i></a><br>
+                        href="{{asset($checkoutOrder->bill_path)}}">{{ $checkoutOrder->bill_code }}
+                        <i class="fas fa-download"></i></a>
+                    <a href="{{route('display-bill')}}?inputFileType=Xls&inputFileName={{realpath(substr($checkoutOrder->bill_path,1))}}" target="_blank">
+                        <i class="fas fa-book-open"></i>
+                    </a>
+                    <br>
                     <b>Thông tin khách hàng: </b>{{$checkoutOrder->customer_info}}
                     <br>
                     @if($checkoutOrder->regular_customer_id!=null && \App\Models\Customer::find($checkoutOrder->regular_customer_id)!=null)
