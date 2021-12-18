@@ -35,6 +35,42 @@ class MenuController extends AppBaseController
         return view('menus.index')
             ->with('menus', $menus);
     }
+    public function search(Request $request)
+    {
+        $search = $request->post();
+        $menu = Menu::where(['deleted_at' => null])->OrderBy('created_at', 'desc');
+        if (isset($search['id'])) {
+            $menu->where(['id'=>$search['id']]);
+        }
+        if (isset($search['price_from']) || isset($search['price_to'])) {
+            if (!isset($search['price_from'])) {
+                $search['price_from'] = 0;
+            }
+            if (!isset($search['price_to'])) {
+                $search['price_to'] = 2000000000;
+            }
+
+            $menu->whereBetween('price', [$search['price_from'], $search['price_to']]);
+        }
+        if (isset($search['count_from']) || isset($search['count_to'])) {
+            if (!isset($search['count_from'])) {
+                $search['count_from'] = 0;
+            }
+            if (!isset($search['count_to'])) {
+                $search['count_to'] = 999999;
+            }
+
+            $menu->whereBetween('count', [$search['count_from'], $search['count_to']]);
+        }
+
+        if (isset($search['status'])) {
+            $menu->where(['status' => $search['status']]);
+        }
+
+        $menu = $menu->paginate(15);
+        return view('menus.index')
+            ->with('menus', $menu,)->with('count', $menu->total());
+    }
 
     /**
      * Show the form for creating a new Menu.

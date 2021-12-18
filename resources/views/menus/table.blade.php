@@ -10,8 +10,10 @@
         </tr>
         </thead>
         <tbody>
+        <?php $delay=200; ?>
         @foreach($menus as $menu)
-            <tr>
+
+            <tr class="aos-animate" data-aos="fade-in" data-aos-delay="<?= $delay ?>>">
                 <td>{{ $menu->name }}</td>
                 <td>{{ number_format($menu->price) }}đ</td>
                 <td><label class="badge badge-info">{{ $menu->count}}</label></td>
@@ -39,6 +41,9 @@
 {{--                    {!! Form::close() !!}--}}
                 </td>
             </tr>
+            <?php
+$delay+=100;
+            ?>
         @endforeach
         </tbody>
     </table>

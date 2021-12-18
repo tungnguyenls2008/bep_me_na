@@ -120,7 +120,10 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
         display: contents;
 
     }
-
+    .border {
+        border: 8px solid #ffffff!important;
+        box-shadow: 0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23)!important;
+    }
 </style>
 <body class="">
 <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
@@ -648,7 +651,8 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
         <div class="app-main__outer">
             <div class="app-main__inner">
 
-                <div class="" data-aos="fade-in" data-aos-delay="300">
+{{--                <div class="" data-aos="fade-in" data-aos-delay="300">--}}
+                <div >
                     @yield('content')
                 </div>
             </div>
@@ -700,6 +704,8 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
 
 
 <script>
+
+
     $(function () {
         AOS.init();
         bsCustomFileInput.init();

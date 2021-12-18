@@ -15,6 +15,9 @@
                 </div>
             </div>
         </div>
+        <div>
+            @include('menus.search')
+        </div>
     </section>
 
     <div class="content px-3">

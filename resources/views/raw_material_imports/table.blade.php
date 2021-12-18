@@ -2,6 +2,7 @@
     .modal-backdrop {
         z-index: -1;
     }
+
 </style>
 <div class="table-responsive">
     <table class="table" id="rawMaterialImports-table">
@@ -23,6 +24,7 @@
         $unit_select = [];
         $unit_badge = [];
         ?>
+        <?php $delay = 200; ?>
         @foreach($rawMaterialImports as $rawMaterialImport)
 
             <tr>
@@ -47,12 +49,15 @@
                                 data-target=".proof-{{$rawMaterialImport->id}}">Ảnh hóa đơn
                         </button>
                         <div class="modal fade proof-{{$rawMaterialImport->id}}" tabindex="-1" role="dialog"
-                             aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
-                            <div class="modal-dialog modal-lg"
-                                 style="max-width: 90%;width: 70%;max-height: 90%;height: 90%;margin-top: 5%">
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-scrollable"
+                                 {{--                                 style="max-width: 90%;width: 70%;max-height: 90%;height: 90%;margin-top: 5%">--}}
+                                 style="max-width: 90%;width: 70%;max-height: 90%;height: 90%;margin-top: 5%;margin-bottom: 5%"
+                                >
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Hóa đơn
+                                            #{{$rawMaterialImport->bill_code}}</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                         </button>
@@ -61,7 +66,11 @@
                                         <img src="{{$rawMaterialImport->proof}}" alt=""
                                              style="width: -webkit-fill-available">
                                     </div>
-
+                                    <div class="modal-footer">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">Đóng</span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -115,6 +124,10 @@
                     {!! Form::close() !!}
                 </td>
             </tr>
+            <?php
+            $delay += 100;
+            ?>
+
         @endforeach
         </tbody>
     </table>

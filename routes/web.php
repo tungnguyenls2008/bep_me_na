@@ -39,6 +39,7 @@ Route::get('organization-show/{id}', [ProfileController::class, 'showLanding'])-
 Route::get('checkoutOrders/search', [\App\Http\Controllers\CheckoutOrderController::class, 'search'])->name('order-search');
 Route::get('rawMaterialImports/search', [\App\Http\Controllers\RawMaterialImportController::class, 'search'])->name('spending-search');
 Route::get('attendances/search', [\App\Http\Controllers\AttendanceController::class, 'search'])->name('attendance-search');
+Route::get('menus/search', [\App\Http\Controllers\MenuController::class, 'search'])->name('menu-search');
 
 Route::middleware(['auth','checkPermission'])->group(function () {
 

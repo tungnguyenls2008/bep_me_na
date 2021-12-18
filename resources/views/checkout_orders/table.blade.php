@@ -17,7 +17,7 @@
 
 
         @foreach($checkoutOrders as $checkoutOrder)
-            <tr>
+            <tr class="aos-animate" data-aos="fade-in" data-aos-delay="100">
                 <td>
                     <b>Số hóa đơn: </b><a
                         href="{{asset($checkoutOrder->bill_path)}}">{{ $checkoutOrder->bill_code }}<i
