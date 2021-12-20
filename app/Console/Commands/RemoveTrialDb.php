@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Models_be\Organization;
+use App\Models\Profile;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -57,6 +58,10 @@ class RemoveTrialDb extends Command
         foreach ($organizations as $organization) {
             deleteConnection($organization->db_name);
             $organization->delete();
+            $profile=Profile::withoutTrashed()->where(['organization_id'=>$organization->id])->first();
+            if ($profile!=null){
+                $profile->delete();
+            }
             DB::statement("DROP DATABASE IF EXISTS `$organization->db_name`");
         }
 
