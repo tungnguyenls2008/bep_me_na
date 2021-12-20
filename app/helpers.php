@@ -37,7 +37,7 @@ function configureConnectionByName($connectionName)
 
     if (file_exists($path)) {
        $db_config=file_get_contents($path);
-        $line_start=3192+63+20;
+        $line_start=strpos($db_config,'//start//');
         $rest_config=substr($db_config,$line_start,strlen($db_config));
         $newConnection_str= '\''.$connectionName.'\' => [
             \'driver\'=>\'mysql\',
