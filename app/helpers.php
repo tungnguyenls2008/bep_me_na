@@ -113,3 +113,33 @@ function checkIfMobile(){
         return false;
 
 }
+function deleteConnection($name){
+    $path = base_path('config/database.php');
+
+    if (file_exists($path)) {
+        $db_config=file_get_contents($path);
+        $str_connection='\''.$name.'\' => [
+            \'driver\'=>\'mysql\',
+            \'url\'=>env(\'DATABASE_URL\'),
+            \'host\'=>env(\'DB_HOST_DEFAULT\', \'127.0.0.1\'),
+            \'port\'=>env(\'DB_PORT_DEFAULT\', \'3306\'),
+            \'database\'=>\''.$name.'\',
+            \'username\'=>env(\'DB_USERNAME_DEFAULT\', \'forge\'),
+            \'password\'=>env(\'DB_PASSWORD_DEFAULT\', \'forge\'),
+            \'unix_socket\'=>env(\'DB_SOCKET\', \'\'),
+            \'charset\'=>\'utf8mb4\',
+            \'collation\'=>\'utf8mb4_unicode_ci\',
+            \'prefix\'=>\'\',
+            \'prefix_indexes\'=> true,
+            \'strict\'=> true,
+            \'engine\'=> null,
+            \'options\'=> extension_loaded(\'pdo_mysql\') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env(\'MYSQL_ATTR_SSL_CA\'),
+            ]) : [],
+        ],
+        ';
+        $db_config=str_replace($str_connection,'',$db_config);
+        file_put_contents($path,$db_config);
+    }
+
+}

@@ -55,8 +55,9 @@ class RemoveTrialDb extends Command
         $dayToCheck = Carbon::now()->subDays($dayAgo);
         $organizations = Organization::withoutTrashed()->whereIn('db_name', $dbs,)->where(['status' => 0])->whereDate("created_at", '<=', $dayToCheck)->get();
         foreach ($organizations as $organization) {
+            deleteConnection($organization->db_name);
             $organization->delete();
-            DB::statement("DROP DATABASE `{$organization->db_name}`");
+            DB::statement("DROP DATABASE IF EXISTS `$organization->db_name`");
         }
 
         echo 'All trial databases wiped successfully!';
