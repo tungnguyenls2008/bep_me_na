@@ -26,6 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('db:update')->weeklyOn(1, '0:00');
+        $schedule->command('db:remove-trials')->weeklyOn(1, '0:00');
     }
 
     /**

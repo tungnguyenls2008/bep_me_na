@@ -1,3 +1,16 @@
+<?php
+use PhpOffice\PhpSpreadsheet\IOFactory;
+?>
+<style>
+/*.modal{*/
+/*    max-width: 90%;width: 70%;max-height: 90%;height: 90%;*/
+/*    position: fixed;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    -webkit-transform: translate(-50%, -50%);*/
+/*    transform: translate(-50%, -50%);*/
+/*}*/
+</style>
 <div class="table-responsive table-hover table-bordered">
     <table class="table" id="checkoutOrders-table">
         <thead>
@@ -17,7 +30,7 @@
 
 
         @foreach($checkoutOrders as $checkoutOrder)
-            <tr class="aos-animate" data-aos="fade-in" data-aos-delay="100">
+            <tr >
                 <td>
                     <b>Số hóa đơn: </b><a
                         href="{{asset($checkoutOrder->bill_path)}}">{{ $checkoutOrder->bill_code }}
@@ -25,6 +38,8 @@
                     <a href="{{route('display-bill')}}?inputFileType=Xls&inputFileName={{realpath(substr($checkoutOrder->bill_path,1))}}" target="_blank">
                         <i class="fas fa-book-open"></i>
                     </a>
+{{--                    <a href="" data-toggle="modal" data-target=".{{$checkoutOrder->bill_code}}"><i class="fas fa-book-open"></i></a>--}}
+
                     <br>
                     <b>Thông tin khách hàng: </b>{{$checkoutOrder->customer_info}}
                     <br>
@@ -241,3 +256,33 @@
     </table>
     {{$checkoutOrders->links()}}
 </div>
+{{--@foreach($checkoutOrders as $checkoutOrder)--}}
+{{--<div class="modal fade {{$checkoutOrder->bill_code}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"--}}
+{{--     >--}}
+{{--    <div class="modal-dialog modal-lg">--}}
+{{--        <div class="modal-content">--}}
+{{--            <div class="modal-header">--}}
+{{--                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>--}}
+{{--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+{{--                    <span aria-hidden="true">&times;</span>--}}
+{{--                </button>--}}
+{{--            </div>--}}
+{{--            <div class="modal-body">--}}
+{{--                <?php--}}
+{{--                $inputFileType='Xls';--}}
+{{--                $inputFileName=realpath(substr($checkoutOrder->bill_path,1));--}}
+{{--                $objReader = IOFactory::createReader($inputFileType);--}}
+{{--                $objPHPExcel = $objReader->load($inputFileName);--}}
+
+{{--                $objWriter = IOFactory::createWriter($objPHPExcel, 'Html');--}}
+{{--                $objWriter->save('php://output');--}}
+{{--                ?>--}}
+{{--            </div>--}}
+{{--            <div class="modal-footer">--}}
+{{--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
+{{--                <button type="button" class="btn btn-primary">Save changes</button>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
+{{--@endforeach--}}

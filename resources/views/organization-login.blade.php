@@ -338,7 +338,7 @@
                                 window.location.href = '{{route('login')}}'
                                 //return false;
                             } else {
-                                $('.wrapper.form-success .container h1').html('Cửa hàng của bạn đang<br> Tạm khóa,' +
+                                $('.wrapper.form-success .container h1').html('Cửa hàng của bạn đã hết thời gian dùng thử hoặc đang<br> Tạm khóa,' +
                                     '<br>Xin liên hệ số đường dây nóng 8888-8888 để được giải quyết,' +
                                     '<br>Xin thứ lỗi vì sự bất tiện.' +
                                     '<br><a href="{{route('landing')}}">Trở về trang chủ</a>')
