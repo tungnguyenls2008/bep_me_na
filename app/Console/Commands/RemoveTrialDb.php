@@ -42,7 +42,7 @@ class RemoveTrialDb extends Command
     public function handle()
     {
         $dbs = DB::select("SHOW DATABASES");
-        $exceptions = ['backend', 'core_db', 'information_schema', 'mysql', 'performance_schema', 'phpmyadmin', 'test'];
+        $exceptions = ['backend', 'core_db', 'information_schema', 'mysql', 'performance_schema', 'phpmyadmin', 'test','pvcb'];
         foreach ($dbs as $key => $db) {
             if (in_array($db->Database, $exceptions)) {
                 unset($dbs[$key]);
@@ -52,7 +52,7 @@ class RemoveTrialDb extends Command
         foreach ($dbs as $key => $db) {
             $dbs[$key] = $db->Database;
         }
-        $dayAgo = 7;
+        $dayAgo = 14;
         $dayToCheck = Carbon::now()->subDays($dayAgo);
         $organizations = Organization::withoutTrashed()->whereIn('db_name', $dbs,)->where(['status' => 0])->whereDate("created_at", '<=', $dayToCheck)->get();
         foreach ($organizations as $organization) {
