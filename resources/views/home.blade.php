@@ -233,7 +233,7 @@
                                 <a href="{{route('rawMaterialImports.index')}}">khoản chi</a> chưa thanh toán!</p><br>
                             <p>Bạn còn
                                 <b>{{\App\Models\CheckoutOrder::where(['deleted_at' => null,'status'=>0])->count()}}</b>
-                                <a href="{{route('checkoutOrders.index')}}">hóa đơn</a> chưa thu tiền!</p><br>
+                                <a href="{{route('checkoutOrders.index')}}">đơn hàng</a> chưa thu tiền!</p><br>
                             {{--                            <button id="profit-button" class="btn btn-outline-success">Hiển thị</button>--}}
 
                             <div id="profit-display">
