@@ -30,7 +30,7 @@ Route::get('backend/email/verify/{id}/{hash}', [\App\Http\Controllers\Controller
 Route::get('backend/email/resend',  [\App\Http\Controllers\Controllers_be\Auth\VerificationController::class, 'resend'])->name('backend-verification.resend');
 
 //================================END======================================
-Route::middleware(['backend'])->prefix('backend')->group(function () {
+Route::middleware(['auth:backend'])->prefix('backend')->group(function () {
     Route::get('home',[\App\Http\Controllers\Controllers_be\HomeController::class,'index'])->name('backend-home');
     Route::resource('organizations', \App\Http\Controllers\Controllers_be\OrganizationController::class)->except(['edit','update','destroy']);
     Route::resource('ceos', \App\Http\Controllers\Controllers_be\CeoController::class);
