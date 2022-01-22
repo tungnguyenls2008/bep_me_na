@@ -118,6 +118,31 @@
 
     </ul>
 </li>
+<li class="app-sidebar__heading">Tiện ích</li>
+<li class="nav-item">
+    <a href="" class="">
+        <i class="metismenu-icon pe-7s-id"></i>
+        Quảng cáo
+    </a>
+</li>
+<li class="nav-item">
+    <a href="" class="">
+        <i class="metismenu-icon pe-7s-id"></i>
+        Quản lý vận chuyển
+    </a>
+</li>
+<li class="nav-item">
+    <a href="" class="">
+        <i class="metismenu-icon pe-7s-id"></i>
+        Sự kiện
+    </a>
+</li>
+<li class="nav-item">
+    <a href="" class="">
+        <i class="metismenu-icon pe-7s-id"></i>
+        Ghi chú
+    </a>
+</li>
 <li class="app-sidebar__heading">Thiết lập</li>
 <?php
 use App\Models\Profile;
