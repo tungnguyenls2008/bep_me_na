@@ -2,7 +2,7 @@
     <h1>CHI TIẾT CHI PHÍ</h1>
 </div>
 <div class="table-responsive">
-    <table class="table" id="rawMaterialImports-table">
+    <table class="table" id="expending-table">
         <thead>
         <tr>
             <th>Nội dung</th>
@@ -17,7 +17,14 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($rawMaterialImports as $rawMaterialImport)
+        <?php
+        $units=\App\Models\Unit::select(['id','name'])->get();
+        $unit_select=[];
+        foreach ($units as $unit){
+            $unit_select[$unit->id]=$unit->name;
+        }
+        ?>
+        @foreach($expending as $rawMaterialImport)
             <tr>
                 <td>{{ $rawMaterialImport->name }}</td>
                 <td>
@@ -31,15 +38,7 @@
                         @endif
                 </td>
                 <td>{{ $rawMaterialImport->quantity }}</td>
-                @switch($rawMaterialImport->unit)
-                    @case (1)<td><label class="badge badge-info">Kg</label></td> @break
-                    @case (2)<td><label class="badge badge-info">Mg</label></td>@break
-                    @case (3)<td><label class="badge badge-info">Con</label></td>@break
-                    @case (4)<td><label class="badge badge-info">Cái</label></td>@break
-                    @case (5)<td><label class="badge badge-info">Mớ</label></td>@break
-                    @case (6)<td><label class="badge badge-info">Ngày</label></td>@break
-                    @case (7)<td><label class="badge badge-info">Tháng</label></td>@break
-                @endswitch
+                <td><label class="badge badge-info">{{$unit_select[$rawMaterialImport->unit]}}</label></td>
                 <td>{{ ($rawMaterialImport->price) }}</td>
                 <td>{{ ($rawMaterialImport->total) }}</td>
                 <?php $user=\App\Models\User::query()->where(['id'=>$rawMaterialImport->user_id])->first(); ?>
@@ -60,7 +59,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td><b>{{($rawMaterialImports->sum(['total']))}}</b></td>
+            <td><b>{{($expending->sum(['total']))}}</b></td>
             <td></td>
         </tr>
         </tbody>

@@ -67,7 +67,7 @@ class SpendingExport implements FromView,WithHeadings,WithStyles,WithColumnForma
         $spending=$spending->get();
         $data=$spending;
         return view('raw_material_imports.export', [
-            'rawMaterialImports' => $data
+            'expending' => $data
         ]);
     }
     public function headings(): array

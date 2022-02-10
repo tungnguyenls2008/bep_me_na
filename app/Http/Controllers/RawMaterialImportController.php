@@ -27,11 +27,11 @@ class RawMaterialImportController extends AppBaseController
      */
     public function index(Request $request)
     {
-        /** @var RawMaterialImport $rawMaterialImports */
-        $rawMaterialImports = RawMaterialImport::where(['deleted_at'=>null])->OrderBy('created_at','desc')->get();
+        /** @var RawMaterialImport $expending */
+        $expending = RawMaterialImport::where(['deleted_at'=>null])->OrderBy('created_at','desc')->get();
 
         return view('raw_material_imports.index')
-            ->with('rawMaterialImports', $rawMaterialImports);
+            ->with('expending', $expending);
     }
     public function search(Request $request)
     {
@@ -63,7 +63,7 @@ class RawMaterialImportController extends AppBaseController
         }
         $spending=$spending->paginate(15);
         return view('raw_material_imports.index')
-            ->with('rawMaterialImports', $spending,)->with('count',$spending->total());
+            ->with('expending', $spending,)->with('count',$spending->total());
     }
     /**
      * Show the form for creating a new RawMaterialImport.
@@ -111,7 +111,7 @@ class RawMaterialImportController extends AppBaseController
 
         Flash::success('Raw Material Import saved successfully.');
 
-        return redirect(route('rawMaterialImports.index'));
+        return redirect(route('expending.index'));
     }
 
     /**
@@ -129,7 +129,7 @@ class RawMaterialImportController extends AppBaseController
         if (empty($rawMaterialImport)) {
             Flash::error('Raw Material Import not found');
 
-            return redirect(route('rawMaterialImports.index'));
+            return redirect(route('expending.index'));
         }
 
         return view('raw_material_imports.show')->with('rawMaterialImport', $rawMaterialImport);
@@ -150,7 +150,7 @@ class RawMaterialImportController extends AppBaseController
         if (empty($rawMaterialImport)) {
             Flash::error('Raw Material Import not found');
 
-            return redirect(route('rawMaterialImports.index'));
+            return redirect(route('expending.index'));
         }
 
         return view('raw_material_imports.edit')->with('rawMaterialImport', $rawMaterialImport);
@@ -174,7 +174,7 @@ class RawMaterialImportController extends AppBaseController
         if (empty($rawMaterialImport)) {
             Flash::error('Raw Material Import not found');
 
-            return redirect(route('rawMaterialImports.index'));
+            return redirect(route('expending.index'));
         }
         if (Auth::id()==$rawMaterialImport->user_id||Auth::user()->is_ceo==1) {
             $rawMaterialImport->fill($input);
@@ -182,11 +182,11 @@ class RawMaterialImportController extends AppBaseController
 
             Flash::success('Cập nhật thành công khoản chi '.$rawMaterialImport->name.'.');
 
-            return redirect(route('rawMaterialImports.index'));
+            return redirect(route('expending.index'));
         }else{
             Flash::error('Bạn không có quyền cập nhật khoản chi này.');
 
-            return redirect(route('rawMaterialImports.index'));
+            return redirect(route('expending.index'));
         }
 
     }
@@ -208,7 +208,7 @@ class RawMaterialImportController extends AppBaseController
         if (empty($rawMaterialImport)) {
             Flash::error('Raw Material Import not found');
 
-            return redirect(route('rawMaterialImports.index'));
+            return redirect(route('expending.index'));
         }
         if (Auth::id()==$rawMaterialImport->user_id||Auth::user()->is_ceo==1) {
             if ($rawMaterialImport->provider_id!=null){
@@ -220,11 +220,11 @@ class RawMaterialImportController extends AppBaseController
 
             Flash::success('Xóa thành công khoản chi '.$rawMaterialImport->name.'.');
 
-            return redirect(route('rawMaterialImports.index'));
+            return redirect(route('expending.index'));
         }else{
             Flash::error('Bạn không có quyền xóa khoản chi này.');
 
-            return redirect(route('rawMaterialImports.index'));
+            return redirect(route('expending.index'));
         }
 
     }
@@ -242,12 +242,12 @@ class RawMaterialImportController extends AppBaseController
         if(Auth::id()==$order->user_id||Auth::user()->is_ceo==1){
             if($order->save()){
                 Flash::success('Chuyển đổi trạng thái khoản chi thành công!');
-                return redirect(route('rawMaterialImports.index'));
+                return redirect(route('expending.index'));
             }
         }
         else{
             Flash::error('Bạn không có quyền chuyển đổi trạng thái khoản chi này!');
-            return redirect(route('rawMaterialImports.index'));
+            return redirect(route('expending.index'));
         }
 
     }

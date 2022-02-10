@@ -50,22 +50,22 @@
 </li>
 <li class="app-sidebar__heading">Chi phí</li>
 <li class="nav-item">
-    <a href="{{ route('rawMaterialImports.create') }}"
-       class="{{ Request::is('rawMaterialImports/create') ? 'mm-active' : '' }}">
+    <a href="{{ route('expending.create') }}"
+       class="{{ Request::is('expending/create') ? 'mm-active' : '' }}">
         <i class="metismenu-icon pe-7s-plus"></i>
         Tạo chi phí mới
     </a>
 </li>
-<li class="nav-item has-treeview nav-pills {{ Request::is('rawMaterialImports*')||Request::is('providers*') ? 'menu-open' : '' }}">
-    <a href="#" class="{{ Request::is('rawMaterialImports')||Request::is('providers*') ? 'mm-active' : '' }}">
+<li class="nav-item has-treeview nav-pills {{ Request::is('expending*')||Request::is('providers*') ? 'menu-open' : '' }}">
+    <a href="#" class="{{ Request::is('expending')||Request::is('providers*') ? 'mm-active' : '' }}">
         <i class="metismenu-icon pe-7s-cash"></i>
         Quản lý chi phí
         <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
     </a>
-    <ul class="nav nav-treeview nav-pills nav-sidebar {{ Request::is('rawMaterialImports')||Request::is('providers') ? 'mm-show' : '' }}">
+    <ul class="nav nav-treeview nav-pills nav-sidebar {{ Request::is('expending')||Request::is('providers') ? 'mm-show' : '' }}">
         <li class="nav-item">
-            <a href="{{ route('rawMaterialImports.index') }}"
-               class="{{ Request::is('rawMaterialImports') ? 'mm-active' : '' }}">
+            <a href="{{ route('expending.index') }}"
+               class="{{ Request::is('expending') ? 'mm-active' : '' }}">
                 <i class="metismenu-icon pe-7s-cash"></i>
                 Thống kê
             </a>

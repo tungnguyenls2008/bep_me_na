@@ -1,7 +1,7 @@
 <?php
 ?>
 <div class="col-md-12 border">
-    {!! Form::model($rawMaterialImports, ['route' => 'spending-search','method'=>'get']) !!}
+    {!! Form::model($expending, ['route' => 'spending-search','method'=>'get']) !!}
 
     <div class="row">
         <div class="col-sm-4">
@@ -79,7 +79,7 @@
     <hr>
     <div class="form-group" style="text-align: center">
         <button type="submit" class="btn btn-success">Tìm kiếm</button>
-        <a href="{{route('rawMaterialImports.index')}}"> Hủy</a>
+        <a href="{{route('expending.index')}}"> Hủy</a>
         <div><?php
             if (isset($count)) {
                 echo "<i>Tìm thấy $count kết quả.</i>";

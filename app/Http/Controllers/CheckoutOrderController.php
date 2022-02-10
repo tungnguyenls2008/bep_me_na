@@ -192,7 +192,7 @@ class CheckoutOrderController extends AppBaseController
                 $menu_to_count->count = $menu_to_count->count + $item;
                 $menu_to_count->save();
             }
-            Flash::success('Lưu hóa đơn thành công!');
+            Flash::success('Tạo đơn hàng thành công!');
 
             return redirect(route('checkoutOrders.index'));
         }
@@ -301,18 +301,22 @@ class CheckoutOrderController extends AppBaseController
                 $menu->count -= $item;
                 $menu->save();
             }
+            $note=Note::where(['bill_code'=>$checkoutOrder->bill_code])->first();
+            if ($note!=null){
+                $note->delete();
+            }
             if ($checkoutOrder->delete()) {
-                Flash::success('Đã xóa thành công hóa đơn ' . $checkoutOrder->bill_code . '.');
+                Flash::success('Đã hủy thành công đơn hàng ' . $checkoutOrder->bill_code . '.');
 
             } else {
-                Flash::error('Có lỗi xảy ra, hóa đơn không được xóa.');
+                Flash::error('Có lỗi xảy ra, đơn hàng không được xóa.');
 
             }
             return redirect(route('checkoutOrders.index'));
 
 
         } else {
-            Flash::error('Bạn không có quyền xóa hóa đơn này.');
+            Flash::error('Bạn không có quyền xóa đơn hàng này.');
 
             return redirect(route('checkoutOrders.index'));
         }
@@ -426,6 +430,13 @@ class CheckoutOrderController extends AppBaseController
                 'alignment' => [
                     'wrapText' => true,
                 ],
+            )
+        );
+        $sheet->getStyle('B12')->applyFromArray(
+            array(
+                'font'  => array(
+                    'bold'  => true,
+                )
             )
         );
         $helper = new ExcelSample();

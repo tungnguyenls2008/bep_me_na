@@ -5,7 +5,7 @@
 
 </style>
 <div class="table-responsive">
-    <table class="table" id="rawMaterialImports-table">
+    <table class="table" id="expending-table">
         <thead>
         <tr>
             <th>Nội dung</th>
@@ -25,7 +25,7 @@
         $unit_badge = [];
         ?>
         <?php $delay = 200; ?>
-        @foreach($rawMaterialImports as $rawMaterialImport)
+        @foreach($expending as $rawMaterialImport)
 
             <tr>
                 <td>{{ $rawMaterialImport->name }}<br>
@@ -109,13 +109,13 @@
 
                 </td>
                 <td width="120">
-                    {!! Form::open(['route' => ['rawMaterialImports.destroy', $rawMaterialImport->id], 'method' => 'delete']) !!}
+                    {!! Form::open(['route' => ['expending.destroy', $rawMaterialImport->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('rawMaterialImports.show', [$rawMaterialImport->id]) }}"
+                        <a href="{{ route('expending.show', [$rawMaterialImport->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('rawMaterialImports.edit', [$rawMaterialImport->id]) }}"
+                        <a href="{{ route('expending.edit', [$rawMaterialImport->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>

@@ -37,7 +37,7 @@ Route::post('organization/check', [\App\Http\Controllers\Controllers_be\Organiza
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('organization-show/{id}', [ProfileController::class, 'showLanding'])->name('organization-show');
 Route::get('checkoutOrders/search', [\App\Http\Controllers\CheckoutOrderController::class, 'search'])->name('order-search');
-Route::get('rawMaterialImports/search', [\App\Http\Controllers\RawMaterialImportController::class, 'search'])->name('spending-search');
+Route::get('expending/search', [\App\Http\Controllers\RawMaterialImportController::class, 'search'])->name('spending-search');
 Route::get('attendances/search', [\App\Http\Controllers\AttendanceController::class, 'search'])->name('attendance-search');
 Route::get('menus/search', [\App\Http\Controllers\MenuController::class, 'search'])->name('menu-search');
 
@@ -61,7 +61,7 @@ Route::middleware(['auth','checkPermission'])->group(function () {
 
 
     Route::resource('menus', App\Http\Controllers\MenuController::class);
-    Route::resource('rawMaterialImports', App\Http\Controllers\RawMaterialImportController::class);
+    Route::resource('expending', App\Http\Controllers\RawMaterialImportController::class);
     Route::resource('checkoutOrders', App\Http\Controllers\CheckoutOrderController::class);
     Route::resource('notes', App\Http\Controllers\NoteController::class);
     Route::resource('customers', App\Http\Controllers\CustomerController::class);

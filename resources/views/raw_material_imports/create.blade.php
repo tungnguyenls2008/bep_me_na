@@ -17,7 +17,7 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'rawMaterialImports.store','files'=>true]) !!}
+            {!! Form::open(['route' => 'expending.store','files'=>true]) !!}
 
             <div class="card-body">
 
@@ -29,7 +29,7 @@
 
             <div class="card-footer">
                 {!! Form::submit('Lưu', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('rawMaterialImports.index') }}" class="btn btn-default">Hủy</a>
+                <a href="{{ route('expending.index') }}" class="btn btn-default">Hủy</a>
             </div>
 
             {!! Form::close() !!}

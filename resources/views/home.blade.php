@@ -52,7 +52,9 @@
                                         </thead>
                                         @foreach($max_sold_menu as $max_sold)
                                             <tr>
-                                                <td>{{$max_sold->name}}</td>
+                                                <td><a href="{{ route('menus.show', [$max_sold->id]) }}" >
+                                                        {{$max_sold->name}}
+                                                    </a></td>
                                                 <td>{{$max_sold->count}}</td>
                                             </tr>
                                         @endforeach
@@ -65,35 +67,7 @@
                 </div>
             </div> <!-- end col-->
             <div class="col-md-3 col-xl-3" data-aos="zoom-out-right" data-aos-delay="500">
-                <div class="card card-info">
-                    <div class="card-header">
-                        <a href="{{route('rawMaterialImports.index')}}"><h3 class="card-title text-white">
-                                Thống kê chi phí
-                            </h3></a>
-                    </div>
-                    <div class="card-body">
-                        <div class="float-end mt-2">
-                            <?php
-                            $import_count = \App\Models\RawMaterialImport::where(['deleted_at' => null])->count();
-                            $sum_import = \App\Models\RawMaterialImport::where(['deleted_at' => null])->sum('total');
-                            $sum_paid_import = \App\Models\RawMaterialImport::where(['deleted_at' => null, 'status' => 1])->sum('total');
-                            ?>
-                            @if($import_count==0)
-                                Bạn chưa tạo dữ liệu chi phí.
-                                <a href="{{route('rawMaterialImports.create')}}" class="btn btn-outline-secondary">Tạo
-                                    ngay</a>
-                            @else
-                                <div id="total-revenue-chart">Bạn có <b>{{$import_count}}</b> khoản chi <br>
-                                    Tổng chi phí tạm tính là <b>{{number_format($sum_import)}}đ</b><br>
-                                    Tổng thực chi là <b>{{number_format($sum_paid_import)}}đ</b><br>
 
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- end col-->
-            <div class="col-md-3 col-xl-3" data-aos="zoom-out-left" data-aos-delay="700">
                 <div class="card card-warning">
                     <div class="card-header ">
                         <a href="{{route('checkoutOrders.index')}}"><h3 class="card-title text-white">Thống kê doanh
@@ -145,12 +119,46 @@
                                 <div id="total-revenue-chart">
                                     Bạn đã thực hiện <b>{{$checkout_order_count}}</b> đơn hàng. <br>
                                     Tổng doanh số tạm tính là <b>{{number_format($sum_sale)}}đ</b><br>
-                                    Tổng doanh số thực là <b>{{number_format($sum_sale_done)}}đ</b><br>
+                                    <a href="{{ route('checkoutOrders.index') }}">
+                                        Tổng doanh số thực là
+                                    </a><br><b>{{number_format($sum_sale_done)}}đ</b><br>
                                 </div>
                             @endif
                         </div>
 
 
+                    </div>
+                </div>
+            </div> <!-- end col-->
+            <div class="col-md-3 col-xl-3" data-aos="zoom-out-left" data-aos-delay="700">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <a href="{{route('expending.index')}}"><h3 class="card-title text-white">
+                                Thống kê chi phí
+                            </h3></a>
+                    </div>
+                    <div class="card-body">
+                        <div class="float-end mt-2">
+                            <?php
+                            $import_count = \App\Models\RawMaterialImport::where(['deleted_at' => null])->count();
+                            $sum_import = \App\Models\RawMaterialImport::where(['deleted_at' => null])->sum('total');
+                            $sum_paid_import = \App\Models\RawMaterialImport::where(['deleted_at' => null, 'status' => 1])->sum('total');
+                            ?>
+                            @if($import_count==0)
+                                Bạn chưa tạo dữ liệu chi phí.
+                                <a href="{{route('expending.create')}}" class="btn btn-outline-secondary">Tạo
+                                    ngay</a>
+                            @else
+                                <div id="total-revenue-chart">Bạn có <b>{{$import_count}}</b> khoản chi <br>
+                                    Tổng chi phí tạm tính là <b>{{number_format($sum_import)}}đ</b><br>
+                                    <a href="{{route('expending.index')}}">
+                                            Tổng chi phí thực là
+                                        </a><br>
+                                     <b>{{number_format($sum_paid_import)}}đ</b><br>
+
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div> <!-- end col-->
@@ -184,7 +192,9 @@
                                         <tbody>
                                         @foreach($max_buy_customer as $customer)
                                             <tr>
-                                                <td>{{$customer->name}}</td>
+                                                <td><a href="{{ route('customers.show', [$customer->id]) }}">
+                                                        {{$customer->name}}
+                                                    </a></td>
                                                 <td>{{$customer->order_count}}</td>
                                             </tr>
                                         @endforeach
@@ -230,7 +240,7 @@
                             <br>
                             <p>Bạn còn
                                 <b>{{\App\Models\RawMaterialImport::where(['deleted_at' => null,'status'=>0])->count()}}</b>
-                                <a href="{{route('rawMaterialImports.index')}}">khoản chi</a> chưa thanh toán!</p><br>
+                                <a href="{{route('expending.index')}}">khoản chi</a> chưa thanh toán!</p><br>
                             <p>Bạn còn
                                 <b>{{\App\Models\CheckoutOrder::where(['deleted_at' => null,'status'=>0])->count()}}</b>
                                 <a href="{{route('checkoutOrders.index')}}">đơn hàng</a> chưa thu tiền!</p><br>

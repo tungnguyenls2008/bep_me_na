@@ -200,7 +200,7 @@ $connection = \Illuminate\Support\Facades\Session::get('connection');
                         </a>
                     </li>
                     <li class="btn-group nav-item">
-                        <a href="{{route('rawMaterialImports.create')}}" class="nav-link">
+                        <a href="{{route('expending.create')}}" class="nav-link">
                             <i class="nav-link-icon fa fa-plus-circle"></i>
                             Tạo chi phí
                         </a>

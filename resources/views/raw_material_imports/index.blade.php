@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
-                       href="{{ route('rawMaterialImports.create') }}">
+                       href="{{ route('expending.create') }}">
                         Tạo mới
                     </a>
                 </div>
