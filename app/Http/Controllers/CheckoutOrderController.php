@@ -621,4 +621,7 @@ class CheckoutOrderController extends AppBaseController
         $objWriter = IOFactory::createWriter($objPHPExcel, 'Html');
         $objWriter->save('php://output');
     }
+    public function printBill(Request $request){
+
+    }
 }
