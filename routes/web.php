@@ -55,6 +55,7 @@ Route::middleware(['auth','checkPermission'])->group(function () {
     Route::get('position-toggle-status', [\App\Http\Controllers\PositionController::class, 'toggleStatus'])->name('position-toggle-status');
     Route::get('employee-toggle-status', [\App\Http\Controllers\EmployeeController::class, 'toggleStatus'])->name('employee-toggle-status');
     Route::get('spending-export/', [\App\Http\Controllers\RawMaterialImportController::class, 'export'])->name('spending-export');
+    Route::get('attendance-export/', [\App\Http\Controllers\AttendanceController::class, 'export'])->name('attendance-export');
     Route::get('bill-export', [\App\Http\Controllers\CheckoutOrderController::class, 'export'])->name('bill-export');
     Route::get('display-bill', [\App\Http\Controllers\CheckoutOrderController::class, 'displayBill'])->name('display-bill');
     Route::get('attendances/create-additional', [\App\Http\Controllers\AttendanceController::class, 'createAdditional'])->name('attendance-create-additional');

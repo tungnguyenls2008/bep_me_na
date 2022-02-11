@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AttendanceExport;
+use App\Exports\SpendingExport;
 use App\Http\Requests\CreateAttendanceRequest;
 use App\Http\Requests\UpdateAttendanceRequest;
 use App\Http\Controllers\AppBaseController;
@@ -10,6 +12,7 @@ use App\Models\Employee;
 use Illuminate\Http\Request;
 use Flash;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 use Response;
 
 class AttendanceController extends AppBaseController
@@ -270,5 +273,9 @@ class AttendanceController extends AppBaseController
         Flash::success('Attendance deleted successfully.');
 
         return redirect(route('attendances.index'));
+    }
+    public function export()
+    {
+        return Excel::download(new AttendanceExport(), 'thong-ke-cham-cong-'.date('d-m-Y',time()).'.xlsx');
     }
 }

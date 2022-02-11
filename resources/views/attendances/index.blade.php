@@ -5,7 +5,8 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Chấm công</h1>
+                    <h1>Chấm công</h1><a href="{{route('attendance-export')}}" class="badge badge-pill badge-success">Xuất excel</a>
+
                 </div>
                 <div class="col-sm-6">
 
