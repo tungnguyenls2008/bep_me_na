@@ -99,11 +99,11 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
                         @foreach($type as $item)
                             @if($item==0)
                                 <tr>
-                                    <td style="color: darkgreen;text-align: center"><i class="fas fa-dollar-sign"></i></td>
+                                    <td style="color: darkgreen;text-align: center" data-toggle="tooltip" data-placement="top" title="Bán"><i class="fas fa-dollar-sign"></i></td>
                                 </tr>
                             @else
                                 <tr>
-                                    <td style="color: red;text-align: center"><i class="fas fa-gift"></i></td>
+                                    <td style="color: red;text-align: center" data-toggle="tooltip" data-placement="top" title="Tặng kèm"><i class="fas fa-gift"></i></td>
                                 </tr>
                             @endif
                         @endforeach
