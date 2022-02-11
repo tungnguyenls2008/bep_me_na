@@ -1,6 +1,6 @@
 <div class="app-sidebar sidebar-shadow" @if(checkIfMobile()==false) data-aos="fade-right" @endif>
 
-    <div class="scrollbar-sidebar ps ps--active-y">
+    <div class="scrollbar-sidebar scrollbar-style ps ps--active-y" style="overflow: auto!important;">
         <div class="app-sidebar__inner">
             <ul class="vertical-nav-menu metismenu" id="metismenu">
                 <a href="{{ route('home') }}">

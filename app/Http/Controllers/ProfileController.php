@@ -10,6 +10,7 @@ use App\Models\Models_be\Product;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Session;
 use Response;
 
@@ -79,6 +80,7 @@ class ProfileController extends AppBaseController
 
         return view('profiles.show')->with('profile', $profile);
     }
+
     public function showLanding($id)
     {
         /** @var Profile $profile */
@@ -91,6 +93,7 @@ class ProfileController extends AppBaseController
 
         return view('profiles.show-landing')->with('profile', $profile);
     }
+
     /**
      * Show the form for editing the specified Profile.
      *
@@ -132,18 +135,18 @@ class ProfileController extends AppBaseController
         if ($request->file('logo') !== null) {
             $image = $request->file('logo');
             $image->move('img/organization_logos', Session::get('connection')['db_name'] . '.png')->getPathname();
-            $org=Organization::withoutTrashed()->where(['profile_id'=>$id])->first();
-            $org->logo='img/organization_logos/'.Session::get('connection')['db_name'] . '.png';
+            $org = Organization::withoutTrashed()->where(['profile_id' => $id])->first();
+            $org->logo = 'img/organization_logos/' . Session::get('connection')['db_name'] . '.png';
             $org->save();
         }
         $profile->fill($request->all());
-        if (isset($request->all()['product_ids'])){
+        if (isset($request->all()['product_ids'])) {
             $profile->product_ids = json_encode($request->all()['product_ids']);
         }
         $profile->save();
 
         Flash::success('Cập nhật thông tin cửa hàng thành công!');
-
+        Artisan::call('cache:clear');
         return redirect(route('profiles.show', $profile));
     }
 
@@ -183,7 +186,7 @@ class ProfileController extends AppBaseController
             $product_select .= "<option value='$product->id'>$product->name</option>";
         }
         $product_selected = [];
-        if (isset($request->all()['profile_id'])){
+        if (isset($request->all()['profile_id'])) {
             $profile = Profile::where(['id' => $request->all()['profile_id']])->first();
             if ($profile != null) {
                 $product_selected = json_decode($profile->product_ids, true);
