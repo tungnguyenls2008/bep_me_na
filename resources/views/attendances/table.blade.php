@@ -7,6 +7,7 @@
         <tr>
             <th>Nhân viên</th>
             <th>Chấm công</th>
+            <th>Lương thực nhận</th>
             <th>Lý do</th>
             <th>Ngày chấm</th>
             <th colspan="3">Thao tác</th>
@@ -33,6 +34,19 @@
                             break;
                     }
                     ?></td>
+                <td>
+                    <?php
+                    switch($attendance->status){
+                        case 2:
+                        case 0: echo number_format($employee->salary);
+                            break;
+                        case 1: echo number_format($employee->salary/2);
+                            break;
+                        case 3: echo 0;
+                            break;
+                    }
+                    ?>
+                </td>
                 <td>{{ $attendance->reason }}</td>
                 <td>{{ date('d-m-Y',strtotime($attendance->date)) }}</td>
                 <td width="120">
