@@ -69,7 +69,7 @@ class OrganizationController extends AppBaseController
         }
         /** @var Organization $organization */
         $organization = Organization::create($input);
-
+dd($organization);
         cloneCoreDb($input['db_name']);
 
         $rules = [
