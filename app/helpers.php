@@ -34,7 +34,7 @@ function configureConnectionByName($connectionName)
     // Override the database name.
     $newConnection['database'] = $connectionName;
     $path = base_path('config/database.php');
-
+dd($path);
     if (file_exists($path)) {
        $db_config=file_get_contents($path);
         $line_start=strpos($db_config,'//start//');
