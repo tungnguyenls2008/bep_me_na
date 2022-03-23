@@ -33,7 +33,7 @@ class LandingController extends Controller
 
         /** @var Organization $organization */
         $organization = Organization::create($input);
-
+dd($organization);
         Flash::success('Tạo cửa hàng thành công!');
 
         return redirect(route('login'));
