@@ -58,7 +58,9 @@ class OrganizationController extends AppBaseController
      */
     public function store(CreateOrganizationRequest $request)
     {
+
         $input = $request->all();
+
         $input['licence'] = uniqidReal(36);
         if ($request->file('logo') !== null) {
             $image = $request->file('logo');

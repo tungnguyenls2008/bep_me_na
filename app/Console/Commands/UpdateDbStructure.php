@@ -38,14 +38,7 @@ class UpdateDbStructure extends Command
      */
     public function handle()
     {
-        $dbs = DB::select("SHOW DATABASES");
-        $exceptions = ['backend', 'core_db', 'information_schema', 'mysql', 'performance_schema', 'phpmyadmin', 'test','pvcb'];
-        foreach ($dbs as $key => $db) {
-            if (in_array($db->Database, $exceptions)) {
-                unset($dbs[$key]);
-            }
-
-        }
+        $dbs = getOrganizationDbs();
         foreach ($dbs as $key => $db) {
             $dbs[$key] = $db->Database;
         }

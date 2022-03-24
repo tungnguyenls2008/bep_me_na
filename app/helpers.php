@@ -142,3 +142,15 @@ function deleteConnection($name){
     }
 
 }
+function getOrganizationDbs(){
+    $dbs = DB::select("SHOW DATABASES");
+    $exceptions = ['backend', 'core_db', 'information_schema', 'mysql', 'performance_schema', 'phpmyadmin', 'test',
+        'pvcb','pvcb_backend','app_core','app_core_backend','socializer','sys','tattoo_artist'];
+    foreach ($dbs as $key => $db) {
+        if (in_array($db->Database, $exceptions)) {
+            unset($dbs[$key]);
+        }
+
+    }
+    return $dbs;
+}

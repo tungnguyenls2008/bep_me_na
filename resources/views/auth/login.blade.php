@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Session;
 ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -295,7 +296,6 @@
     <div class="container" >
         <div>
             <?php
-            use Illuminate\Support\Facades\Session;
             $organization=\App\Models\Models_be\Organization::withoutTrashed()->where(['db_name'=>Session::get('connection')['db_name']])->first();
             ?>
             <img src="{{isset($organization->logo)?asset($organization->logo):asset('img/organization_logos/default-company-logo.png')}}" alt="" width="200px">
