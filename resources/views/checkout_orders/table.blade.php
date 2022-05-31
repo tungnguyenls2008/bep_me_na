@@ -112,7 +112,9 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
                 <?php
                 $total = [];
                 for ($i = 0; $i < count($price); $i++) {
-                    $total[$i] = $quantity[$i] * $price[$i];
+                    if (isset($price[$i])){
+                        $total[$i] = $quantity[$i] * $price[$i];
+                    }
                 }
                 ?>
                 <td>
