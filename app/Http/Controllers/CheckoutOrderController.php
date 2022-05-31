@@ -164,7 +164,9 @@ class CheckoutOrderController extends AppBaseController
             }
         }
         for ($i = 0; $i < count($checkoutOrder['price']); $i++) {
-            $checkoutOrder['total'][$i] = $checkoutOrder['quantity'][$i] * $checkoutOrder['price'][$i];
+            if (isset($checkoutOrder['price'][$i])){
+                $checkoutOrder['total'][$i] = $checkoutOrder['quantity'][$i] * $checkoutOrder['price'][$i];
+            }
         }
         $checkoutOrder['total_before_tax'] = array_sum($checkoutOrder['total']);
         $checkoutOrder['user_id'] = User::find($checkoutOrder['user_id'])->name;
