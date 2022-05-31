@@ -86,9 +86,11 @@
                                 $price = json_decode($checkoutOrder->price, true);
                                 $total = [];
                                 for ($i = 0; $i < count($price); $i++) {
-                                    $total[$i] = $quantity[$i] * $price[$i];
-                                    if ($checkoutOrder->discount_percent != null) {
-                                        $total[$i] = ($total[$i]) - ($total[$i] * $checkoutOrder->discount_percent / 100);
+                                    if (isset($quantity[$i])){
+                                        $total[$i] = $quantity[$i] * $price[$i];
+                                        if ($checkoutOrder->discount_percent != null) {
+                                            $total[$i] = ($total[$i]) - ($total[$i] * $checkoutOrder->discount_percent / 100);
+                                        }
                                     }
                                 }
                                 $order_total = array_sum($total);
