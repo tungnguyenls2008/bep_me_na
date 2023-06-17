@@ -143,26 +143,28 @@
                     $sum_total = [];
                     foreach ($organizations as $key => $organization) {
                         $checkoutOrders = [];
-                        $checkoutOrders[$organization->db_name] = \Illuminate\Support\Facades\DB::connection($organization->db_name)
-                            ->table('checkout_order')->where(['deleted_at' => null])->get();
+                        $connection=\Illuminate\Support\Facades\DB::connection($organization->db_name);
+                        if ($connection){
+                            $checkoutOrders[$organization->db_name] = $connection->table('checkout_order')
+                                ->where(['deleted_at' => null])->get();
+                            $sum_total_done = [];
+                            $total = [];
+                            $order_total = [];
+                            foreach ($checkoutOrders[$organization->db_name] as $c_key => $checkoutOrder) {
+                                $quantity = json_decode($checkoutOrder->quantity, true);
+                                $price = json_decode($checkoutOrder->price, true);
 
-                        $sum_total_done = [];
-                        $total = [];
-                        $order_total = [];
-                        foreach ($checkoutOrders[$organization->db_name] as $c_key => $checkoutOrder) {
-                            $quantity = json_decode($checkoutOrder->quantity, true);
-                            $price = json_decode($checkoutOrder->price, true);
-
-                            for ($i = 0; $i < count($price); $i++) {
-                                if (isset($price[$i])) {
+                                for ($i = 0; $i < count($price); $i++) {
                                     $total[$i] = (($quantity[$i] * $price[$i])) - (($quantity[$i] * $price[$i]) * $checkoutOrder->discount_percent / 100);
                                 }
-                            }
-                            $order_total[$c_key] = array_sum($total);
-                            //$sum_total[$c_key]= array_sum($order_total);
+                                $order_total[$c_key] = array_sum($total);
+                                //$sum_total[$c_key]= array_sum($order_total);
 
+                            }
+                            $sum_sale[$organization->db_name] = array_sum($order_total);
                         }
-                        $sum_sale[$organization->db_name] = array_sum($order_total);
+
+
                     }
                     //                    $top_sale_organization = \App\Models\Models_be\Organization::withoutTrashed()
                     //                        ->where(['db_name' => array_keys($sum_sale, max($sum_sale))[0]])->first();
