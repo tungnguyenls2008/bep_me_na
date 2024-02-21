@@ -232,5 +232,5 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Flash' => Laracasts\Flash\Flash::class,
     ],
-
+    'log_path'=> 'data/www/thuchi-system/storage/logs',
 ];
