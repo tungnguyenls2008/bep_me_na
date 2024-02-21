@@ -49,7 +49,7 @@ return [
 
         'daily' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/laravel.log'),
+            'path' => '/data/www/html/thuchi-system/storage/logs/laravel.log',
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
         ],
@@ -97,7 +97,7 @@ return [
         ],
 
         'emergency' => [
-            'path' => storage_path('logs/laravel.log'),
+            'path' => '/data/www/html/abc/storage/logs/laravel.log',
         ],
     ],
 
