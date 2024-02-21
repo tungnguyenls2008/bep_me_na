@@ -43,7 +43,7 @@ return [
 
         'single' => [
             'driver' => 'single',
-            'path' => '/data/www/html/abc/storage/logs/laravel.log',
+            'path' => '/data/www/html/thuchi-system/storage/logs/laravel.log',
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 
@@ -97,7 +97,7 @@ return [
         ],
 
         'emergency' => [
-            'path' => '/data/www/html/abc/storage/logs/laravel.log',
+            'path' => '/data/www/html/thuchi-system/storage/logs/laravel.log',
         ],
     ],
 
