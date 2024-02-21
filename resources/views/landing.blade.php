@@ -155,9 +155,8 @@
                                 $price = json_decode($checkoutOrder->price, true);
 
                                 for ($i = 0; $i < count($price); $i++) {
-                                    if(isset($quantity[$i] && isset($price[$i])){
+                                    if(isset($quantity[$i]) && isset($price[$i])){
                                         $total[$i] = (($quantity[$i] * $price[$i])) - (($quantity[$i] * $price[$i]) * $checkoutOrder->discount_percent / 100);
-                                
                                     }
                                 }
                                 $order_total[$c_key] = array_sum($total);
