@@ -43,13 +43,13 @@ return [
 
         'single' => [
             'driver' => 'single',
-            'path' => '/data/www/html/thuchi-system/storage/logs/laravel.log',
+            'path' => '/data/www/thuchi-system/storage/logs/laravel.log',
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 
         'daily' => [
             'driver' => 'daily',
-            'path' => '/data/www/html/thuchi-system/storage/logs/laravel.log',
+            'path' => '/data/www/thuchi-system/storage/logs/laravel.log',
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
         ],
@@ -97,7 +97,7 @@ return [
         ],
 
         'emergency' => [
-            'path' => '/data/www/html/thuchi-system/storage/logs/laravel.log',
+            'path' => '/data/www/thuchi-system/storage/logs/laravel.log',
         ],
     ],
 
